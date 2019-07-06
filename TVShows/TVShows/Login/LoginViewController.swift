@@ -7,4 +7,14 @@
 //
 
 import Foundation
+import UIKit
+
+class LoginViewController: UIViewController {
+    var count = 0
+    @IBOutlet weak var label: UILabel!
+    @IBAction func button(_ sender: UIButton) {
+        count += 1
+        label.text = "Number of taps: \(count)"
+    }
+}
 
