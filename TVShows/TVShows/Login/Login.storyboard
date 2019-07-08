@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LVn-LZ-bkB">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -13,9 +13,9 @@
         <!--Login View Controller-->
         <scene sceneID="LdY-4L-E6q">
             <objects>
-                <viewController id="LVn-LZ-bkB" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController id="LVn-LZ-bkB" customClass="LoginViewController" customModule="TVShows" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MD1-Eu-R0p">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="olG-v3-kdI">
@@ -39,7 +39,7 @@
                         <viewLayoutGuide key="safeArea" id="ws8-4a-CKf"/>
                     </view>
                     <connections>
-                        <outlet property="label" destination="T3Z-aJ-vPT" id="XDg-nU-jCW"/>
+                        <outlet property="label" destination="T3Z-aJ-vPT" id="BF8-RX-lcR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="204-8W-36j" userLabel="First Responder" sceneMemberID="firstResponder"/>
