@@ -44,6 +44,7 @@
                         <viewLayoutGuide key="safeArea" id="ws8-4a-CKf"/>
                     </view>
                     <connections>
+                        <outlet property="button_outlet" destination="olG-v3-kdI" id="YfL-ew-gPl"/>
                         <outlet property="label" destination="T3Z-aJ-vPT" id="BF8-RX-lcR"/>
                     </connections>
                 </viewController>
