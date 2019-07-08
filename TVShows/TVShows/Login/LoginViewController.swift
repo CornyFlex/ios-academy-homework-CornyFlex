@@ -11,8 +11,11 @@ import UIKit
 
 class LoginViewController: UIViewController {
     var count = 0
+    @IBOutlet weak var Activity: UIActivityIndicatorView!
+    @IBOutlet weak var button_icon: UIButton!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var button_outlet: UIButton!
+    
     @IBAction func button(_ sender: UIButton) {
         count += 1
         label.text = "Number of taps: \(count)"

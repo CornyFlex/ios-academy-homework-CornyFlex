@@ -19,8 +19,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="olG-v3-kdI">
-                                <rect key="frame" x="37" y="462" width="357" height="86"/>
-                                <color key="backgroundColor" red="0.24555623531341553" green="0.087852723896503448" blue="0.42942553758621216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="20" y="348" width="374" height="200"/>
+                                <color key="backgroundColor" red="0.021191021427512169" green="0.90419834852218628" blue="0.97924941778182983" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="62"/>
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <state key="normal" title="Infinum">
@@ -31,30 +31,39 @@
                                     <action selector="button:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="dbv-ea-4ZL"/>
                                 </connections>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l0F-VT-cy2">
-                                <rect key="frame" x="350" y="836" width="51" height="31"/>
-                            </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of taps: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3Z-aJ-vPT">
                                 <rect key="frame" x="40" y="748" width="334" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <color key="textColor" red="0.96586912870407104" green="0.92129111289978027" blue="0.87186235189437866" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" red="1" green="0.57751154699999996" blue="0.78596959060000005" alpha="0.77470290490000004" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iVT-wc-u2h">
+                                <rect key="frame" x="144" y="158" width="126" height="118"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="Image"/>
+                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="B1J-87-Mmz">
+                                <rect key="frame" x="197" y="634" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.088909931480884552" green="0.61988723278045654" blue="0.7157103419303894" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="T3Z-aJ-vPT" secondAttribute="bottom" constant="100" id="CwY-3S-gbM"/>
+                            <constraint firstItem="olG-v3-kdI" firstAttribute="centerX" secondItem="MD1-Eu-R0p" secondAttribute="centerX" id="DuW-Pi-wyo"/>
                             <constraint firstItem="ws8-4a-CKf" firstAttribute="trailing" secondItem="olG-v3-kdI" secondAttribute="trailing" constant="20" id="LB5-tQ-emz"/>
+                            <constraint firstItem="olG-v3-kdI" firstAttribute="centerY" secondItem="MD1-Eu-R0p" secondAttribute="centerY" id="SY8-vw-gGI"/>
                             <constraint firstItem="ws8-4a-CKf" firstAttribute="trailing" secondItem="T3Z-aJ-vPT" secondAttribute="trailing" constant="40" id="XVU-j2-ROA"/>
-                            <constraint firstItem="ws8-4a-CKf" firstAttribute="trailing" secondItem="l0F-VT-cy2" secondAttribute="trailing" constant="15" id="XtG-zX-D1A"/>
-                            <constraint firstItem="olG-v3-kdI" firstAttribute="leading" secondItem="ws8-4a-CKf" secondAttribute="leading" constant="37" id="gTP-NE-rTJ"/>
-                            <constraint firstItem="l0F-VT-cy2" firstAttribute="bottom" secondItem="ws8-4a-CKf" secondAttribute="bottom" constant="5" id="iWn-Op-xDM"/>
                             <constraint firstItem="T3Z-aJ-vPT" firstAttribute="leading" secondItem="ws8-4a-CKf" secondAttribute="leading" constant="40" id="wBV-HV-Olu"/>
                             <constraint firstItem="T3Z-aJ-vPT" firstAttribute="top" secondItem="olG-v3-kdI" secondAttribute="bottom" constant="200" id="wcA-ns-Iac"/>
+                            <constraint firstItem="olG-v3-kdI" firstAttribute="centerY" secondItem="MD1-Eu-R0p" secondAttribute="centerY" id="ziw-xk-xAc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ws8-4a-CKf"/>
                     </view>
                     <connections>
+                        <outlet property="Activity" destination="B1J-87-Mmz" id="IhS-PT-OKx"/>
+                        <outlet property="button_icon" destination="iVT-wc-u2h" id="dzB-wO-dNG"/>
                         <outlet property="button_outlet" destination="olG-v3-kdI" id="YfL-ew-gPl"/>
                         <outlet property="label" destination="T3Z-aJ-vPT" id="BF8-RX-lcR"/>
                     </connections>
@@ -64,4 +73,7 @@
             <point key="canvasLocation" x="140.57971014492756" y="-79.017857142857139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Image" width="42.666667938232422" height="42.666667938232422"/>
+    </resources>
 </document>
