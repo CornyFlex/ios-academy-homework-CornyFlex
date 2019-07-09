@@ -37,6 +37,14 @@
                                 <color key="textColor" red="0.96586912870407104" green="0.92129111289978027" blue="0.87186235189437866" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" red="1" green="0.57751154699999996" blue="0.78596959060000005" alpha="0.77470290490000004" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iVT-wc-u2h">
+                                <rect key="frame" x="208" y="135" width="166" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="Image"/>
+                                <connections>
+                                    <action selector="button_icon_action:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="VDs-8q-iVx"/>
+                                </connections>
+                            </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="B1J-87-Mmz">
                                 <rect key="frame" x="197" y="634" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -50,19 +58,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SZY-7a-53V">
-                                <rect key="frame" x="20" y="135" width="189" height="200"/>
+                                <rect key="frame" x="40" y="135" width="160" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="Image-1"/>
                                 <connections>
                                     <action selector="button_start_action:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="gNj-lX-Xvd"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iVT-wc-u2h">
-                                <rect key="frame" x="217" y="135" width="177" height="200"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="Image"/>
-                                <connections>
-                                    <action selector="button_icon_action:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="VDs-8q-iVx"/>
                                 </connections>
                             </button>
                         </subviews>
