@@ -45,7 +45,7 @@
                                 <rect key="frame" x="25" y="385" width="24" height="24"/>
                                 <state key="normal" backgroundImage="ic-checkbox-empty"/>
                                 <connections>
-                                    <action selector="checkmark_action:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="XUH-uj-k9Z"/>
+                                    <action selector="checkmark_action:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="QJy-FF-keH"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember me" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfU-bo-nW8">
