@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var or_outlet: UILabel!
     
-    // MARK - functions: 
+    // MARK - acctions: 
     
     @IBAction func checkmark_action(_ sender: UIButton) {
     }
