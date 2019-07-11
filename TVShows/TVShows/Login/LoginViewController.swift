@@ -13,30 +13,35 @@ class LoginViewController: UIViewController {
     
     // MARK - outlets:
     
-    @IBOutlet weak var username_outlet: UITextField!
-    @IBOutlet weak var password_outlet: UITextField!
-    @IBOutlet weak var checkmark_outlet: UIButton!
-    @IBOutlet weak var remember_outlet: UILabel!
-    @IBOutlet weak var login_outlet: UIButton!
-    @IBOutlet weak var create_outlet: UIButton!
-    @IBOutlet weak var or_outlet: UILabel!
+    @IBOutlet private weak var usernameOutlet: UITextField!
+    @IBOutlet private weak var passwordOutlet: UITextField!
+    @IBOutlet private weak var checkmarkOutlet: UIButton!
+    @IBOutlet private weak var rememberMeOutlet: UILabel!
+    @IBOutlet private weak var loginOutlet: UIButton!
+    @IBOutlet private weak var createAccountOutlet: UIButton!
+    @IBOutlet private weak var orOutlet: UILabel!
     
     // MARK: - life cycle functions
     
+    private func loginButtonEdit() {
+        loginOutlet.layer.cornerRadius = 20
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        checkmark_action()
+        loginButtonEdit()
         }
     
     // MARK: - actions
     
-    @IBAction func checkmark_action(_ sender: UIButton) {
-        if checkmark_outlet.currentImage == UIImage(named: "ic-checkbox-empty.png") {
-            checkmark_outlet.setImage(UIImage(named: "ic-checkbox-filled.png"), for: .normal)
+    @IBAction private func checkmark_action() {
+        if checkmarkOutlet.currentImage == UIImage(named: "ic-checkbox-empty.png") {
+            checkmarkOutlet.setImage(UIImage(named: "ic-checkbox-filled.png"), for: .normal)
         }
         else {
-            checkmark_outlet.setImage(UIImage(named: "ic-checkbox-empty.png"), for: .normal)
+            checkmarkOutlet.setImage(UIImage(named: "ic-checkbox-empty.png"), for: .normal)
         }
     }
 }

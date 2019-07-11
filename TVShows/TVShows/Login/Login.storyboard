@@ -45,7 +45,7 @@
                                 <rect key="frame" x="25" y="385" width="24" height="24"/>
                                 <state key="normal" backgroundImage="ic-checkbox-empty"/>
                                 <connections>
-                                    <action selector="checkmark_action:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="QJy-FF-keH"/>
+                                    <action selector="checkmark_action" destination="LVn-LZ-bkB" eventType="touchUpInside" id="w1X-pI-ATs"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember me" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfU-bo-nW8">
@@ -59,7 +59,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MBR-b2-PAv">
                                 <rect key="frame" x="17.5" y="429" width="340" height="70"/>
-                                <color key="backgroundColor" red="0.93557053804397583" green="0.14932838082313538" blue="0.49999189376831055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="1" green="0.45882352941176469" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="340" id="JNL-AG-95n"/>
                                     <constraint firstAttribute="height" constant="70" id="a64-PI-PME"/>
@@ -105,13 +105,13 @@
                         <viewLayoutGuide key="safeArea" id="ws8-4a-CKf"/>
                     </view>
                     <connections>
-                        <outlet property="checkmark_outlet" destination="wec-GI-den" id="k2u-Y0-8gp"/>
-                        <outlet property="create_outlet" destination="c4w-K4-jS8" id="HD8-5M-EYR"/>
-                        <outlet property="login_outlet" destination="MBR-b2-PAv" id="bKn-EQ-svO"/>
-                        <outlet property="or_outlet" destination="E7Z-07-xWP" id="f7W-Yv-akK"/>
-                        <outlet property="password_outlet" destination="mzP-YD-YKR" id="M8n-K2-dTM"/>
-                        <outlet property="remember_outlet" destination="dfU-bo-nW8" id="hst-1s-3oh"/>
-                        <outlet property="username_outlet" destination="S12-55-qrp" id="FH4-6U-D5m"/>
+                        <outlet property="checkmarkOutlet" destination="wec-GI-den" id="k2u-Y0-8gp"/>
+                        <outlet property="createAccountOutlet" destination="c4w-K4-jS8" id="HD8-5M-EYR"/>
+                        <outlet property="loginOutlet" destination="MBR-b2-PAv" id="bKn-EQ-svO"/>
+                        <outlet property="orOutlet" destination="E7Z-07-xWP" id="f7W-Yv-akK"/>
+                        <outlet property="passwordOutlet" destination="mzP-YD-YKR" id="M8n-K2-dTM"/>
+                        <outlet property="rememberMeOutlet" destination="dfU-bo-nW8" id="hst-1s-3oh"/>
+                        <outlet property="usernameOutlet" destination="S12-55-qrp" id="FH4-6U-D5m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="204-8W-36j" userLabel="First Responder" sceneMemberID="firstResponder"/>
