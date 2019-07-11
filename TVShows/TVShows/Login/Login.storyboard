@@ -28,7 +28,7 @@
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="centerButtonCounterAction:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="dbv-ea-4ZL"/>
+                                    <action selector="centerButtonCounterAction:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="OIs-hH-7Wh"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of taps: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3Z-aJ-vPT">
@@ -42,7 +42,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="Image"/>
                                 <connections>
-                                    <action selector="stopAnimatingAction" destination="LVn-LZ-bkB" eventType="touchUpInside" id="ozc-RX-3dE"/>
+                                    <action selector="stopAnimatingAction" destination="LVn-LZ-bkB" eventType="touchUpInside" id="p5s-Fd-jDz"/>
                                 </connections>
                             </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="B1J-87-Mmz">
@@ -62,7 +62,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="Image-1"/>
                                 <connections>
-                                    <action selector="startAnimatingAction" destination="LVn-LZ-bkB" eventType="touchUpInside" id="MQ8-yx-Pfg"/>
+                                    <action selector="startAnimatingAction" destination="LVn-LZ-bkB" eventType="touchUpInside" id="njB-5L-1PG"/>
                                 </connections>
                             </button>
                         </subviews>

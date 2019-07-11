@@ -24,23 +24,6 @@ final class LoginViewController: UIViewController {
     @IBOutlet private weak var welcomeMessage: UILabel!
     @IBOutlet private weak var startAnimatingOutlet: UIButton!
     
-    // MARK: - actions
-    
-    @IBAction private func centerButtonCounterAction(_ sender: UIButton) {
-        tapCounter += 1
-        numberOfTaps.text = "Number of taps: \(tapCounter)"
-    }
-    
-        //Game console - stop animating
-    @IBAction private func stopAnimatingAction() {
-        activityIndicator.stopAnimating()
-    }
-    
-        //Moon - start - animating
-    @IBAction private func startAnimatingAction() {
-        activityIndicator.startAnimating()
-    }
-    
     // MARK: - lifecycle methods
     
     private func configureUI() {
@@ -70,6 +53,23 @@ final class LoginViewController: UIViewController {
         
             self.activityIndicator.stopAnimating()
         }
+    }
+    
+    // MARK: - actions
+    
+    @IBAction private func centerButtonCounterAction(_ sender: UIButton) {
+        tapCounter += 1
+        numberOfTaps.text = "Number of taps: \(tapCounter)"
+    }
+    
+        //Moon - stop animating
+    @IBAction private func stopAnimatingAction() {
+        activityIndicator.stopAnimating()
+    }
+    
+        //Game console - start animating
+    @IBAction private func startAnimatingAction() {
+        activityIndicator.startAnimating()
     }
 }
 
