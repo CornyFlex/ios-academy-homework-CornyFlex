@@ -11,6 +11,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    // MARK - outlets:
+    
     @IBOutlet weak var username_outlet: UITextField!
     
     @IBOutlet weak var password_outlet: UITextField!
@@ -25,10 +27,14 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var or_outlet: UILabel!
     
+    // MARK - functions: 
+    
     @IBAction func checkmark_action(_ sender: UIButton) {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         }
     }
     
