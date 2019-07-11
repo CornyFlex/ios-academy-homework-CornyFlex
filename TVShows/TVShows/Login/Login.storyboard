@@ -28,7 +28,7 @@
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="button:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="dbv-ea-4ZL"/>
+                                    <action selector="centerButtonCounterAction:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="dbv-ea-4ZL"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of taps: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3Z-aJ-vPT">
@@ -42,7 +42,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="Image"/>
                                 <connections>
-                                    <action selector="button_icon_action:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="VDs-8q-iVx"/>
+                                    <action selector="stopAnimatingAction" destination="LVn-LZ-bkB" eventType="touchUpInside" id="ozc-RX-3dE"/>
                                 </connections>
                             </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="B1J-87-Mmz">
@@ -62,7 +62,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="Image-1"/>
                                 <connections>
-                                    <action selector="button_start_action:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="gNj-lX-Xvd"/>
+                                    <action selector="startAnimatingAction" destination="LVn-LZ-bkB" eventType="touchUpInside" id="MQ8-yx-Pfg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -80,12 +80,12 @@
                         <viewLayoutGuide key="safeArea" id="ws8-4a-CKf"/>
                     </view>
                     <connections>
-                        <outlet property="Activity" destination="B1J-87-Mmz" id="IhS-PT-OKx"/>
-                        <outlet property="button_icon" destination="iVT-wc-u2h" id="dzB-wO-dNG"/>
-                        <outlet property="button_outlet" destination="olG-v3-kdI" id="YfL-ew-gPl"/>
-                        <outlet property="button_start_outlet" destination="SZY-7a-53V" id="0Aw-8Y-NcE"/>
-                        <outlet property="label" destination="T3Z-aJ-vPT" id="BF8-RX-lcR"/>
-                        <outlet property="welcome" destination="LL8-7T-yuW" id="pmH-Sp-LaI"/>
+                        <outlet property="activityIndicator" destination="B1J-87-Mmz" id="IhS-PT-OKx"/>
+                        <outlet property="centerButtonCounter" destination="olG-v3-kdI" id="YfL-ew-gPl"/>
+                        <outlet property="numberOfTaps" destination="T3Z-aJ-vPT" id="BF8-RX-lcR"/>
+                        <outlet property="startAnimatingOutlet" destination="SZY-7a-53V" id="0Aw-8Y-NcE"/>
+                        <outlet property="stopAnimatingOutlet" destination="iVT-wc-u2h" id="dzB-wO-dNG"/>
+                        <outlet property="welcomeMessage" destination="LL8-7T-yuW" id="pmH-Sp-LaI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="204-8W-36j" userLabel="First Responder" sceneMemberID="firstResponder"/>

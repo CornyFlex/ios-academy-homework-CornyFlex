@@ -9,55 +9,68 @@
 import Foundation
 import UIKit
 
-class LoginViewController: UIViewController {
-    var count = 0
-    @IBOutlet weak var Activity: UIActivityIndicatorView!
-    @IBOutlet weak var button_icon: UIButton!
-    @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var button_outlet: UIButton!
-    @IBOutlet weak var welcome: UILabel!
-    @IBOutlet weak var button_start_outlet: UIButton!
+final class LoginViewController: UIViewController {
     
-    @IBAction func button(_ sender: UIButton) {
-        count += 1
-        label.text = "Number of taps: \(count)"
+    // MARK: - properties
+    
+    private var tapCounter = 0
+    
+    // MARK: - outlets
+    
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var stopAnimatingOutlet: UIButton!
+    @IBOutlet private weak var numberOfTaps: UILabel!
+    @IBOutlet private weak var centerButtonCounter: UIButton!
+    @IBOutlet private weak var welcomeMessage: UILabel!
+    @IBOutlet private weak var startAnimatingOutlet: UIButton!
+    
+    // MARK: - actions
+    
+    @IBAction private func centerButtonCounterAction(_ sender: UIButton) {
+        tapCounter += 1
+        numberOfTaps.text = "Number of taps: \(tapCounter)"
     }
-    //Game console - start animating
-    @IBAction func button_icon_action(_ sender: Any) {
-        Activity.stopAnimating()
+    
+        //Game console - stop animating
+    @IBAction private func stopAnimatingAction() {
+        activityIndicator.stopAnimating()
     }
-    //Moon - stop animating
-    @IBAction func button_start_action(_ sender: Any) {
-        Activity.startAnimating()
+    
+        //Moon - start - animating
+    @IBAction private func startAnimatingAction() {
+        activityIndicator.startAnimating()
     }
+    
+    // MARK: - lifecycle methods
+    
+    private func configureUI() {
+        centerButtonCounter.layer.cornerRadius = 25
+        centerButtonCounter.layer.borderWidth = 5
+        startAnimatingOutlet.layer.cornerRadius = 10
+        startAnimatingOutlet.layer.borderWidth = 5
+        stopAnimatingOutlet.layer.cornerRadius = 10
+        stopAnimatingOutlet.layer.borderWidth = 5
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        button_outlet.layer.cornerRadius = 25
-        button_outlet.layer.borderWidth = 5
-        button_start_outlet.layer.cornerRadius = 10
-        button_start_outlet.layer.borderWidth = 5
-        button_icon.layer.cornerRadius = 10
-        button_icon.layer.borderWidth = 5
         
+        configureUI()
         
-        label.isHidden = true
-        button_outlet.isHidden = true
-        button_icon.isHidden = true
-        button_start_outlet.isHidden = true
+        numberOfTaps.isHidden = true
+        centerButtonCounter.isHidden = true
+        stopAnimatingOutlet.isHidden = true
+        startAnimatingOutlet.isHidden = true
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.numberOfTaps.isHidden = false
+            self.centerButtonCounter.isHidden = false
+            self.stopAnimatingOutlet.isHidden = false
+            self.startAnimatingOutlet.isHidden = false
         
-            self.label.isHidden = false
-            self.button_outlet.isHidden = false
-            self.button_icon.isHidden = false
-            self.button_start_outlet.isHidden = false
-        
-            self.Activity.stopAnimating()
-        })
+            self.activityIndicator.stopAnimating()
+        }
     }
-    
-        
-        
 }
 
 
