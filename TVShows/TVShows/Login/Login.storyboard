@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LVn-LZ-bkB">
+    <device id="retina6_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="LdY-4L-E6q">
+            <objects>
+                <viewController id="LVn-LZ-bkB" customClass="LoginViewController" customModule="TVShows" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MD1-Eu-R0p">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="olG-v3-kdI">
+                                <rect key="frame" x="20" y="348" width="374" height="200"/>
+                                <color key="backgroundColor" red="0.021191021427512169" green="0.90419834852218628" blue="0.97924941778182983" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="62"/>
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" title="Infinum">
+                                    <color key="titleColor" red="0.045119278132915497" green="0.23001247644424438" blue="0.90125530958175659" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="centerButtonCounterAction:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="OIs-hH-7Wh"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of taps: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3Z-aJ-vPT">
+                                <rect key="frame" x="40" y="748" width="334" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <color key="textColor" red="0.96586912870407104" green="0.92129111289978027" blue="0.87186235189437866" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="highlightedColor" red="1" green="0.57751154699999996" blue="0.78596959060000005" alpha="0.77470290490000004" colorSpace="custom" customColorSpace="sRGB"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iVT-wc-u2h">
+                                <rect key="frame" x="208" y="135" width="166" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="Image"/>
+                                <connections>
+                                    <action selector="stopAnimatingAction" destination="LVn-LZ-bkB" eventType="touchUpInside" id="p5s-Fd-jDz"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="B1J-87-Mmz">
+                                <rect key="frame" x="197" y="634" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to Infinum!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LL8-7T-yuW">
+                                <rect key="frame" x="69" y="82" width="276" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" red="0.6074410080909729" green="0.091743387281894684" blue="0.54568415880203247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SZY-7a-53V">
+                                <rect key="frame" x="40" y="135" width="160" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="Image-1"/>
+                                <connections>
+                                    <action selector="startAnimatingAction" destination="LVn-LZ-bkB" eventType="touchUpInside" id="njB-5L-1PG"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.088909931480884552" green="0.61988723278045654" blue="0.7157103419303894" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="T3Z-aJ-vPT" secondAttribute="bottom" constant="100" id="CwY-3S-gbM"/>
+                            <constraint firstItem="olG-v3-kdI" firstAttribute="centerX" secondItem="MD1-Eu-R0p" secondAttribute="centerX" id="DuW-Pi-wyo"/>
+                            <constraint firstItem="ws8-4a-CKf" firstAttribute="trailing" secondItem="olG-v3-kdI" secondAttribute="trailing" constant="20" id="LB5-tQ-emz"/>
+                            <constraint firstItem="olG-v3-kdI" firstAttribute="centerY" secondItem="MD1-Eu-R0p" secondAttribute="centerY" id="SY8-vw-gGI"/>
+                            <constraint firstItem="ws8-4a-CKf" firstAttribute="trailing" secondItem="T3Z-aJ-vPT" secondAttribute="trailing" constant="40" id="XVU-j2-ROA"/>
+                            <constraint firstItem="T3Z-aJ-vPT" firstAttribute="leading" secondItem="ws8-4a-CKf" secondAttribute="leading" constant="40" id="wBV-HV-Olu"/>
+                            <constraint firstItem="T3Z-aJ-vPT" firstAttribute="top" secondItem="olG-v3-kdI" secondAttribute="bottom" constant="200" id="wcA-ns-Iac"/>
+                            <constraint firstItem="olG-v3-kdI" firstAttribute="centerY" secondItem="MD1-Eu-R0p" secondAttribute="centerY" id="ziw-xk-xAc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ws8-4a-CKf"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="B1J-87-Mmz" id="IhS-PT-OKx"/>
+                        <outlet property="centerButtonCounter" destination="olG-v3-kdI" id="YfL-ew-gPl"/>
+                        <outlet property="numberOfTaps" destination="T3Z-aJ-vPT" id="BF8-RX-lcR"/>
+                        <outlet property="startAnimatingOutlet" destination="SZY-7a-53V" id="0Aw-8Y-NcE"/>
+                        <outlet property="stopAnimatingOutlet" destination="iVT-wc-u2h" id="dzB-wO-dNG"/>
+                        <outlet property="welcomeMessage" destination="LL8-7T-yuW" id="pmH-Sp-LaI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="204-8W-36j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140.57971014492756" y="-79.017857142857139"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Image" width="42.666667938232422" height="42.666667938232422"/>
+        <image name="Image-1" width="42.666667938232422" height="42.666667938232422"/>
+    </resources>
+</document>
