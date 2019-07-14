@@ -95,6 +95,9 @@
                                         <state key="normal" title="LOG IN">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="loginClicked:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="y2a-tU-23g"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7Z-07-xWP">
                                         <rect key="frame" x="0.0" y="307" width="340" height="20.5"/>
@@ -110,6 +113,9 @@
                                         <state key="normal" title="Create an account">
                                             <color key="titleColor" red="1" green="0.45882352941176469" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="createAccountClicked:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="L2e-wm-6Nn"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

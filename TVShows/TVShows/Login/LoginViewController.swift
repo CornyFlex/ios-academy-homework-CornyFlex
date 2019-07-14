@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+
 class LoginViewController: UIViewController {
     
     // MARK - outlets:
@@ -30,6 +31,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         checkmark_action()
         loginButtonEdit()
+        
         }
     
     // MARK: - actions
@@ -42,6 +44,22 @@ class LoginViewController: UIViewController {
             clickToRememberCheckmark.setImage(UIImage(named: "ic-checkbox-empty.png"), for: .normal)
         }
     }
+    @IBAction func loginClicked(_ sender: UIButton) {
+        
+        let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+        
+        let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        
+        //viewController.name("iOS Academy 2019")
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+        
+        
+    }
+    @IBAction func createAccountClicked(_ sender: UIButton) {
+    }
+    
 }
     
         
