@@ -8,7 +8,9 @@
 
 import Foundation
 import UIKit
-
+import Alamofire
+import CodableAlamofire
+import SVProgressHUD
 
 class LoginViewController: UIViewController {
     
@@ -53,14 +55,62 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginClicked(_ sender: UIButton) {
-        goToHomeScreen()
+        let username = usernameField.text
+        let password = passwordField.text
+        
+        if (username == "" || password == "") {
+            return
+        }
+        
     }
     
     @IBAction func createAccountClicked(_ sender: UIButton) {
-        goToHomeScreen()
+        let username = usernameField.text
+        let password = passwordField.text
+        
+        if (username == "" || password == "") {
+            return
+        }
+        
+        registerUserAlamofireCodableWith(user: username!, pass: password!)
     }
-    
 }
+    
+    // MARK: register and json parsing
+    
+    private extension LoginViewController {
+        
+        func registerUserAlamofireCodableWith(user: String, pass: String) {
+            
+            SVProgressHUD.show()
+            
+            let parameters: [String: String] = [
+                "username": user,
+                "password": pass
+            ]
+            
+            Alamofire
+                .request("https://api.infinum.academy/api/users",
+                         method: .post,
+                         parameters: parameters,
+                         encoding: JSONEncoding.default)
+                .validate()
+                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<User>) in
+                    
+                    SVProgressHUD.dismiss()
+                    switch response.result {
+                    case .success(let user):
+                        print("Succes: \(user)")
+                        self.goToHomeScreen()
+                    case .failure(let error):
+                        print("API failure: \(error)")
+                    }
+                    
+                }
+            }
+        }
+    
+
     
         
         
