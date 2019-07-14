@@ -7,6 +7,6 @@ target 'TVShows' do
 
   # Pods for TVShows
   pod 'MBProgressHUD'
-  pod 'Alamofire'
-  pod 'CodableAlamofire'
+  #pod 'Alamofire'
+  #pod 'CodableAlamofire'
 end

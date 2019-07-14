@@ -23,6 +23,17 @@ class LoginViewController: UIViewController {
     
     // MARK: - life cycle functions
     
+    private func goToHomeScreen() {
+        let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+        
+        let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        
+        //viewController.name("iOS Academy 2019")
+        
+        navigationController?.pushViewController(viewController, animated: true)
+
+    }
+    
     private func loginButtonEdit() {
         clickToLogin.layer.cornerRadius = 10
     }
@@ -45,19 +56,11 @@ class LoginViewController: UIViewController {
         }
     }
     @IBAction func loginClicked(_ sender: UIButton) {
-        
-        let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
-        
-        let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-        
-        //viewController.name("iOS Academy 2019")
-        
-        navigationController?.pushViewController(viewController, animated: true)
-        
-        
+        goToHomeScreen()
         
     }
     @IBAction func createAccountClicked(_ sender: UIButton) {
+        goToHomeScreen()
     }
     
 }
