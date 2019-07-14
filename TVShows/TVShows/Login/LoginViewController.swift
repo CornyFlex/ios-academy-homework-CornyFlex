@@ -25,11 +25,7 @@ class LoginViewController: UIViewController {
     
     private func goToHomeScreen() {
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
-        
         let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-        
-        //viewController.name("iOS Academy 2019")
-        
         navigationController?.pushViewController(viewController, animated: true)
 
     }
@@ -55,10 +51,11 @@ class LoginViewController: UIViewController {
             clickToRememberCheckmark.setImage(UIImage(named: "ic-checkbox-empty.png"), for: .normal)
         }
     }
+    
     @IBAction func loginClicked(_ sender: UIButton) {
         goToHomeScreen()
-        
     }
+    
     @IBAction func createAccountClicked(_ sender: UIButton) {
         goToHomeScreen()
     }
