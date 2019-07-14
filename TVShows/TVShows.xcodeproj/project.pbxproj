@@ -12,16 +12,33 @@
 		420777C322D0ECFE00181E33 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420777C222D0ECFE00181E33 /* LoginViewController.swift */; };
 		421B782222DA589800F4BA01 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421B782122DA589800F4BA01 /* HomeViewController.swift */; };
 		421B782422DA594300F4BA01 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 421B782322DA594300F4BA01 /* Home.storyboard */; };
+		421B787122DA894900F4BA01 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 421B787022DA894900F4BA01 /* Alamofire.framework */; };
+		421B787222DA894900F4BA01 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 421B787022DA894900F4BA01 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		42A748AB22CE53EA00DDD092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A748AA22CE53EA00DDD092 /* AppDelegate.swift */; };
 		42A748B222CE53EA00DDD092 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42A748B122CE53EA00DDD092 /* Assets.xcassets */; };
 		42A748B522CE53EA00DDD092 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42A748B322CE53EA00DDD092 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		421B787322DA894B00F4BA01 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				421B787222DA894900F4BA01 /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		420777C022D0ECCF00181E33 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		420777C222D0ECFE00181E33 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		421B782122DA589800F4BA01 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		421B782322DA594300F4BA01 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		421B787022DA894900F4BA01 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42A748A722CE53EA00DDD092 /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42A748AA22CE53EA00DDD092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42A748B122CE53EA00DDD092 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -38,6 +55,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26265EB2E7E58FA28A8F7908 /* Pods_TVShows.framework in Frameworks */,
+				421B787122DA894900F4BA01 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +92,7 @@
 		42A7489E22CE53EA00DDD092 = {
 			isa = PBXGroup;
 			children = (
+				421B787022DA894900F4BA01 /* Alamofire.framework */,
 				42A748A922CE53EA00DDD092 /* TVShows */,
 				42A748A822CE53EA00DDD092 /* Products */,
 				40EE7D53ADD02EB78EA30F56 /* Pods */,
@@ -122,6 +141,7 @@
 				42A748A422CE53EA00DDD092 /* Frameworks */,
 				42A748A522CE53EA00DDD092 /* Resources */,
 				1960BB42EA1FC95D226CF0AC /* [CP] Embed Pods Frameworks */,
+				421B787322DA894B00F4BA01 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

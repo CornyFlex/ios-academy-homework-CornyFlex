@@ -6,6 +6,7 @@ target 'TVShows' do
   use_frameworks!
 
   # Pods for TVShows
-  pod "MBProgressHUD"
+  pod 'MBProgressHUD'
   pod 'Alamofire'
+  pod 'CodableAlamofire'
 end
