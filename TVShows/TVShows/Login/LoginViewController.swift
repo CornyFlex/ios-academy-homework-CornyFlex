@@ -29,7 +29,6 @@ class LoginViewController: UIViewController {
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         navigationController?.pushViewController(viewController, animated: true)
-
     }
     
     private func loginButtonEdit() {
@@ -40,7 +39,6 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         checkmark_action()
         loginButtonEdit()
-        
         }
     
     // MARK: - actions
@@ -68,8 +66,6 @@ class LoginViewController: UIViewController {
             return
         }
         loginUserAlamofireCodableWith(email: username, pass: password)
-        
-        
     }
     
     @IBAction func createAccountClicked(_ sender: UIButton) {
@@ -86,12 +82,11 @@ class LoginViewController: UIViewController {
         if (username == "" || password == "") {
             return
         }
-        
         registerUserAlamofireCodableWith(email: username, pass: password)
     }
 }
     
-    // MARK: register and json parsing
+    // MARK: - register and json parsing
     
     private extension LoginViewController {
         
@@ -121,10 +116,12 @@ class LoginViewController: UIViewController {
                     case .failure(let error):
                         print("API failure: \(error)")
                     }
-                    
                 }
             }
         }
+
+// MARK: - extensions
+
     private extension LoginViewController {
     
         func loginUserAlamofireCodableWith(email: String, pass: String) {
