@@ -96,7 +96,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="loginClicked:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="y2a-tU-23g"/>
+                                            <action selector="loginClicked" destination="LVn-LZ-bkB" eventType="touchUpInside" id="tq5-2D-lAt"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7Z-07-xWP">

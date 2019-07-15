@@ -54,25 +54,40 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func loginClicked(_ sender: UIButton) {
-        let username = usernameField.text
-        let password = passwordField.text
+    @IBAction func loginClicked() {
+        guard let username = usernameField.text else {
+            print("Error username")
+            return
+        }
+        guard let password = passwordField.text else {
+            print("Error password")
+            return
+        }
         
         if (username == "" || password == "") {
             return
         }
+        loginUserAlamofireCodableWith(email: username, pass: password)
+        
         
     }
     
     @IBAction func createAccountClicked(_ sender: UIButton) {
-        let username = usernameField.text
-        let password = passwordField.text
+        
+        guard let username = usernameField.text else {
+            print("Error username")
+            return
+        }
+        guard let password = passwordField.text else {
+            print("Error password")
+            return
+        }
         
         if (username == "" || password == "") {
             return
         }
         
-        registerUserAlamofireCodableWith(user: username!, pass: password!)
+        registerUserAlamofireCodableWith(email: username, pass: password)
     }
 }
     
@@ -80,12 +95,12 @@ class LoginViewController: UIViewController {
     
     private extension LoginViewController {
         
-        func registerUserAlamofireCodableWith(user: String, pass: String) {
+        func registerUserAlamofireCodableWith(email: String, pass: String) {
             
             SVProgressHUD.show()
             
             let parameters: [String: String] = [
-                "username": user,
+                "email": email,
                 "password": pass
             ]
             
@@ -94,8 +109,40 @@ class LoginViewController: UIViewController {
                          method: .post,
                          parameters: parameters,
                          encoding: JSONEncoding.default)
+                
                 .validate()
                 .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<User>) in
+                    
+                    SVProgressHUD.dismiss()
+                    switch response.result {
+                    case .success(let user):
+                        print("Succes: \(user)")
+                        self.loginUserAlamofireCodableWith(email: email, pass: pass)
+                    case .failure(let error):
+                        print("API failure: \(error)")
+                    }
+                    
+                }
+            }
+        }
+    private extension LoginViewController {
+    
+        func loginUserAlamofireCodableWith(email: String, pass: String) {
+            
+            SVProgressHUD.show()
+            
+            let parameters: [String: String] = [
+                "email": email,
+                "password": pass
+            ]
+            
+            Alamofire
+                .request("https://api.infinum.academy/api/users/sessions",
+                         method: .post,
+                         parameters: parameters,
+                         encoding: JSONEncoding.default)
+                .validate()
+                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<LoginData>) in
                     
                     SVProgressHUD.dismiss()
                     switch response.result {
@@ -105,12 +152,9 @@ class LoginViewController: UIViewController {
                     case .failure(let error):
                         print("API failure: \(error)")
                     }
-                    
-                }
             }
         }
-    
-
+}
     
         
         
