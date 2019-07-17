@@ -19,58 +19,66 @@ class LoginViewController: UIViewController {
     @IBOutlet private weak var usernameField: UITextField!
     @IBOutlet private weak var passwordField: UITextField!
     @IBOutlet private weak var clickToRememberCheckmark: UIButton!
-    @IBOutlet private weak var rememberMe: UILabel!
     @IBOutlet private weak var clickToLogin: UIButton!
-    @IBOutlet private weak var createAccount: UIButton!
+    @IBOutlet private weak var clickToCreateAccount: UIButton!
     
     // MARK: - life cycle functions
     
     private func goToHomeScreen() {
+        
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         navigationController?.pushViewController(viewController, animated: true)
+        
     }
     
     private func loginButtonEdit() {
+        
         clickToLogin.layer.cornerRadius = 10
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkmark_action()
+        checkmarkClicked()
         loginButtonEdit()
         }
     
     // MARK: - actions
     
-    @IBAction private func checkmark_action() {
+    @IBAction private func checkmarkClicked() {
+        
         if clickToRememberCheckmark.currentImage == UIImage(named: "ic-checkbox-empty.png") {
             clickToRememberCheckmark.setImage(UIImage(named: "ic-checkbox-filled.png"), for: .normal)
         }
+            
         else {
             clickToRememberCheckmark.setImage(UIImage(named: "ic-checkbox-empty.png"), for: .normal)
         }
     }
     
     @IBAction func loginClicked() {
-        guard let username = usernameField.text else {
+        
+        guard let email = usernameField.text else {
             print("Error username")
             return
         }
+        
         guard let password = passwordField.text else {
             print("Error password")
             return
         }
         
-        if (username == "" || password == "") {
+        if (email == "" || password == "") {
             return
         }
-        loginUserAlamofireCodableWith(email: username, pass: password)
+        
+        loginUserAlamofireCodableWith(email: email, pass: password)
     }
     
-    @IBAction func createAccountClicked(_ sender: UIButton) {
+    @IBAction func createAccountClicked() {
         
-        guard let username = usernameField.text else {
+        guard let email = usernameField.text else {
             print("Error username")
             return
         }
@@ -79,14 +87,15 @@ class LoginViewController: UIViewController {
             return
         }
         
-        if (username == "" || password == "") {
+        if (email == "" || password == "") {
             return
         }
-        registerUserAlamofireCodableWith(email: username, pass: password)
+        
+        registerUserAlamofireCodableWith(email: email, pass: password)
     }
 }
-    
-    // MARK: - register and json parsing
+// MARK: - private
+    // MARK: - register and json parsing (going to login)
     
     private extension LoginViewController {
         
@@ -109,6 +118,7 @@ class LoginViewController: UIViewController {
                 .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<User>) in
                     
                     SVProgressHUD.dismiss()
+                    
                     switch response.result {
                     case .success(let user):
                         print("Succes: \(user)")
@@ -120,7 +130,7 @@ class LoginViewController: UIViewController {
             }
         }
 
-// MARK: - extensions
+// MARK: Login and json parsing (going to home screen)
 
     private extension LoginViewController {
     
@@ -142,6 +152,7 @@ class LoginViewController: UIViewController {
                 .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<LoginData>) in
                     
                     SVProgressHUD.dismiss()
+                    
                     switch response.result {
                     case .success(let user):
                         print("Succes: \(user)")
@@ -149,8 +160,8 @@ class LoginViewController: UIViewController {
                     case .failure(let error):
                         print("API failure: \(error)")
                     }
-            }
         }
+    }
 }
     
         

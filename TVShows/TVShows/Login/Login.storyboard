@@ -74,7 +74,7 @@
                                                 <color key="tintColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" backgroundImage="ic-checkbox-empty"/>
                                                 <connections>
-                                                    <action selector="checkmark_action" destination="LVn-LZ-bkB" eventType="touchUpInside" id="w1X-pI-ATs"/>
+                                                    <action selector="checkmarkClicked" destination="LVn-LZ-bkB" eventType="touchUpInside" id="w1X-pI-ATs"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -114,7 +114,7 @@
                                             <color key="titleColor" red="1" green="0.45882352941176469" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="createAccountClicked:" destination="LVn-LZ-bkB" eventType="touchUpInside" id="L2e-wm-6Nn"/>
+                                            <action selector="createAccountClicked" destination="LVn-LZ-bkB" eventType="touchUpInside" id="1bo-MG-eRA"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -144,11 +144,10 @@
                     <navigationItem key="navigationItem" id="e5A-NQ-Lbf"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="clickToCreateAccount" destination="c4w-K4-jS8" id="HD8-5M-EYR"/>
                         <outlet property="clickToLogin" destination="MBR-b2-PAv" id="bKn-EQ-svO"/>
                         <outlet property="clickToRememberCheckmark" destination="wec-GI-den" id="k2u-Y0-8gp"/>
-                        <outlet property="createAccount" destination="c4w-K4-jS8" id="HD8-5M-EYR"/>
                         <outlet property="passwordField" destination="mzP-YD-YKR" id="M8n-K2-dTM"/>
-                        <outlet property="rememberMe" destination="dfU-bo-nW8" id="hst-1s-3oh"/>
                         <outlet property="usernameField" destination="S12-55-qrp" id="FH4-6U-D5m"/>
                     </connections>
                 </viewController>
