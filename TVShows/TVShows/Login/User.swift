@@ -24,3 +24,16 @@ struct LoginData: Codable {
     let token: String
 }
 
+struct Show: Codable {
+    let idShow: String
+    let title: String
+    let imageUrl: String
+    let likesCount: Int
+    
+    enum CodingKeysShows: String, CodingKey {
+        case idShow = "_id"
+        case title
+        case imageUrl
+        case likesCount
+    }
+}

@@ -14,7 +14,10 @@ import SVProgressHUD
 
 class LoginViewController: UIViewController {
     
-    // MARK - outlets:
+    // MARK: - properties
+    let homeViewC = HomeViewController()
+ 
+    // MARK: - outlets
     
     @IBOutlet private weak var usernameField: UITextField!
     @IBOutlet private weak var passwordField: UITextField!
@@ -156,9 +159,17 @@ class LoginViewController: UIViewController {
                     switch response.result {
                     case .success(let user):
                         print("Succes: \(user)")
+                        let tokenShow = user.token
+                        self.homeViewC.loadShowsAlamofireCodable(token: tokenShow)
                         self.goToHomeScreen()
+                        
+                        
                     case .failure(let error):
                         print("API failure: \(error)")
+                        
+                        let alert = UIAlertController(title:" Login failed", message: "Error: Incorrect email or password, please try again.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title:"OK", style: .cancel, handler:nil))
+                        self.present(alert, animated: true)
                     }
         }
     }
