@@ -12,6 +12,7 @@
 		421B782222DA589800F4BA01 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421B782122DA589800F4BA01 /* HomeViewController.swift */; };
 		421B782422DA594300F4BA01 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 421B782322DA594300F4BA01 /* Home.storyboard */; };
 		421B787822DBC69D00F4BA01 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421B787722DBC69D00F4BA01 /* User.swift */; };
+		421B788122E2682B00F4BA01 /* ShowsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421B788022E2682B00F4BA01 /* ShowsTableViewCell.swift */; };
 		42A748AB22CE53EA00DDD092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A748AA22CE53EA00DDD092 /* AppDelegate.swift */; };
 		42A748B222CE53EA00DDD092 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42A748B122CE53EA00DDD092 /* Assets.xcassets */; };
 		42A748B522CE53EA00DDD092 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42A748B322CE53EA00DDD092 /* LaunchScreen.storyboard */; };
@@ -37,8 +38,8 @@
 		420777C222D0ECFE00181E33 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		421B782122DA589800F4BA01 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		421B782322DA594300F4BA01 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
-		421B787522DB651600F4BA01 /* Alamofire.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; name = Alamofire.xcworkspace; path = ../Alamofire/Alamofire.xcworkspace; sourceTree = "<group>"; };
 		421B787722DBC69D00F4BA01 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		421B788022E2682B00F4BA01 /* ShowsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsTableViewCell.swift; sourceTree = "<group>"; };
 		42A748A722CE53EA00DDD092 /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42A748AA22CE53EA00DDD092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42A748B122CE53EA00DDD092 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -82,16 +83,24 @@
 		421B782022DA583000F4BA01 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				421B787922E0D16F00F4BA01 /* Cells */,
 				421B782322DA594300F4BA01 /* Home.storyboard */,
 				421B782122DA589800F4BA01 /* HomeViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
 		};
+		421B787922E0D16F00F4BA01 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				421B788022E2682B00F4BA01 /* ShowsTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		42A7489E22CE53EA00DDD092 = {
 			isa = PBXGroup;
 			children = (
-				421B787522DB651600F4BA01 /* Alamofire.xcworkspace */,
 				42A748A922CE53EA00DDD092 /* TVShows */,
 				42A748A822CE53EA00DDD092 /* Products */,
 				40EE7D53ADD02EB78EA30F56 /* Pods */,
@@ -248,6 +257,7 @@
 				421B787822DBC69D00F4BA01 /* User.swift in Sources */,
 				420777C322D0ECFE00181E33 /* LoginViewController.swift in Sources */,
 				42A748AB22CE53EA00DDD092 /* AppDelegate.swift in Sources */,
+				421B788122E2682B00F4BA01 /* ShowsTableViewCell.swift in Sources */,
 				421B782222DA589800F4BA01 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

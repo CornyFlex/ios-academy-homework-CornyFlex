@@ -30,7 +30,7 @@ struct Show: Codable {
     let imageUrl: String
     let likesCount: Int
     
-    enum CodingKeysShows: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case idShow = "_id"
         case title
         case imageUrl

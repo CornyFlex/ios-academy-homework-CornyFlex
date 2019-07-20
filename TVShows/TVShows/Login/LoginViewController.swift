@@ -13,9 +13,6 @@ import CodableAlamofire
 import SVProgressHUD
 
 class LoginViewController: UIViewController {
-    
-    // MARK: - properties
-    let homeViewC = HomeViewController()
  
     // MARK: - outlets
     
@@ -27,10 +24,11 @@ class LoginViewController: UIViewController {
     
     // MARK: - life cycle functions
     
-    private func goToHomeScreen() {
+    private func goToHomeScreen(token: String) {
         
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        viewController.token = token
         navigationController?.pushViewController(viewController, animated: true)
         
     }
@@ -157,17 +155,16 @@ class LoginViewController: UIViewController {
                     SVProgressHUD.dismiss()
                     
                     switch response.result {
+                        
                     case .success(let user):
                         print("Succes: \(user)")
-                        let tokenShow = user.token
-                        self.homeViewC.loadShowsAlamofireCodable(token: tokenShow)
-                        self.goToHomeScreen()
+                        self.goToHomeScreen(token: user.token)
                         
                         
                     case .failure(let error):
                         print("API failure: \(error)")
                         
-                        let alert = UIAlertController(title:" Login failed", message: "Error: Incorrect email or password, please try again.", preferredStyle: .alert)
+                        let alert = UIAlertController(title:"Login failed", message: "Error: Incorrect email or password, please try again.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title:"OK", style: .cancel, handler:nil))
                         self.present(alert, animated: true)
                     }
