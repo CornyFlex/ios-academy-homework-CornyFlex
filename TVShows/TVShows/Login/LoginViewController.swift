@@ -13,7 +13,8 @@ import CodableAlamofire
 import SVProgressHUD
 
 class LoginViewController: UIViewController {
- 
+
+    
     // MARK: - outlets
     
     @IBOutlet private weak var usernameField: UITextField!
@@ -159,7 +160,6 @@ class LoginViewController: UIViewController {
                     case .success(let user):
                         print("Succes: \(user)")
                         self.goToHomeScreen(token: user.token)
-                        
                         
                     case .failure(let error):
                         print("API failure: \(error)")
