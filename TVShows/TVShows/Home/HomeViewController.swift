@@ -37,6 +37,12 @@ class HomeViewController: UIViewController {
         
     }
     
+//    func goToDetails(token: String, id: String) {
+//        let detailsStoryboard = UIStoryboard(name: "Details", bundle: nil)
+//        let detailsViewController = detailsStoryboard.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+//        navigationController?.pushViewController(detailsViewController, animated: true)
+//    }
+    
 }
 extension HomeViewController: UITableViewDelegate {
     // Delegate UI events, open up `UITableViewDelegate` and explore :)
@@ -45,6 +51,13 @@ extension HomeViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let item = items[indexPath.row]
         print("Selected Item: \(item)")
+        
+        let detailsStoryboard = UIStoryboard(name: "Details", bundle: nil)
+        let detailsViewController = detailsStoryboard.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+        detailsViewController.idDetails = item.idShow
+        detailsViewController.tokenDetails = token
+        navigationController?.pushViewController(detailsViewController, animated: true)
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -105,7 +118,7 @@ private extension HomeViewController {
     }
 }
 
-extension HomeViewController {
+private extension HomeViewController {
     
     func setupTableView() {
         // For now we are using automatic height, that means that the table view cell will try to callculate its own size
