@@ -37,12 +37,6 @@ class HomeViewController: UIViewController {
         
     }
     
-//    func goToDetails(token: String, id: String) {
-//        let detailsStoryboard = UIStoryboard(name: "Details", bundle: nil)
-//        let detailsViewController = detailsStoryboard.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
-//        navigationController?.pushViewController(detailsViewController, animated: true)
-//    }
-    
 }
 extension HomeViewController: UITableViewDelegate {
     // Delegate UI events, open up `UITableViewDelegate` and explore :)
@@ -55,7 +49,10 @@ extension HomeViewController: UITableViewDelegate {
         let detailsStoryboard = UIStoryboard(name: "Details", bundle: nil)
         let detailsViewController = detailsStoryboard.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
         detailsViewController.idDetails = item.idShow
+        detailsViewController.showDescription = item.description
         detailsViewController.tokenDetails = token
+        detailsViewController.showTitle = item.title
+        
         navigationController?.pushViewController(detailsViewController, animated: true)
         
     }
