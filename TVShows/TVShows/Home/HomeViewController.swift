@@ -21,20 +21,15 @@ class HomeViewController: UIViewController {
     
     var items = [Show]()
     var token: String!
+    
 //    let showInstance = HomeViewController()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        loadShowsAlamofireCodable()
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewShows.delegate = self
         tableViewShows.dataSource = self
         setupTableView()
-        navigationItem.setHidesBackButton(true, animated: true)
-//        navigationController?.setViewControllers([showInstance], animated: true)
-        
+        loadShowsAlamofireCodable()
     }
     
 }
@@ -49,7 +44,6 @@ extension HomeViewController: UITableViewDelegate {
         let detailsStoryboard = UIStoryboard(name: "Details", bundle: nil)
         let detailsViewController = detailsStoryboard.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
         detailsViewController.idDetails = item.idShow
-        detailsViewController.showDescription = item.description
         detailsViewController.tokenDetails = token
         detailsViewController.showTitle = item.title
         
@@ -118,16 +112,11 @@ private extension HomeViewController {
 private extension HomeViewController {
     
     func setupTableView() {
-        // For now we are using automatic height, that means that the table view cell will try to callculate its own size
-        // For the system to knows that we plan to do that, we need to specifiy some estimated row height
+
         tableViewShows.estimatedRowHeight = 110
-        //tableViewShows.rowHeight = UITableView.automaticDimension
-        
-        // Little trick to remove empty table view cells from the screen, play with removing it.
+
         tableViewShows.tableFooterView = UIView()
-//
-//        tableView.delegate = self
-//        tableView.dataSource = self
+
     }
 }
 

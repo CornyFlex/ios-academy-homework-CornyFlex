@@ -14,7 +14,6 @@ import SVProgressHUD
 
 class LoginViewController: UIViewController {
 
-    
     // MARK: - outlets
     
     @IBOutlet private weak var usernameField: UITextField!
@@ -30,7 +29,8 @@ class LoginViewController: UIViewController {
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         viewController.token = token
-        navigationController?.pushViewController(viewController, animated: true)
+//        navigationController?.pushViewController(viewController, animated: true)
+        navigationController?.setViewControllers([viewController], animated: true)
         
     }
     
@@ -42,9 +42,10 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        SVProgressHUD.setDefaultMaskType(.black)
         checkmarkClicked()
         loginButtonEdit()
-        }
+    }
     
     // MARK: - actions
     

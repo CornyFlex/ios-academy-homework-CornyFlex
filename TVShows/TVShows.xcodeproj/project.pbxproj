@@ -19,6 +19,8 @@
 		42A748AB22CE53EA00DDD092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A748AA22CE53EA00DDD092 /* AppDelegate.swift */; };
 		42A748B222CE53EA00DDD092 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42A748B122CE53EA00DDD092 /* Assets.xcassets */; };
 		42A748B522CE53EA00DDD092 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42A748B322CE53EA00DDD092 /* LaunchScreen.storyboard */; };
+		42EBECBE22E71215005D89DF /* NewEpisodeVewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EBECBD22E71215005D89DF /* NewEpisodeVewController.swift */; };
+		42EBECC022E71229005D89DF /* AddEpisode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42EBECBF22E71229005D89DF /* AddEpisode.storyboard */; };
 		BA433CA4EF19FE646CFECD4C /* Pods_TVShows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF3AE3D372CF7B0C66397507 /* Pods_TVShows.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +53,8 @@
 		42A748B122CE53EA00DDD092 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42A748B422CE53EA00DDD092 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42A748B622CE53EA00DDD092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42EBECBD22E71215005D89DF /* NewEpisodeVewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEpisodeVewController.swift; sourceTree = "<group>"; };
+		42EBECBF22E71229005D89DF /* AddEpisode.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddEpisode.storyboard; sourceTree = "<group>"; };
 		64CF3315D61612A850FE9C3F /* Pods-TVShows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.release.xcconfig"; path = "Target Support Files/Pods-TVShows/Pods-TVShows.release.xcconfig"; sourceTree = "<group>"; };
 		FF3AE3D372CF7B0C66397507 /* Pods_TVShows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVShows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -143,6 +147,7 @@
 		42A748A922CE53EA00DDD092 /* TVShows */ = {
 			isa = PBXGroup;
 			children = (
+				42EBECBC22E711E6005D89DF /* NewEpisode */,
 				421B788222E4D7CC00F4BA01 /* Details */,
 				421B782022DA583000F4BA01 /* Home */,
 				420777BF22D0EC2000181E33 /* Login */,
@@ -152,6 +157,15 @@
 				42A748B622CE53EA00DDD092 /* Info.plist */,
 			);
 			path = TVShows;
+			sourceTree = "<group>";
+		};
+		42EBECBC22E711E6005D89DF /* NewEpisode */ = {
+			isa = PBXGroup;
+			children = (
+				42EBECBD22E71215005D89DF /* NewEpisodeVewController.swift */,
+				42EBECBF22E71229005D89DF /* AddEpisode.storyboard */,
+			);
+			path = NewEpisode;
 			sourceTree = "<group>";
 		};
 		9E237981C33EE5F94E497371 /* Frameworks */ = {
@@ -225,6 +239,7 @@
 			files = (
 				421B788622E4D82500F4BA01 /* Details.storyboard in Resources */,
 				42A748B522CE53EA00DDD092 /* LaunchScreen.storyboard in Resources */,
+				42EBECC022E71229005D89DF /* AddEpisode.storyboard in Resources */,
 				42A748B222CE53EA00DDD092 /* Assets.xcassets in Resources */,
 				420777C122D0ECCF00181E33 /* Login.storyboard in Resources */,
 				421B782422DA594300F4BA01 /* Home.storyboard in Resources */,
@@ -281,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				421B787822DBC69D00F4BA01 /* User.swift in Sources */,
+				42EBECBE22E71215005D89DF /* NewEpisodeVewController.swift in Sources */,
 				420777C322D0ECFE00181E33 /* LoginViewController.swift in Sources */,
 				42A748AB22CE53EA00DDD092 /* AppDelegate.swift in Sources */,
 				421B788122E2682B00F4BA01 /* ShowsTableViewCell.swift in Sources */,
