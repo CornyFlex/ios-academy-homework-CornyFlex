@@ -13,9 +13,9 @@ import SVProgressHUD
 
 class DetailsViewController: UIViewController {
     
+    @IBOutlet weak var descriptionDetailsShow: UILabel!
     @IBOutlet weak var nameSeriesDetails: UILabel!
     @IBOutlet weak var episodesNumberDetails: UILabel!
-    @IBOutlet weak var descriptionDetails: UITextView!
     @IBOutlet weak var thumbnailDetails: UIImageView!
     
     @IBOutlet weak var addNewShow: UIButton!
@@ -33,23 +33,25 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadDetails()
+    }
     
+    func loadDetails() {
         loadDetailsShowAlamofireCodable(showId: idDetails)
         loadDescriptionDetailsShowAlamofireCodable(showId: idDetails)
         
-        descriptionDetails.text = showDescription
         nameSeriesDetails.text = showTitle
         episodesNumberDetails.text = String(numberOfEpisodes)
-        configureDescription(with: characteristics)
         
         self.tableViewDetails.bringSubviewToFront(addNewShow)
-        
     }
-    
     @IBAction func clickToAddNewEp() {
         let newEpStoryboard = UIStoryboard(name:"AddEpisode", bundle:nil)
         let newEpViewController = newEpStoryboard.instantiateViewController(withIdentifier: "NewEpisodeViewController") as! NewEpisodeViewController
         
+        newEpViewController.showId = idDetails
+        newEpViewController.tokenEpisode = tokenDetails
+        newEpViewController.delegate = self
         let navigationController = UINavigationController(rootViewController: newEpViewController)
         present(navigationController, animated: true)
     }
@@ -131,16 +133,14 @@ private extension DetailsViewController {
                 headers: (headers as! HTTPHeaders)
             )
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<[ShowDetails]>) in
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<ShowDetails>) in
                 SVProgressHUD.dismiss()
                 
                 switch response.result {
                 case .success(let showsDetails):
                     print("Success: \(showsDetails)")
-                    
-                    showsDetails.forEach { show in
-                        self.characteristics.append(show)
-                    }
+                    self.descriptionDetailsShow.text = showsDetails.description
+                    self.tableViewDetails.reloadData()
                     
                 case .failure(let error):
                     print("Failed: \(error)")
@@ -156,8 +156,17 @@ private extension DetailsViewController {
     }
 }
 
-private extension DetailsViewController {
-    func configureDescription(with item: [ShowDetails]) {
-        descriptionDetails.text = item.description
+extension DetailsViewController: NewEpisodeDelegate {
+    func episodeAdded() {
+        loadDetails()
+    }
+    func episodeError() {
+        
     }
 }
+
+//private extension DetailsViewController {
+//    func configureDescription(with item: [ShowDetails]) {
+//        descriptionDetails.text = item.description
+//    }
+//}
