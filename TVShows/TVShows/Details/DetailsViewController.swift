@@ -13,7 +13,7 @@ import SVProgressHUD
 
 class DetailsViewController: UIViewController {
     
-    @IBOutlet weak var descriptionDetailsShow: UILabel!
+    @IBOutlet weak var descriptionDetailsShow: UITextView!
     @IBOutlet weak var nameSeriesDetails: UILabel!
     @IBOutlet weak var episodesNumberDetails: UILabel!
     @IBOutlet weak var thumbnailDetails: UIImageView!
@@ -28,6 +28,7 @@ class DetailsViewController: UIViewController {
     var showTitle: String!
     var showDescription: String?
     var numberOfEpisodes = 0
+    var imageUrlDetails: String!
     
     var characteristics = [ShowDetails]()
     
@@ -44,6 +45,11 @@ class DetailsViewController: UIViewController {
         episodesNumberDetails.text = String(numberOfEpisodes)
         
         self.tableViewDetails.bringSubviewToFront(addNewShow)
+        
+        let url = URL(string: "https://api.infinum.academy" + imageUrlDetails)
+        let placeHolder = UIImage(named: "Image-5")
+        thumbnailDetails.kf.setImage(with: url, placeholder: placeHolder)
+       
     }
     @IBAction func clickToAddNewEp() {
         let newEpStoryboard = UIStoryboard(name:"AddEpisode", bundle:nil)
@@ -51,7 +57,9 @@ class DetailsViewController: UIViewController {
         
         newEpViewController.showId = idDetails
         newEpViewController.tokenEpisode = tokenDetails
+        
         newEpViewController.delegate = self
+        
         let navigationController = UINavigationController(rootViewController: newEpViewController)
         present(navigationController, animated: true)
     }
@@ -63,8 +71,6 @@ extension DetailsViewController: UITableViewDelegate {
         let itemDetails = characteristics[indexPath.row]
         print("\(itemDetails)")
         
-        
-//        loadDetailsShowAlamofireCodable(showId: idDetails)
     }
 }
 
@@ -161,7 +167,6 @@ extension DetailsViewController: NewEpisodeDelegate {
         loadDetails()
     }
     func episodeError() {
-        
     }
 }
 

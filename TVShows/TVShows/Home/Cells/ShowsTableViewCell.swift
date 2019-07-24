@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ShowsTableViewCell: UITableViewCell {
 
@@ -14,23 +15,28 @@ class ShowsTableViewCell: UITableViewCell {
     @IBOutlet weak var thumbnailTVShow: UIImageView!
     @IBOutlet weak var titleTVShow: UILabel!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-//        thumbnailTVShow.image = nil
-//        titleTVShow.text = nil
     }
 }
 
 extension ShowsTableViewCell {
     func configure(with item: Show) {
         titleTVShow.text = item.title
+        
+        let url = URL(string: "https://api.infinum.academy" + item.imageUrl)
+        let placeholderImage = UIImage(named: "Image-5")
+        thumbnailTVShow.kf.setImage(with: url, placeholder: placeholderImage)
     }
 }
+
+//extension ShowsTableViewCell {
+//    func
+//}
 

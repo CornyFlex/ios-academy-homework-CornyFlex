@@ -10,6 +10,7 @@ import UIKit
 import SVProgressHUD
 import Alamofire
 import CodableAlamofire
+import Kingfisher
 
 class HomeViewController: UIViewController {
     
@@ -22,19 +23,17 @@ class HomeViewController: UIViewController {
     var items = [Show]()
     var token: String!
     
-//    let showInstance = HomeViewController()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewShows.delegate = self
         tableViewShows.dataSource = self
         setupTableView()
         loadShowsAlamofireCodable()
+        
     }
     
 }
 extension HomeViewController: UITableViewDelegate {
-    // Delegate UI events, open up `UITableViewDelegate` and explore :)
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -43,9 +42,11 @@ extension HomeViewController: UITableViewDelegate {
         
         let detailsStoryboard = UIStoryboard(name: "Details", bundle: nil)
         let detailsViewController = detailsStoryboard.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+        
         detailsViewController.idDetails = item.idShow
         detailsViewController.tokenDetails = token
         detailsViewController.showTitle = item.title
+        detailsViewController.imageUrlDetails = item.imageUrl
         
         navigationController?.pushViewController(detailsViewController, animated: true)
         
@@ -54,6 +55,7 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0;
     }
+
 }
 
 extension HomeViewController: UITableViewDataSource {
@@ -67,10 +69,6 @@ extension HomeViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ShowsTableViewCell.self), for: indexPath) as! ShowsTableViewCell
             cell.configure(with: items[indexPath.row])
         
-//        let something: Show
-//        something = items[indexPath.row]
-//
-//        cell.titleTVShow.text = something.title
           return cell
     }
 }
@@ -112,11 +110,9 @@ private extension HomeViewController {
 private extension HomeViewController {
     
     func setupTableView() {
-
         tableViewShows.estimatedRowHeight = 110
-
         tableViewShows.tableFooterView = UIView()
-
+        tableViewShows.separatorStyle = .none
     }
 }
 

@@ -24,7 +24,7 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-logo" translatesAutoresizingMaskIntoConstraints="NO" id="QuQ-r6-Xql">
                                         <rect key="frame" x="0.0" y="0.0" width="340" height="80"/>
                                     </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S12-55-qrp" userLabel="Username_textfield">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="S12-55-qrp" userLabel="Username_textfield">
                                         <rect key="frame" x="0.0" y="85" width="340" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="500" constant="40" id="2oe-qq-9v2"/>
@@ -41,7 +41,7 @@
                                             <constraint firstAttribute="height" constant="1" id="oNC-OQ-itT"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mzP-YD-YKR">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mzP-YD-YKR">
                                         <rect key="frame" x="0.0" y="136" width="340" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="340" id="5Rg-Tw-jaf"/>
@@ -49,7 +49,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bpn-7c-PUC">
                                         <rect key="frame" x="0.0" y="181" width="340" height="1"/>
@@ -68,11 +68,12 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wec-GI-den" userLabel="Checkmark">
-                                                <rect key="frame" x="0.0" y="13" width="22" height="22"/>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wec-GI-den" userLabel="Checkmark">
+                                                <rect key="frame" x="-1" y="12" width="24" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" backgroundImage="ic-checkbox-empty"/>
+                                                <state key="selected" image="ic-checkbox-filled" backgroundImage="ic-checkbox-empty"/>
                                                 <connections>
                                                     <action selector="checkmarkClicked" destination="LVn-LZ-bkB" eventType="touchUpInside" id="w1X-pI-ATs"/>
                                                 </connections>
@@ -176,6 +177,7 @@
     </scenes>
     <resources>
         <image name="ic-checkbox-empty" width="24" height="24"/>
+        <image name="ic-checkbox-filled" width="24" height="24"/>
         <image name="login-logo" width="75" height="80"/>
     </resources>
 </document>

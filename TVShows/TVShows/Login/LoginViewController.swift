@@ -12,8 +12,11 @@ import Alamofire
 import CodableAlamofire
 import SVProgressHUD
 
+
 class LoginViewController: UIViewController {
 
+    let defaults = UserDefaults.standard
+    
     // MARK: - outlets
     
     @IBOutlet private weak var usernameField: UITextField!
@@ -29,39 +32,32 @@ class LoginViewController: UIViewController {
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         viewController.token = token
-//        navigationController?.pushViewController(viewController, animated: true)
         navigationController?.setViewControllers([viewController], animated: true)
         
     }
     
     private func loginButtonEdit() {
-        
         clickToLogin.layer.cornerRadius = 10
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         SVProgressHUD.setDefaultMaskType(.black)
-        checkmarkClicked()
+        clickToRememberCheckmark.isSelected = false
         loginButtonEdit()
+        
+        if userAlreadyExist(userNameKey: "email", passwordKey: "password") == true {
+            loginUserAlamofireCodableWith(email: defaults.string(forKey:"email")!, pass: defaults.string(forKey: "password")!)
+        }
     }
     
     // MARK: - actions
     
     @IBAction private func checkmarkClicked() {
-        
-        if clickToRememberCheckmark.currentImage == UIImage(named: "ic-checkbox-empty.png") {
-            clickToRememberCheckmark.setImage(UIImage(named: "ic-checkbox-filled.png"), for: .normal)
-        }
-            
-        else {
-            clickToRememberCheckmark.setImage(UIImage(named: "ic-checkbox-empty.png"), for: .normal)
-        }
+        clickToRememberCheckmark.isSelected.toggle()
     }
     
     @IBAction func loginClicked() {
-        
         guard let email = usernameField.text else {
             print("Error username")
             return
@@ -118,14 +114,14 @@ class LoginViewController: UIViewController {
                          encoding: JSONEncoding.default)
                 
                 .validate()
-                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<User>) in
+                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<User>) in
                     
                     SVProgressHUD.dismiss()
                     
                     switch response.result {
                     case .success(let user):
                         print("Succes: \(user)")
-                        self.loginUserAlamofireCodableWith(email: email, pass: pass)
+                        self?.loginUserAlamofireCodableWith(email: email, pass: pass)
                     case .failure(let error):
                         print("API failure: \(error)")
                     }
@@ -152,7 +148,7 @@ class LoginViewController: UIViewController {
                          parameters: parameters,
                          encoding: JSONEncoding.default)
                 .validate()
-                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<LoginData>) in
+                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<LoginData>) in
                     
                     SVProgressHUD.dismiss()
                     
@@ -160,21 +156,50 @@ class LoginViewController: UIViewController {
                         
                     case .success(let user):
                         print("Succes: \(user)")
-                        self.goToHomeScreen(token: user.token)
+                        if self?.clickToRememberCheckmark.isSelected == true {
+                            
+                            self?.defaults.set(email, forKey: "email")
+                            self?.defaults.set(pass, forKey: "password")
+                        }
+                        self?.goToHomeScreen(token: user.token)
                         
                     case .failure(let error):
                         print("API failure: \(error)")
                         
+                        self?.passwordField.shake()
+                        self?.usernameField.shake()
+                        
                         let alert = UIAlertController(title:"Login failed", message: "Error: Incorrect email or password, please try again.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title:"OK", style: .cancel, handler:nil))
-                        self.present(alert, animated: true)
+                        self?.present(alert, animated: true)
                     }
         }
     }
 }
-    
-        
-        
+private extension UITextField {
+    func shake() {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.05
+        animation.repeatCount = 5
+        animation.autoreverses = true
+        animation.fromValue = CGPoint(x: self.center.x - 4.0, y: self.center.y)
+        animation.toValue = CGPoint(x: self.center.x + 4.0, y: self.center.y)
+        layer.add(animation, forKey: "position")
+    }
+}
+
+private extension LoginViewController {
+    func userAlreadyExist(userNameKey: String, passwordKey: String) -> Bool {
+        return defaults.string(forKey: userNameKey) != nil && defaults.string(forKey: passwordKey) != nil
+    }
+}
+//private extension LoginViewController {
+//    func saveUserInfo() {
+//        defaults.set(usernameField.text, forKey: "email")
+//        defaults.set(passwordField.text, forKey: "password")
+//    }
+//}
+
 
 
 
