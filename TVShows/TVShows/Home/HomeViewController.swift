@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     var items = [Show]()
     var token: String!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewShows.delegate = self
@@ -30,9 +31,31 @@ class HomeViewController: UIViewController {
         setupTableView()
         loadShowsAlamofireCodable()
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Image-7"),
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(logoutActionHandler))
     }
     
+    @objc private func logoutActionHandler() {
+        print("hello")
+        UserDefaults.standard.removeObject(forKey: "email")
+        UserDefaults.standard.removeObject(forKey: "password")
+        UserDefaults.standard.synchronize()
+        
+        goToLogin()
+    }
 }
+
+private extension HomeViewController {
+    func goToLogin() {
+        let loginStoryboard = UIStoryboard(name: "Login", bundle:nil)
+        let viewControllerForGoingBackToLogin = loginStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
+        
+        navigationController?.setViewControllers([viewControllerForGoingBackToLogin], animated: true)
+    }
+}
+
 extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

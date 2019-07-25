@@ -160,6 +160,7 @@ class LoginViewController: UIViewController {
                             
                             self?.defaults.set(email, forKey: "email")
                             self?.defaults.set(pass, forKey: "password")
+                            self?.defaults.synchronize()
                         }
                         self?.goToHomeScreen(token: user.token)
                         
@@ -193,12 +194,6 @@ private extension LoginViewController {
         return defaults.string(forKey: userNameKey) != nil && defaults.string(forKey: passwordKey) != nil
     }
 }
-//private extension LoginViewController {
-//    func saveUserInfo() {
-//        defaults.set(usernameField.text, forKey: "email")
-//        defaults.set(passwordField.text, forKey: "password")
-//    }
-//}
 
 
 
