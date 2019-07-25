@@ -68,11 +68,12 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wec-GI-den" userLabel="Checkmark">
-                                                <rect key="frame" x="0.0" y="13" width="22" height="22"/>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wec-GI-den" userLabel="Checkmark">
+                                                <rect key="frame" x="-1" y="12" width="24" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                <state key="normal" backgroundImage="ic-checkbox-empty"/>
+                                                <state key="normal" image="ic-checkbox-empty"/>
+                                                <state key="selected" image="ic-checkbox-filled"/>
                                                 <connections>
                                                     <action selector="checkmarkClicked" destination="LVn-LZ-bkB" eventType="touchUpInside" id="w1X-pI-ATs"/>
                                                 </connections>
@@ -114,7 +115,7 @@
                                             <color key="titleColor" red="1" green="0.45882352941176469" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="createAccountClicked" destination="LVn-LZ-bkB" eventType="touchUpInside" id="1bo-MG-eRA"/>
+                                            <action selector="clickToCreateAccount" destination="LVn-LZ-bkB" eventType="touchUpInside" id="1bo-MG-eRA"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -144,11 +145,11 @@
                     <navigationItem key="navigationItem" id="e5A-NQ-Lbf"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
-                        <outlet property="clickToCreateAccount" destination="c4w-K4-jS8" id="HD8-5M-EYR"/>
-                        <outlet property="clickToLogin" destination="MBR-b2-PAv" id="bKn-EQ-svO"/>
-                        <outlet property="clickToRememberCheckmark" destination="wec-GI-den" id="k2u-Y0-8gp"/>
-                        <outlet property="passwordField" destination="mzP-YD-YKR" id="M8n-K2-dTM"/>
-                        <outlet property="usernameField" destination="S12-55-qrp" id="FH4-6U-D5m"/>
+                        <outlet property="createAccountButton" destination="c4w-K4-jS8" id="HD8-5M-EYR"/>
+                        <outlet property="loginButton" destination="MBR-b2-PAv" id="bKn-EQ-svO"/>
+                        <outlet property="passwordTextField" destination="mzP-YD-YKR" id="M8n-K2-dTM"/>
+                        <outlet property="rememberMeCheckmark" destination="wec-GI-den" id="k2u-Y0-8gp"/>
+                        <outlet property="usernameTextField" destination="S12-55-qrp" id="FH4-6U-D5m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="204-8W-36j" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -176,6 +177,7 @@
     </scenes>
     <resources>
         <image name="ic-checkbox-empty" width="24" height="24"/>
+        <image name="ic-checkbox-filled" width="24" height="24"/>
         <image name="login-logo" width="75" height="80"/>
     </resources>
 </document>

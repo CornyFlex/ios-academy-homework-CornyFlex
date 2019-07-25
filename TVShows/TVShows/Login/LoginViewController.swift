@@ -16,78 +16,64 @@ class LoginViewController: UIViewController {
     
     // MARK - outlets:
     
-    @IBOutlet private weak var usernameField: UITextField!
-    @IBOutlet private weak var passwordField: UITextField!
-    @IBOutlet private weak var clickToRememberCheckmark: UIButton!
-    @IBOutlet private weak var clickToLogin: UIButton!
-    @IBOutlet private weak var clickToCreateAccount: UIButton!
+    @IBOutlet private weak var usernameTextField: UITextField!
+    @IBOutlet private weak var passwordTextField: UITextField!
+    @IBOutlet private weak var rememberMeCheckmark: UIButton!
+    @IBOutlet private weak var loginButton: UIButton!
+    @IBOutlet private weak var createAccountButton: UIButton!
     
     // MARK: - life cycle functions
     
     private func goToHomeScreen() {
-        
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         navigationController?.pushViewController(viewController, animated: true)
-        
     }
     
     private func loginButtonEdit() {
-        
-        clickToLogin.layer.cornerRadius = 10
-        
+        loginButton.layer.cornerRadius = 10
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         checkmarkClicked()
         loginButtonEdit()
-        }
+        
+        rememberMeCheckmark.isSelected = false
+    }
     
     // MARK: - actions
     
     @IBAction private func checkmarkClicked() {
         
-        if clickToRememberCheckmark.currentImage == UIImage(named: "ic-checkbox-empty.png") {
-            clickToRememberCheckmark.setImage(UIImage(named: "ic-checkbox-filled.png"), for: .normal)
-        }
-            
-        else {
-            clickToRememberCheckmark.setImage(UIImage(named: "ic-checkbox-empty.png"), for: .normal)
-        }
+        rememberMeCheckmark.isSelected.toggle()
     }
     
     @IBAction func loginClicked() {
         
-        guard let email = usernameField.text else {
-            print("Error username")
-            return
-        }
-        
-        guard let password = passwordField.text else {
-            print("Error password")
-            return
-        }
-        
-        if (email == "" || password == "") {
+        guard
+            let email = usernameTextField.text,
+            let password = passwordTextField.text,
+            !email.isEmpty,
+            !password.isEmpty
+        else {
+            let alert = UIAlertController(title: "Login error",  message: "Please enter username and password", preferredStyle: .alert)
             return
         }
         
         loginUserAlamofireCodableWith(email: email, pass: password)
     }
     
-    @IBAction func createAccountClicked() {
+    @IBAction func clickToCreateAccount() {
         
-        guard let email = usernameField.text else {
-            print("Error username")
-            return
-        }
-        guard let password = passwordField.text else {
-            print("Error password")
-            return
-        }
-        
-        if (email == "" || password == "") {
+        guard
+            let email = usernameTextField.text,
+            let password = passwordTextField.text,
+            !email.isEmpty,
+            !password.isEmpty
+            
+        else {
+            let alert = UIAlertController(title: "Registration error",  message: "Please enter username and password", preferredStyle: .alert)
             return
         }
         
@@ -95,6 +81,7 @@ class LoginViewController: UIViewController {
     }
 }
 // MARK: - private
+
     // MARK: - register and json parsing (going to login)
     
     private extension LoginViewController {
@@ -115,14 +102,14 @@ class LoginViewController: UIViewController {
                          encoding: JSONEncoding.default)
                 
                 .validate()
-                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<User>) in
+                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<User>) in
                     
                     SVProgressHUD.dismiss()
                     
                     switch response.result {
                     case .success(let user):
                         print("Succes: \(user)")
-                        self.loginUserAlamofireCodableWith(email: email, pass: pass)
+                        self?.loginUserAlamofireCodableWith(email: email, pass: pass)
                     case .failure(let error):
                         print("API failure: \(error)")
                     }
@@ -149,18 +136,18 @@ class LoginViewController: UIViewController {
                          parameters: parameters,
                          encoding: JSONEncoding.default)
                 .validate()
-                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<LoginData>) in
+                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<LoginData>) in
                     
                     SVProgressHUD.dismiss()
                     
                     switch response.result {
                     case .success(let user):
                         print("Succes: \(user)")
-                        self.goToHomeScreen()
+                        self?.goToHomeScreen()
                     case .failure(let error):
                         print("API failure: \(error)")
                     }
-        }
+            }
     }
 }
     
