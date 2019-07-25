@@ -27,7 +27,9 @@ class LoginViewController: UIViewController {
     private func goToHomeScreen(token: String) {
         
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
-        let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        guard
+        let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
+            else { return }
         viewController.token = token
 //        navigationController?.pushViewController(viewController, animated: true)
         navigationController?.setViewControllers([viewController], animated: true)
@@ -85,6 +87,7 @@ class LoginViewController: UIViewController {
             print("Error username")
             return
         }
+        
         guard let password = passwordField.text else {
             print("Error password")
             return
@@ -152,7 +155,7 @@ class LoginViewController: UIViewController {
                          parameters: parameters,
                          encoding: JSONEncoding.default)
                 .validate()
-                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<LoginData>) in
+                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<LoginData>) in
                     
                     SVProgressHUD.dismiss()
                     
@@ -160,14 +163,14 @@ class LoginViewController: UIViewController {
                         
                     case .success(let user):
                         print("Succes: \(user)")
-                        self.goToHomeScreen(token: user.token)
+                        self?.goToHomeScreen(token: user.token)
                         
                     case .failure(let error):
                         print("API failure: \(error)")
                         
                         let alert = UIAlertController(title:"Login failed", message: "Error: Incorrect email or password, please try again.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title:"OK", style: .cancel, handler:nil))
-                        self.present(alert, animated: true)
+                        self?.present(alert, animated: true)
                     }
         }
     }

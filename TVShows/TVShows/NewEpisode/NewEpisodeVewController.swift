@@ -11,6 +11,8 @@ import Alamofire
 import CodableAlamofire
 import SVProgressHUD
 
+// MARK: - protocol
+
 protocol NewEpisodeDelegate: class {
     func episodeAdded()
     func episodeError()
@@ -18,17 +20,24 @@ protocol NewEpisodeDelegate: class {
 
 class NewEpisodeViewController: UIViewController {
 
+    // MARK: - outlets
+    
     @IBOutlet weak var episodeTitleTextField: UITextField!
     @IBOutlet weak var seasonNumberTextField: UITextField!
     @IBOutlet weak var episodeNumberTextField: UITextField!
     @IBOutlet weak var episodeDescriptionTextField: UITextField!
     
+    // MARK: - properties
+    
     var showId: String = ""
     var tokenEpisode: String = ""
     weak var delegate: NewEpisodeDelegate?
     
+    // MARK: - life cycle functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Cancel",
             style: .plain,
@@ -53,11 +62,13 @@ class NewEpisodeViewController: UIViewController {
     }
 
 }
+
+// MARK: - private extensions
+
 private extension NewEpisodeViewController {
+    
     func addShowEpisode(ShowId: String){
-        
         SVProgressHUD.show()
-        
         let parameters: [String: String] = [
             "showId": ShowId,
             "title" : episodeTitleTextField.text!,
@@ -70,11 +81,11 @@ private extension NewEpisodeViewController {
         let headers = ["Authorization": tokenEpisode]
         
         Alamofire
-        .request("https://api.infinum.academy/api/episodes",
-        method: .post,
-        parameters: parameters,
-        encoding: JSONEncoding.default,
-        headers: headers)
+            .request("https://api.infinum.academy/api/episodes",
+                     method: .post,
+                     parameters: parameters,
+                     encoding: JSONEncoding.default,
+                     headers: headers)
         
         .validate()
         .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<Episodes>) in
@@ -82,14 +93,17 @@ private extension NewEpisodeViewController {
             SVProgressHUD.dismiss()
             
             switch response.result {
+        
             case .success(let episodeAdded):
+                
                 print("Succes: \(episodeAdded)")
                 self?.dismiss(animated: true)
                 self?.delegate?.episodeAdded()
                 
             case .failure(let error):
-                print("API failure: \(error)")
                 
+                print("API failure: \(error)")
+            
                 let alert = UIAlertController(title:"Failed to add episode", message: "Failed to add new episode, please try again. (Error: \(error)", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title:"OK", style: .cancel, handler:nil))
                 self?.present(alert, animated: true)
@@ -98,4 +112,4 @@ private extension NewEpisodeViewController {
             }
         }
     }
-    }
+}

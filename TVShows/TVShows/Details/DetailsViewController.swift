@@ -13,14 +13,16 @@ import SVProgressHUD
 
 class DetailsViewController: UIViewController {
     
+    // MARK: - outlets
+    
     @IBOutlet weak var descriptionDetailsShow: UILabel!
     @IBOutlet weak var nameSeriesDetails: UILabel!
     @IBOutlet weak var episodesNumberDetails: UILabel!
     @IBOutlet weak var thumbnailDetails: UIImageView!
-    
     @IBOutlet weak var addNewShow: UIButton!
-    
     @IBOutlet weak var tableViewDetails: UITableView!
+    
+    // MARK: - properties
     
     var tokenDetails: String!
     var idDetails: String!
@@ -31,12 +33,15 @@ class DetailsViewController: UIViewController {
     
     var characteristics = [ShowDetails]()
     
+    // MARK: - lifecycle functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadDetails()
     }
     
     func loadDetails() {
+        
         loadDetailsShowAlamofireCodable(showId: idDetails)
         loadDescriptionDetailsShowAlamofireCodable(showId: idDetails)
         
@@ -45,32 +50,41 @@ class DetailsViewController: UIViewController {
         
         self.tableViewDetails.bringSubviewToFront(addNewShow)
     }
+    
     @IBAction func clickToAddNewEp() {
+        
         let newEpStoryboard = UIStoryboard(name:"AddEpisode", bundle:nil)
-        let newEpViewController = newEpStoryboard.instantiateViewController(withIdentifier: "NewEpisodeViewController") as! NewEpisodeViewController
+        
+        guard
+        let newEpViewController = newEpStoryboard.instantiateViewController(withIdentifier: "NewEpisodeViewController") as? NewEpisodeViewController
+        else { return }
         
         newEpViewController.showId = idDetails
         newEpViewController.tokenEpisode = tokenDetails
+        
         newEpViewController.delegate = self
+        
         let navigationController = UINavigationController(rootViewController: newEpViewController)
         present(navigationController, animated: true)
     }
 }
+
+// MARK: - extensions
 extension DetailsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: false)
         let itemDetails = characteristics[indexPath.row]
         print("\(itemDetails)")
         
-        
-//        loadDetailsShowAlamofireCodable(showId: idDetails)
     }
 }
 
 extension DetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("CURRENT INDEX PATH BEING CONFIGURED: \(indexPath)")
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailsTableViewCell", for: indexPath) as! DetailsTableViewCell
         cell.configureDetailsCell(with: characteristics[indexPath.row])
         
@@ -82,8 +96,7 @@ extension DetailsViewController: UITableViewDataSource {
     }
 }
 
-
-
+// MARK: - private extension
 
 private extension DetailsViewController {
     func loadDetailsShowAlamofireCodable(showId: String) {
@@ -99,18 +112,19 @@ private extension DetailsViewController {
                 headers: (headers as! HTTPHeaders)
             )
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<[ShowDetails]>) in
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<[ShowDetails]>) in
                 SVProgressHUD.dismiss()
 
                 switch response.result {
+                    
                 case .success(let showsDetails):
                     print("Success: \(showsDetails)")
                     
                     showsDetails.forEach { show in
-                        self.characteristics.append(show)
+                        self?.characteristics.append(show)
                     }
-                    self.episodesNumberDetails.text = "Number of episodes:\(showsDetails.count)"
-                    self.tableViewDetails.reloadData()
+                    self?.episodesNumberDetails.text = "Number of episodes:\(showsDetails.count)"
+                    self?.tableViewDetails.reloadData()
                   
                 case .failure(let error):
                     print("Failed: \(error)")
@@ -120,9 +134,9 @@ private extension DetailsViewController {
 }
 
 private extension DetailsViewController {
+    
     func loadDescriptionDetailsShowAlamofireCodable(showId: String) {
         SVProgressHUD.show()
-        
         let headers = ["Authorization": tokenDetails]
         
         Alamofire
@@ -147,8 +161,8 @@ private extension DetailsViewController {
                 }
         }
     }
-    
 }
+
 private extension DetailsViewController {
     func setupDetailsTable() {
         tableViewDetails.estimatedRowHeight = 70
@@ -156,17 +170,14 @@ private extension DetailsViewController {
     }
 }
 
+// MARK: - Delegate
+
 extension DetailsViewController: NewEpisodeDelegate {
+    
     func episodeAdded() {
         loadDetails()
     }
     func episodeError() {
-        
     }
 }
 
-//private extension DetailsViewController {
-//    func configureDescription(with item: [ShowDetails]) {
-//        descriptionDetails.text = item.description
-//    }
-//}
