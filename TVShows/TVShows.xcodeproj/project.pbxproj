@@ -37,7 +37,6 @@
 		420777C222D0ECFE00181E33 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		421B782122DA589800F4BA01 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		421B782322DA594300F4BA01 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
-		421B787522DB651600F4BA01 /* Alamofire.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; name = Alamofire.xcworkspace; path = ../Alamofire/Alamofire.xcworkspace; sourceTree = "<group>"; };
 		421B787722DBC69D00F4BA01 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		42A748A722CE53EA00DDD092 /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42A748AA22CE53EA00DDD092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,7 +90,6 @@
 		42A7489E22CE53EA00DDD092 = {
 			isa = PBXGroup;
 			children = (
-				421B787522DB651600F4BA01 /* Alamofire.xcworkspace */,
 				42A748A922CE53EA00DDD092 /* TVShows */,
 				42A748A822CE53EA00DDD092 /* Products */,
 				40EE7D53ADD02EB78EA30F56 /* Pods */,
