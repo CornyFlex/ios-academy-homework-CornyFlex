@@ -91,7 +91,6 @@ private extension NewEpisodeViewController {
         .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<Episodes>) in
             
             SVProgressHUD.dismiss()
-            
             switch response.result {
         
             case .success(let episodeAdded):
@@ -103,7 +102,7 @@ private extension NewEpisodeViewController {
             case .failure(let error):
                 
                 print("API failure: \(error)")
-            
+                
                 let alert = UIAlertController(title:"Failed to add episode", message: "Failed to add new episode, please try again. (Error: \(error)", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title:"OK", style: .cancel, handler:nil))
                 self?.present(alert, animated: true)
