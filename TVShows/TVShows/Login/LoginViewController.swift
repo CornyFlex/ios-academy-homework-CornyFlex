@@ -26,7 +26,10 @@ class LoginViewController: UIViewController {
     
     private func goToHomeScreen() {
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
-        let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        
+        guard
+        let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
+            else { return }
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -61,7 +64,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        loginUserAlamofireCodableWith(email: email, pass: password)
+        loginUserWith(email: email, pass: password)
     }
     
     @IBAction func clickToCreateAccount() {
@@ -74,10 +77,11 @@ class LoginViewController: UIViewController {
             
         else {
             let alert = UIAlertController(title: "Registration error",  message: "Please enter username and password", preferredStyle: .alert)
+            navigationController?.present(alert, animated: true)
             return
         }
         
-        registerUserAlamofireCodableWith(email: email, pass: password)
+        registerUserWith(email: email, pass: password)
     }
 }
 // MARK: - private
@@ -86,7 +90,7 @@ class LoginViewController: UIViewController {
     
     private extension LoginViewController {
         
-        func registerUserAlamofireCodableWith(email: String, pass: String) {
+        func registerUserWith(email: String, pass: String) {
             
             SVProgressHUD.show()
             
@@ -108,20 +112,22 @@ class LoginViewController: UIViewController {
                     
                     switch response.result {
                     case .success(let user):
+                        
                         print("Succes: \(user)")
-                        self?.loginUserAlamofireCodableWith(email: email, pass: pass)
+                        self?.loginUserWith(email: email, pass: pass)
+                        
                     case .failure(let error):
                         print("API failure: \(error)")
                     }
                 }
             }
-        }
+    }
 
 // MARK: Login and json parsing (going to home screen)
 
     private extension LoginViewController {
     
-        func loginUserAlamofireCodableWith(email: String, pass: String) {
+        func loginUserWith(email: String, pass: String) {
             
             SVProgressHUD.show()
             
@@ -141,15 +147,17 @@ class LoginViewController: UIViewController {
                     SVProgressHUD.dismiss()
                     
                     switch response.result {
+                        
                     case .success(let user):
                         print("Succes: \(user)")
                         self?.goToHomeScreen()
+                        
                     case .failure(let error):
                         print("API failure: \(error)")
-                    }
+                }
             }
+        }
     }
-}
     
         
         
