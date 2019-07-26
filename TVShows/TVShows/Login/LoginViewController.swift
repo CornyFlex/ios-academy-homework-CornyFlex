@@ -8,69 +8,159 @@
 
 import Foundation
 import UIKit
+import Alamofire
+import CodableAlamofire
+import SVProgressHUD
 
-final class LoginViewController: UIViewController {
+class LoginViewController: UIViewController {
     
-    // MARK: - properties
+    // MARK - outlets:
     
-    private var tapCounter = 0
+    @IBOutlet private weak var usernameTextField: UITextField!
+    @IBOutlet private weak var passwordTextField: UITextField!
+    @IBOutlet private weak var rememberMeCheckmark: UIButton!
+    @IBOutlet private weak var loginButton: UIButton!
+    @IBOutlet private weak var createAccountButton: UIButton!
     
-    // MARK: - outlets
+    // MARK: - life cycle functions
     
-    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet private weak var stopAnimatingOutlet: UIButton!
-    @IBOutlet private weak var numberOfTaps: UILabel!
-    @IBOutlet private weak var centerButtonCounter: UIButton!
-    @IBOutlet private weak var welcomeMessage: UILabel!
-    @IBOutlet private weak var startAnimatingOutlet: UIButton!
+    private func goToHomeScreen() {
+        let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+        
+        guard
+        let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
+            else { return }
+        navigationController?.pushViewController(viewController, animated: true)
+    }
     
-    // MARK: - lifecycle methods
-    
-    private func configureUI() {
-        centerButtonCounter.layer.cornerRadius = 25
-        centerButtonCounter.layer.borderWidth = 5
-        startAnimatingOutlet.layer.cornerRadius = 10
-        startAnimatingOutlet.layer.borderWidth = 5
-        stopAnimatingOutlet.layer.cornerRadius = 10
-        stopAnimatingOutlet.layer.borderWidth = 5
+    private func loginButtonEdit() {
+        loginButton.layer.cornerRadius = 10
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkmarkClicked()
+        loginButtonEdit()
         
-        configureUI()
-        
-        numberOfTaps.isHidden = true
-        centerButtonCounter.isHidden = true
-        stopAnimatingOutlet.isHidden = true
-        startAnimatingOutlet.isHidden = true
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.numberOfTaps.isHidden = false
-            self.centerButtonCounter.isHidden = false
-            self.stopAnimatingOutlet.isHidden = false
-            self.startAnimatingOutlet.isHidden = false
-        
-            self.activityIndicator.stopAnimating()
-        }
+        rememberMeCheckmark.isSelected = false
     }
     
     // MARK: - actions
     
-    @IBAction private func centerButtonCounterAction(_ sender: UIButton) {
-        tapCounter += 1
-        numberOfTaps.text = "Number of taps: \(tapCounter)"
+    @IBAction private func checkmarkClicked() {
+        
+        rememberMeCheckmark.isSelected.toggle()
     }
     
-        //Moon - stop animating
-    @IBAction private func stopAnimatingAction() {
-        activityIndicator.stopAnimating()
+    @IBAction func loginClicked() {
+        
+        guard
+            let email = usernameTextField.text,
+            let password = passwordTextField.text,
+            !email.isEmpty,
+            !password.isEmpty
+        else {
+            let alert = UIAlertController(title: "Login error",  message: "Please enter username and password", preferredStyle: .alert)
+            return
+        }
+        
+        loginUserWith(email: email, pass: password)
     }
     
-        //Game console - start animating
-    @IBAction private func startAnimatingAction() {
-        activityIndicator.startAnimating()
+    @IBAction func clickToCreateAccount() {
+        
+        guard
+            let email = usernameTextField.text,
+            let password = passwordTextField.text,
+            !email.isEmpty,
+            !password.isEmpty
+            
+        else {
+            let alert = UIAlertController(title: "Registration error",  message: "Please enter username and password", preferredStyle: .alert)
+            navigationController?.present(alert, animated: true)
+            return
+        }
+        
+        registerUserWith(email: email, pass: password)
     }
 }
+// MARK: - private
+
+    // MARK: - register and json parsing (going to login)
+    
+    private extension LoginViewController {
+        
+        func registerUserWith(email: String, pass: String) {
+            
+            SVProgressHUD.show()
+            
+            let parameters: [String: String] = [
+                "email": email,
+                "password": pass
+            ]
+            
+            Alamofire
+                .request("https://api.infinum.academy/api/users",
+                         method: .post,
+                         parameters: parameters,
+                         encoding: JSONEncoding.default)
+                
+                .validate()
+                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<User>) in
+                    
+                    SVProgressHUD.dismiss()
+                    
+                    switch response.result {
+                    case .success(let user):
+                        
+                        print("Succes: \(user)")
+                        self?.loginUserWith(email: email, pass: pass)
+                        
+                    case .failure(let error):
+                        print("API failure: \(error)")
+                    }
+                }
+            }
+    }
+
+// MARK: Login and json parsing (going to home screen)
+
+    private extension LoginViewController {
+    
+        func loginUserWith(email: String, pass: String) {
+            
+            SVProgressHUD.show()
+            
+            let parameters: [String: String] = [
+                "email": email,
+                "password": pass
+            ]
+            
+            Alamofire
+                .request("https://api.infinum.academy/api/users/sessions",
+                         method: .post,
+                         parameters: parameters,
+                         encoding: JSONEncoding.default)
+                .validate()
+                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<LoginData>) in
+                    
+                    SVProgressHUD.dismiss()
+                    
+                    switch response.result {
+                        
+                    case .success(let user):
+                        print("Succes: \(user)")
+                        self?.goToHomeScreen()
+                        
+                    case .failure(let error):
+                        print("API failure: \(error)")
+                }
+            }
+        }
+    }
+    
+        
+        
+
 
 
