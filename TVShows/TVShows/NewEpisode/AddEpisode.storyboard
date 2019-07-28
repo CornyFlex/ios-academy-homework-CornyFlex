@@ -37,6 +37,9 @@
                                                                     <constraint firstAttribute="height" constant="50" id="ksy-LJ-stQ"/>
                                                                 </constraints>
                                                                 <state key="normal" backgroundImage="Image-6"/>
+                                                                <connections>
+                                                                    <action selector="didTapAddPhotoButton" destination="eHM-bR-gDo" eventType="touchUpInside" id="5Uz-mT-r5u"/>
+                                                                </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOU-2r-zoS">
                                                                 <rect key="frame" x="35" y="85" width="80" height="20.5"/>
@@ -125,6 +128,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="xBu-eJ-qwW"/>
                     <connections>
+                        <outlet property="episodeAddPhotoButton" destination="FKw-oF-EBT" id="mZf-9U-DDH"/>
                         <outlet property="episodeDescriptionTextField" destination="81D-UL-zlV" id="E94-FU-R4x"/>
                         <outlet property="episodeNumberTextField" destination="3Qr-Mj-Ne4" id="kUA-hf-gR7"/>
                         <outlet property="episodeTitleTextField" destination="H7R-lD-CcN" id="yPf-yJ-9az"/>

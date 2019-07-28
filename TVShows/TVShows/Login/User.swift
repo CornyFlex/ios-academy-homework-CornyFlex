@@ -73,3 +73,17 @@ struct Episodes: Codable {
         case season
     }
 }
+
+struct Media: Codable {
+    let mediaId: String?
+    let mimeType: String?
+    let withName: String?
+    let fileName: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case mediaId
+        case mimeType
+        case withName
+        case fileName
+    }
+}

@@ -23,13 +23,14 @@ class HomeViewController: UIViewController {
     var items = [Show]()
     var token: String!
     
+    // MARK: - life cycle functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewShows.delegate = self
         tableViewShows.dataSource = self
         setupTableView()
-        loadShowsAlamofireCodable()
+        loadShows()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Image-7"),
                                                            style: .plain,
@@ -47,14 +48,7 @@ class HomeViewController: UIViewController {
     }
 }
 
-private extension HomeViewController {
-    func goToLogin() {
-        let loginStoryboard = UIStoryboard(name: "Login", bundle:nil)
-        let viewControllerForGoingBackToLogin = loginStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
-        
-        navigationController?.setViewControllers([viewControllerForGoingBackToLogin], animated: true)
-    }
-}
+// MARK: - extensions
 
 extension HomeViewController: UITableViewDelegate {
     
@@ -64,7 +58,9 @@ extension HomeViewController: UITableViewDelegate {
         print("Selected Item: \(item)")
         
         let detailsStoryboard = UIStoryboard(name: "Details", bundle: nil)
-        let detailsViewController = detailsStoryboard.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+        guard
+        let detailsViewController = detailsStoryboard.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController
+            else { return }
         
         detailsViewController.idDetails = item.idShow
         detailsViewController.tokenDetails = token
@@ -89,18 +85,19 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("CURRENT INDEX PATH BEING CONFIGURED: \(indexPath)")
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ShowsTableViewCell.self), for: indexPath) as! ShowsTableViewCell
+        
             cell.configure(with: items[indexPath.row])
         
           return cell
     }
 }
 
-        
 //Mark: -private
     //Mark: -shows loading and parsing
 private extension HomeViewController {
-    func loadShowsAlamofireCodable() {
+    func loadShows() {
         SVProgressHUD.show()
         
         let headers = ["Authorization": token!]
@@ -113,16 +110,16 @@ private extension HomeViewController {
                 headers: headers
             )
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<[Show]>) in
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<[Show]>) in
                 SVProgressHUD.dismiss()
                 
                 switch response.result {
                 case .success(let shows):
                     print("Succes: \(shows)")
                     shows.forEach { show in
-                        self.items.append(show)
+                        self?.items.append(show)
                     }
-                    self.tableViewShows.reloadData()
+                    self?.tableViewShows.reloadData()
                 case .failure(let error):
                     print("Eror: \(error)")
                 }
@@ -130,6 +127,17 @@ private extension HomeViewController {
     }
 }
 
+private extension HomeViewController {
+    func goToLogin() {
+        let loginStoryboard = UIStoryboard(name: "Login", bundle:nil)
+        
+        guard
+            let viewControllerForGoingBackToLogin = loginStoryboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginViewController
+            else { return }
+        
+        navigationController?.setViewControllers([viewControllerForGoingBackToLogin], animated: true)
+    }
+}
 private extension HomeViewController {
     
     func setupTableView() {

@@ -64,13 +64,28 @@ class DetailsViewController: UIViewController {
         present(navigationController, animated: true)
     }
 }
+
+// MARK: - extensions
+
 extension DetailsViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let itemDetails = characteristics[indexPath.row]
         print("\(itemDetails)")
         
+        let episodeDetailsSB = UIStoryboard(name: "EpisodeDetails", bundle: nil)
+        guard
+        let episodeDetailsVC = episodeDetailsSB.instantiateViewController(withIdentifier: "EpisodeDetailsViewController") as? EpisodeDetailsViewController
+            else { return }
+        
+        episodeDetailsVC.epDescription = itemDetails.description!
+        episodeDetailsVC.epSeasonNumber = itemDetails.season!
+        episodeDetailsVC.epNumber = itemDetails.episodeNumber!
+        episodeDetailsVC.epTitleDetails = itemDetails.title
+        
+        navigationController?.pushViewController(episodeDetailsVC, animated: true)
+
     }
 }
 
@@ -88,7 +103,7 @@ extension DetailsViewController: UITableViewDataSource {
     }
 }
 
-
+// MARK: - private extension
 
 
 private extension DetailsViewController {
@@ -105,7 +120,7 @@ private extension DetailsViewController {
                 headers: (headers as! HTTPHeaders)
             )
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<[ShowDetails]>) in
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<[ShowDetails]>) in
                 SVProgressHUD.dismiss()
 
                 switch response.result {
@@ -113,10 +128,10 @@ private extension DetailsViewController {
                     print("Success: \(showsDetails)")
                     
                     showsDetails.forEach { show in
-                        self.characteristics.append(show)
+                        self?.characteristics.append(show)
                     }
-                    self.episodesNumberDetails.text = "Number of episodes:\(showsDetails.count)"
-                    self.tableViewDetails.reloadData()
+                    self?.episodesNumberDetails.text = "Number of episodes:\(showsDetails.count)"
+                    self?.tableViewDetails.reloadData()
                   
                 case .failure(let error):
                     print("Failed: \(error)")
@@ -139,14 +154,14 @@ private extension DetailsViewController {
                 headers: (headers as! HTTPHeaders)
             )
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<ShowDetails>) in
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<ShowDetails>) in
                 SVProgressHUD.dismiss()
                 
                 switch response.result {
                 case .success(let showsDetails):
                     print("Success: \(showsDetails)")
-                    self.descriptionDetailsShow.text = showsDetails.description
-                    self.tableViewDetails.reloadData()
+                    self?.descriptionDetailsShow.text = showsDetails.description
+                    self?.tableViewDetails.reloadData()
                     
                 case .failure(let error):
                     print("Failed: \(error)")
@@ -162,6 +177,8 @@ private extension DetailsViewController {
     }
 }
 
+// MARK: - extension delegate
+
 extension DetailsViewController: NewEpisodeDelegate {
     func episodeAdded() {
         loadDetails()
@@ -169,9 +186,3 @@ extension DetailsViewController: NewEpisodeDelegate {
     func episodeError() {
     }
 }
-
-//private extension DetailsViewController {
-//    func configureDescription(with item: [ShowDetails]) {
-//        descriptionDetails.text = item.description
-//    }
-//}

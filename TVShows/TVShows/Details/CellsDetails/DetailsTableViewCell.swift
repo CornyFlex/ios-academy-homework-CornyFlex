@@ -30,9 +30,13 @@ class DetailsTableViewCell: UITableViewCell {
 
 }
 extension DetailsTableViewCell {
+    
     func configureDetailsCell(with item: ShowDetails) {
         episodeTitleSeries.text = item.title
-        guard let season = item.season, let episodeNumber = item.episodeNumber else { return }
+        
+        guard let season = item.season, let episodeNumber = item.episodeNumber
+            else { return }
+        
         seasonNumberDetails.text = "S\(season)"
         episodeNumberDetails.text = "Ep\(episodeNumber)"
         
