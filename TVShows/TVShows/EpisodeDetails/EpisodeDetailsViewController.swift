@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class EpisodeDetailsViewController: UIViewController {
 
@@ -21,17 +22,39 @@ class EpisodeDetailsViewController: UIViewController {
     var epNumber = ""
     var epDescription = ""
     
+    let barButtonImage = UIImage(named: "navigateBack")
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadEpisodeDetails()
         
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(
+//            image: barButtonImage,
+//            style: .plain,
+//            target: self,
+//            action: #selector(didSelectCancel))
+//    }
+//
+//    @objc func didSelectCancel() {
+//        print("Cancel Episode")
+//        navigationController?.dismiss(animated: true, completion: nil)
+//    }
+    }
+    func loadEpisodeDetails() {
         episodeDetailsDescription.text = epDescription
         episodeDetailsTitle.text = epTitleDetails
         episodeDetailsSeasonAndEpisodeNumber.text = "S\(epSeasonNumber) Ep\(epNumber)"
-        // Do any additional setup after loading the view.
+        
+        let url = URL(string: "https://api.infinum.academy\(epImageUrl)")
+        let placeHolder = UIImage(named: "placeholderEpisodeDetails")
+        
+        episodeDetailsImage.kf.setImage(with: url, placeholder: placeHolder)
     }
     
-
+    
+    @IBAction func goBack() {
+        self.dismiss(animated: true, completion: nil)
+    }
     @IBAction func didClickOnCommentsButton() {
     }
     /*

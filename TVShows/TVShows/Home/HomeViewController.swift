@@ -32,10 +32,11 @@ class HomeViewController: UIViewController {
         setupTableView()
         loadShows()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Image-7"),
-                                                           style: .plain,
-                                                           target: self,
-                                                           action: #selector(logoutActionHandler))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(named: "Image-7"),
+            style: .plain,
+            target: self,
+            action: #selector(logoutActionHandler))
     }
     
     @objc private func logoutActionHandler() {
