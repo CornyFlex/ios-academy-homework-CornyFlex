@@ -17,7 +17,7 @@ protocol NewEpisodeDelegate: class {
     func episodeError()
 }
 
-class NewEpisodeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate {
 
     @IBOutlet weak var episodeTitleTextField: UITextField!
     @IBOutlet weak var seasonNumberTextField: UITextField!
@@ -25,6 +25,7 @@ class NewEpisodeViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var episodeDescriptionTextField: UITextField!
     @IBOutlet weak var episodeAddPhotoButton: UIButton!
     
+    var media: Media?
     var showId: String = ""
     var tokenEpisode: String = ""
     weak var delegate: NewEpisodeDelegate?
@@ -64,7 +65,7 @@ class NewEpisodeViewController: UIViewController, UIImagePickerControllerDelegat
         
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
-//        imagePicker.delegate = self
+        imagePicker.delegate = self
         
         navigationController?.present(imagePicker, animated: true, completion: nil)
         
@@ -92,20 +93,6 @@ func checkPermission() {
         print("User has denied the permission.")
     @unknown default:
         fatalError()
-    }
-}
-
-
-extension NewEpisodeViewController {
-   @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        imageGallery = pickedImage
-        uploadImageOnAPI(token: tokenEpisode)
-        navigationController?.dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -147,6 +134,7 @@ private extension NewEpisodeViewController {
                     case .success(let media):
                         print("DECODED: \(media)")
                         print("Proceed to add episode call...")
+                        self.media = media
                     case .failure(let error):
                         print("FAILURE: \(error)")
     
@@ -162,14 +150,17 @@ private extension NewEpisodeViewController {
         
         SVProgressHUD.show()
         
-        let parameters: [String: String] = [
+        var parameters: [String: String] = [
             "showId": ShowId,
             "title" : episodeTitleTextField.text!,
             "description": episodeDescriptionTextField.text!,
             "episodeNumber": episodeNumberTextField.text!,
             "season": seasonNumberTextField.text!,
-            "mediaId": ""
         ]
+        
+        if let mediaId = media?.id {
+            parameters["mediaId"] = mediaId
+        }
         
         let headers = ["Authorization": tokenEpisode]
         
@@ -201,6 +192,20 @@ private extension NewEpisodeViewController {
                 self?.delegate?.episodeError()
             }
         }
+    }
+}
+
+extension NewEpisodeViewController: UIImagePickerControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        imageGallery = pickedImage
+        uploadImageOnAPI(token: tokenEpisode)
+        navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
 }
 

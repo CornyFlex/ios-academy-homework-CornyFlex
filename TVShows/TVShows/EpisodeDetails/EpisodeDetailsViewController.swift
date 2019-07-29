@@ -56,6 +56,13 @@ class EpisodeDetailsViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func didClickOnCommentsButton() {
+        let commentsSB = UIStoryboard(name: "Comments", bundle: nil)
+        guard
+            let commentsVC = commentsSB.instantiateViewController(withIdentifier: "LoadCommentsViewController") as? LoadCommentsViewController
+            else { return }
+        
+        navigationController?.pushViewController(commentsVC, animated: true)
+        
     }
     /*
     // MARK: - Navigation

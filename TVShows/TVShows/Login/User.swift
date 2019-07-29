@@ -75,15 +75,13 @@ struct Episodes: Codable {
 }
 
 struct Media: Codable {
-    let mediaId: String?
-    let mimeType: String?
-    let withName: String?
-    let fileName: String?
+    let path: String
+    let type: String
+    let id: String
     
     enum CodingKeys: String, CodingKey {
-        case mediaId
-        case mimeType
-        case withName
-        case fileName
+        case id = "_id"
+        case path
+        case type
     }
 }
