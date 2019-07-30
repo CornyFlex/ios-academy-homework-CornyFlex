@@ -16,6 +16,9 @@ class EpisodeDetailsViewController: UIViewController {
     @IBOutlet weak var episodeDetailsSeasonAndEpisodeNumber: UILabel!
     @IBOutlet weak var episodeDetailsDescription: UITextView!
     
+    var epId = ""
+    var token = ""
+    
     var epImageUrl = ""
     var epTitleDetails = ""
     var epSeasonNumber = ""
@@ -27,18 +30,6 @@ class EpisodeDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadEpisodeDetails()
-        
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(
-//            image: barButtonImage,
-//            style: .plain,
-//            target: self,
-//            action: #selector(didSelectCancel))
-//    }
-//
-//    @objc func didSelectCancel() {
-//        print("Cancel Episode")
-//        navigationController?.dismiss(animated: true, completion: nil)
-//    }
     }
     func loadEpisodeDetails() {
         episodeDetailsDescription.text = epDescription
@@ -55,23 +46,17 @@ class EpisodeDetailsViewController: UIViewController {
     @IBAction func goBack() {
         self.dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func didClickOnCommentsButton() {
         let commentsSB = UIStoryboard(name: "Comments", bundle: nil)
         guard
             let commentsVC = commentsSB.instantiateViewController(withIdentifier: "LoadCommentsViewController") as? LoadCommentsViewController
             else { return }
         
+        commentsVC.episodeID = epId
+        
+        
         navigationController?.pushViewController(commentsVC, animated: true)
         
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

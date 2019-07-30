@@ -33,7 +33,7 @@
                                                             <constraint firstAttribute="height" constant="350" id="he5-Kg-Uh9"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ske-oN-KMi">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ske-oN-KMi">
                                                         <rect key="frame" x="0.0" y="355" width="384" height="44.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                                         <nil key="textColor"/>

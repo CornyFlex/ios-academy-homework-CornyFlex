@@ -80,7 +80,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VD0-Li-obZ"/>
                     </view>
-                    <navigationItem key="navigationItem" id="lY7-G2-7Ha"/>
+                    <navigationItem key="navigationItem" title="Shows" id="lY7-G2-7Ha"/>
                     <connections>
                         <outlet property="tableViewShows" destination="Hdf-EO-YBj" id="F3o-VL-Zbe"/>
                     </connections>

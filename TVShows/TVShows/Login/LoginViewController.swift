@@ -39,6 +39,15 @@ class LoginViewController: UIViewController {
     private func loginButtonEdit() {
         clickToLogin.layer.cornerRadius = 10
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = false
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +56,7 @@ class LoginViewController: UIViewController {
         loginButtonEdit()
         
         if userAlreadyExist(userNameKey: "email", passwordKey: "password") == true {
-            loginUserAlamofireCodableWith(email: defaults.string(forKey:"email")!, pass: defaults.string(forKey: "password")!)
+            loginUserWith(email: defaults.string(forKey:"email")!, pass: defaults.string(forKey: "password")!)
         }
     }
     
@@ -72,7 +81,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        loginUserAlamofireCodableWith(email: email, pass: password)
+        loginUserWith(email: email, pass: password)
     }
     
     @IBAction func createAccountClicked() {
@@ -90,7 +99,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        registerUserAlamofireCodableWith(email: email, pass: password)
+        registerUserWith(email: email, pass: password)
     }
 }
 // MARK: - private
@@ -98,7 +107,7 @@ class LoginViewController: UIViewController {
     
     private extension LoginViewController {
         
-        func registerUserAlamofireCodableWith(email: String, pass: String) {
+        func registerUserWith(email: String, pass: String) {
             
             SVProgressHUD.show()
             
@@ -121,7 +130,7 @@ class LoginViewController: UIViewController {
                     switch response.result {
                     case .success(let user):
                         print("Succes: \(user)")
-                        self?.loginUserAlamofireCodableWith(email: email, pass: pass)
+                        self?.loginUserWith(email: email, pass: pass)
                     case .failure(let error):
                         print("API failure: \(error)")
                     }
@@ -133,7 +142,7 @@ class LoginViewController: UIViewController {
 
     private extension LoginViewController {
     
-        func loginUserAlamofireCodableWith(email: String, pass: String) {
+        func loginUserWith(email: String, pass: String) {
             
             SVProgressHUD.show()
             
@@ -157,11 +166,14 @@ class LoginViewController: UIViewController {
                     case .success(let user):
                         print("Succes: \(user)")
                         if self?.clickToRememberCheckmark.isSelected == true {
-                            
-                            self?.defaults.set(email, forKey: "email")
+        
                             self?.defaults.set(pass, forKey: "password")
                             self?.defaults.synchronize()
                         }
+                        self?.defaults.set(email, forKey: "email")
+                        self?.defaults.set(user.token, forKey: "token")
+                        self?.defaults.synchronize()
+                        
                         self?.goToHomeScreen(token: user.token)
                         
                     case .failure(let error):

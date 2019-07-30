@@ -85,6 +85,10 @@ extension DetailsViewController: UITableViewDelegate {
         episodeDetailsVC.epTitleDetails = itemDetails.title
         episodeDetailsVC.epImageUrl = itemDetails.imageUrl
         
+        episodeDetailsVC.token = tokenDetails
+        episodeDetailsVC.epId = itemDetails.idShow
+        
+        
         let navigationController = UINavigationController(rootViewController: episodeDetailsVC)
         navigationController.setNavigationBarHidden(true, animated: true)
         present(navigationController, animated: true)

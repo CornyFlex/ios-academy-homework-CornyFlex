@@ -24,6 +24,11 @@ class HomeViewController: UIViewController {
     var token: String!
     
     // MARK: - life cycle functions
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +36,7 @@ class HomeViewController: UIViewController {
         tableViewShows.dataSource = self
         setupTableView()
         loadShows()
-        
+        navigationController?.navigationBar.tintColor = UIColor.black
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "Image-7"),
             style: .plain,
@@ -43,6 +48,7 @@ class HomeViewController: UIViewController {
         print("hello")
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
+        UserDefaults.standard.removeObject(forKey: "token")
         UserDefaults.standard.synchronize()
         
         goToLogin()

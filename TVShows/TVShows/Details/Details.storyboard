@@ -19,23 +19,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="tableViewDetails" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="okI-yV-So9">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="882"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="Agj-fZ-Ll7">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="460"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="588"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="NJT-Gl-2bN">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="460"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="588"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image-5" translatesAutoresizingMaskIntoConstraints="NO" id="fCF-Mz-PgO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="192"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image-5" translatesAutoresizingMaskIntoConstraints="NO" id="fCF-Mz-PgO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="192" id="B24-az-VL2"/>
+                                                        <constraint firstAttribute="height" constant="400" id="Yzy-6q-F3S"/>
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B88-HK-D30">
-                                                    <rect key="frame" x="0.0" y="207" width="414" height="35"/>
+                                                    <rect key="frame" x="0.0" y="415" width="414" height="35"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lFL-T4-xpU">
                                                             <rect key="frame" x="0.0" y="0.0" width="16" height="35"/>
@@ -56,17 +56,17 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zWc-mz-ath">
-                                                    <rect key="frame" x="0.0" y="257" width="414" height="164"/>
+                                                    <rect key="frame" x="0.0" y="465" width="414" height="84"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BbO-zy-0UY">
-                                                            <rect key="frame" x="0.0" y="0.0" width="16" height="164"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="16" height="84"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="16" id="ifP-dZ-dLL"/>
                                                             </constraints>
                                                         </view>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tkd-yN-RIa">
-                                                            <rect key="frame" x="16" y="0.0" width="398" height="164"/>
+                                                            <rect key="frame" x="16" y="0.0" width="398" height="84"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -75,7 +75,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="FdV-a9-FZj">
-                                                    <rect key="frame" x="0.0" y="436" width="414" height="24"/>
+                                                    <rect key="frame" x="0.0" y="564" width="414" height="24"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bhE-XI-9Q1">
                                                             <rect key="frame" x="0.0" y="0.0" width="16" height="24"/>
@@ -101,12 +101,13 @@
                                         <constraint firstItem="NJT-Gl-2bN" firstAttribute="leading" secondItem="Agj-fZ-Ll7" secondAttribute="leading" id="PVW-D5-fbg"/>
                                         <constraint firstItem="NJT-Gl-2bN" firstAttribute="top" secondItem="Agj-fZ-Ll7" secondAttribute="top" id="U4s-rR-yc8"/>
                                         <constraint firstAttribute="trailing" secondItem="NJT-Gl-2bN" secondAttribute="trailing" id="YH8-RO-LJH"/>
+                                        <constraint firstItem="NJT-Gl-2bN" firstAttribute="top" secondItem="Agj-fZ-Ll7" secondAttribute="top" id="cFg-Mg-LqL"/>
                                         <constraint firstAttribute="bottom" secondItem="NJT-Gl-2bN" secondAttribute="bottom" id="fjv-GT-ffZ"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailsTableViewCell" rowHeight="75" id="2gU-wA-d1D" customClass="DetailsTableViewCell" customModule="TVShows" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="488" width="414" height="75"/>
+                                        <rect key="frame" x="0.0" y="616" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2gU-wA-d1D" id="lGo-J0-4B3">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="74.5"/>
@@ -172,9 +173,9 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="okI-yV-So9" firstAttribute="top" secondItem="VLZ-w0-0fe" secondAttribute="top" id="3wU-36-GAc"/>
                             <constraint firstItem="VLZ-w0-0fe" firstAttribute="bottom" secondItem="lmn-od-Jjx" secondAttribute="bottom" id="Cih-4C-uoa"/>
-                            <constraint firstItem="okI-yV-So9" firstAttribute="top" secondItem="VLZ-w0-0fe" secondAttribute="top" id="Vxi-VO-Uoc"/>
-                            <constraint firstItem="okI-yV-So9" firstAttribute="bottom" secondItem="VLZ-w0-0fe" secondAttribute="bottom" id="h2k-yV-Mmc"/>
+                            <constraint firstItem="okI-yV-So9" firstAttribute="bottom" secondItem="VLZ-w0-0fe" secondAttribute="bottom" constant="64" id="h2k-yV-Mmc"/>
                             <constraint firstItem="okI-yV-So9" firstAttribute="leading" secondItem="VLZ-w0-0fe" secondAttribute="leading" id="lh3-E0-U2z"/>
                             <constraint firstItem="VLZ-w0-0fe" firstAttribute="trailing" secondItem="lmn-od-Jjx" secondAttribute="trailing" constant="30" id="oU9-rr-3b4"/>
                             <constraint firstItem="okI-yV-So9" firstAttribute="trailing" secondItem="VLZ-w0-0fe" secondAttribute="trailing" id="wW0-iQ-9bi"/>
