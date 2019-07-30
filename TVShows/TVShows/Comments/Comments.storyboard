@@ -19,14 +19,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="S43-Db-cuH">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="768"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentTableViewCell" rowHeight="98" id="yaW-0Z-D9n" customClass="CommentTableViewCell" customModule="TVShows" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="98"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentTableViewCell" rowHeight="110" id="yaW-0Z-D9n" customClass="CommentTableViewCell" customModule="TVShows" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yaW-0Z-D9n" id="99s-js-Dmz">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="97.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yaW-0Z-D9n" id="99s-js-Dmz">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="109.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HHO-dh-nvx">
@@ -36,23 +36,30 @@
                                                         <constraint firstAttribute="width" constant="75" id="IgY-NY-XRW"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRa-5Z-bPc">
-                                                    <rect key="frame" x="95" y="41" width="69" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRa-5Z-bPc">
+                                                    <rect key="frame" x="95" y="41" width="283" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Who?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUP-kn-2Gp">
-                                                    <rect key="frame" x="95" y="10" width="44" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Who?" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUP-kn-2Gp">
+                                                    <rect key="frame" x="95" y="10" width="303" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="K3a-BE-gvA"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="GUP-kn-2Gp" firstAttribute="top" secondItem="99s-js-Dmz" secondAttribute="top" constant="10" id="BnL-vb-B56"/>
                                                 <constraint firstItem="GUP-kn-2Gp" firstAttribute="leading" secondItem="HHO-dh-nvx" secondAttribute="trailing" constant="10" id="RRM-sc-wbY"/>
+                                                <constraint firstAttribute="trailing" secondItem="GUP-kn-2Gp" secondAttribute="trailing" constant="16" id="SsQ-7g-gvR"/>
+                                                <constraint firstAttribute="bottom" secondItem="HHO-dh-nvx" secondAttribute="bottom" constant="10" id="VZH-Fg-jVz"/>
                                                 <constraint firstItem="HHO-dh-nvx" firstAttribute="top" secondItem="99s-js-Dmz" secondAttribute="top" constant="10" id="Vbs-dE-O2G"/>
                                                 <constraint firstItem="VRa-5Z-bPc" firstAttribute="leading" secondItem="HHO-dh-nvx" secondAttribute="trailing" constant="10" id="Vnf-au-OSy"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="VRa-5Z-bPc" secondAttribute="trailing" constant="16" id="axC-a5-IQ9"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="VRa-5Z-bPc" secondAttribute="bottom" constant="10" id="fvi-l6-bTd"/>
                                                 <constraint firstItem="VRa-5Z-bPc" firstAttribute="top" secondItem="GUP-kn-2Gp" secondAttribute="bottom" constant="10" id="o0y-qw-GsZ"/>
                                                 <constraint firstItem="HHO-dh-nvx" firstAttribute="leading" secondItem="99s-js-Dmz" secondAttribute="leading" constant="10" id="qAc-Vg-wqf"/>
@@ -111,11 +118,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="fmB-w7-Cq9" firstAttribute="bottom" secondItem="S43-Db-cuH" secondAttribute="bottom" id="18k-JY-Qc9"/>
                             <constraint firstItem="S43-Db-cuH" firstAttribute="leading" secondItem="fmB-w7-Cq9" secondAttribute="leading" id="72w-ZU-dLl"/>
                             <constraint firstItem="dW6-1a-naW" firstAttribute="leading" secondItem="fmB-w7-Cq9" secondAttribute="leading" id="Duc-f1-Xg9"/>
                             <constraint firstItem="fmB-w7-Cq9" firstAttribute="bottom" secondItem="dW6-1a-naW" secondAttribute="bottom" id="O7J-dI-KdC"/>
                             <constraint firstItem="S43-Db-cuH" firstAttribute="top" secondItem="fmB-w7-Cq9" secondAttribute="top" id="Otm-8T-hAs"/>
+                            <constraint firstItem="dW6-1a-naW" firstAttribute="top" secondItem="S43-Db-cuH" secondAttribute="bottom" id="QXq-RV-kRq"/>
                             <constraint firstItem="dW6-1a-naW" firstAttribute="leading" secondItem="fmB-w7-Cq9" secondAttribute="leading" id="XBT-z3-L09"/>
                             <constraint firstItem="fmB-w7-Cq9" firstAttribute="trailing" secondItem="dW6-1a-naW" secondAttribute="trailing" id="adF-Zo-eax"/>
                             <constraint firstItem="fmB-w7-Cq9" firstAttribute="trailing" secondItem="S43-Db-cuH" secondAttribute="trailing" id="mTE-fQ-KXu"/>
@@ -123,6 +130,8 @@
                         <viewLayoutGuide key="safeArea" id="fmB-w7-Cq9"/>
                     </view>
                     <connections>
+                        <outlet property="bottomConstraint" destination="O7J-dI-KdC" id="Lrt-S9-I4Z"/>
+                        <outlet property="inputCommentTextField" destination="suR-xG-wCv" id="lsM-K5-bgs"/>
                         <outlet property="tableViewComments" destination="S43-Db-cuH" id="JaM-6K-dbf"/>
                     </connections>
                 </viewController>

@@ -99,3 +99,13 @@ struct Comment: Codable {
         case userId = "_id"
     }
 }
+
+struct PostComment: Codable {
+    let text: String
+    let episodeId: String
+    
+    enum CodingKeys: String, CodingKey {
+        case text
+        case episodeId
+    }
+}

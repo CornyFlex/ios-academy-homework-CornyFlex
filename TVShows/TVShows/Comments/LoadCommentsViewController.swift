@@ -15,6 +15,9 @@ class LoadCommentsViewController: UIViewController {
     
     @IBOutlet weak var tableViewComments: UITableView!
     
+    @IBOutlet weak var inputCommentTextField: UITextField!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
     let emailUserComments = UserDefaults.standard.string(forKey: "email")
     let idUserComments = UserDefaults.standard.string(forKey: "token")
     
@@ -22,32 +25,15 @@ class LoadCommentsViewController: UIViewController {
     
     var commentsList = [Comment]()
     
-//    let center = NotificationCenter.default
-//
-//    let keyboardWillShowObserver: NSObjectProtocol = center.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { (notification) in
-//        guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-//        let height = value.cgRectValue.height
-//        if self.view.frame.origin.y == 0{
-//            self.view.frame.origin.y -= height
-//        }
-    
-//
-//        // use the height of the keyboard to layout your UI so the prt currently in
-//        // foxus remains visible
-//    }
-//
-//    let keyboardWillHideObserver: NSObjectProtocol = self.center.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { (notification) in
-//        if self.view.frame.origin.y != 0 {
-//            self.view.frame.origin.y += height
-//        }
-//
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(false, animated: true)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back"
-            , style: .plain, target: self, action: #selector(goBackToEpDetails))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(goBackToEpDetails))
+        
+        navigationItem.leftBarButtonItem?.image = UIImage(named:"navigateBack")
+        
     }
     
     @objc func goBackToEpDetails() {
@@ -67,25 +53,24 @@ class LoadCommentsViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(LoadCommentsViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(LoadCommentsViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        tableViewComments.rowHeight = UITableView.automaticDimension
+        tableViewComments.estimatedRowHeight = 400
+        
     }
     
    @objc func keyboardWillShow(notification: Notification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             print("notification: Keyboard will show")
-            if self.view.frame.origin.y == 0{
-                self.view.frame.origin.y -= keyboardSize.height
+            bottomConstraint.constant = keyboardSize.height - view.safeAreaInsets.bottom
             }
         }
-
-    }
 
    @objc func keyboardWillHide(notification: Notification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y != 0 {
-                self.view.frame.origin.y += keyboardSize.height
+    if ((notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue) != nil {
+            bottomConstraint.constant = 0
             }
         }
-    }
+
 
     
     func getEpisodeComments() {
@@ -117,7 +102,7 @@ class LoadCommentsViewController: UIViewController {
         }
     }
     
-    func postEpisodeComment(text: String, episodeID: String) {
+    func postEpisodeCommentWith(text: String, episodeID: String) {
         SVProgressHUD.show()
         let parameters: [String: String] = [
             "text": text,
@@ -128,14 +113,14 @@ class LoadCommentsViewController: UIViewController {
         
         Alamofire
             .request(
-                "https://api.infinum.academy/api/shows/\(episodeID)/episodes",
+                "https://api.infinum.academy/api/comments",
                 method: .post,
                 parameters: parameters,
                 encoding: JSONEncoding.default,
                 headers: (headers as! HTTPHeaders)
             )
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<[Comment]>) in
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<PostComment>) in
                 SVProgressHUD.dismiss()
                 
                 switch response.result {
@@ -150,15 +135,21 @@ class LoadCommentsViewController: UIViewController {
     
     
     @IBAction func didTapPostComment() {
+        postEpisodeCommentWith(text: inputCommentTextField.text!, episodeID: episodeID)
+        inputCommentTextField.text = ""
     }
     
 }
 extension LoadCommentsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.fade)
         let commentDetails = commentsList[indexPath.row]
         print("\(commentDetails)")
-            
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
     
@@ -174,22 +165,6 @@ extension LoadCommentsViewController: UITableViewDataSource {
         
         return cell
     }
-    
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
-extension LoadCommentsViewController: UITextViewDelegate {
-    
-}
