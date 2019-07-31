@@ -25,7 +25,7 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentTableViewCell" rowHeight="110" id="yaW-0Z-D9n" customClass="CommentTableViewCell" customModule="TVShows" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yaW-0Z-D9n" id="99s-js-Dmz">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yaW-0Z-D9n" id="99s-js-Dmz">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="109.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -36,7 +36,7 @@
                                                         <constraint firstAttribute="width" constant="75" id="IgY-NY-XRW"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRa-5Z-bPc">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Message" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRa-5Z-bPc">
                                                     <rect key="frame" x="95" y="41" width="283" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -56,7 +56,7 @@
                                                 <constraint firstItem="GUP-kn-2Gp" firstAttribute="top" secondItem="99s-js-Dmz" secondAttribute="top" constant="10" id="BnL-vb-B56"/>
                                                 <constraint firstItem="GUP-kn-2Gp" firstAttribute="leading" secondItem="HHO-dh-nvx" secondAttribute="trailing" constant="10" id="RRM-sc-wbY"/>
                                                 <constraint firstAttribute="trailing" secondItem="GUP-kn-2Gp" secondAttribute="trailing" constant="16" id="SsQ-7g-gvR"/>
-                                                <constraint firstAttribute="bottom" secondItem="HHO-dh-nvx" secondAttribute="bottom" constant="10" id="VZH-Fg-jVz"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="HHO-dh-nvx" secondAttribute="bottom" constant="10" id="VZH-Fg-jVz"/>
                                                 <constraint firstItem="HHO-dh-nvx" firstAttribute="top" secondItem="99s-js-Dmz" secondAttribute="top" constant="10" id="Vbs-dE-O2G"/>
                                                 <constraint firstItem="VRa-5Z-bPc" firstAttribute="leading" secondItem="HHO-dh-nvx" secondAttribute="trailing" constant="10" id="Vnf-au-OSy"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="VRa-5Z-bPc" secondAttribute="trailing" constant="16" id="axC-a5-IQ9"/>

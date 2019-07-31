@@ -14,7 +14,6 @@ import CodableAlamofire
 class LoadCommentsViewController: UIViewController {
     
     @IBOutlet weak var tableViewComments: UITableView!
-    
     @IBOutlet weak var inputCommentTextField: UITextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
@@ -24,6 +23,9 @@ class LoadCommentsViewController: UIViewController {
     var episodeID = ""
     
     var commentsList = [Comment]()
+    
+    public var refreshControl: UIRefreshControl?
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -49,12 +51,13 @@ class LoadCommentsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getEpisodeComments()
+        addRefreshControl()
         
         NotificationCenter.default.addObserver(self, selector: #selector(LoadCommentsViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(LoadCommentsViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         tableViewComments.rowHeight = UITableView.automaticDimension
-        tableViewComments.estimatedRowHeight = 400
+        tableViewComments.estimatedRowHeight = 200
         
     }
     
@@ -71,7 +74,19 @@ class LoadCommentsViewController: UIViewController {
             }
         }
 
-
+    func addRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.tintColor = UIColor.red
+        refreshControl?.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
+        tableViewComments.addSubview(refreshControl!)
+    }
+    
+    @objc func refreshTable() {
+        getEpisodeComments()
+        refreshControl?.endRefreshing()
+        tableViewComments.reloadData()
+        
+    }
     
     func getEpisodeComments() {
         SVProgressHUD.show()
@@ -150,6 +165,10 @@ extension LoadCommentsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
 }
     
