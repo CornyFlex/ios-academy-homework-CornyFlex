@@ -17,6 +17,10 @@ class LoadCommentsViewController: UIViewController {
     @IBOutlet weak var inputCommentTextField: UITextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
+    
+    @IBOutlet weak var imageThatShowsIfThereAreNoComments: UIImageView!
+    @IBOutlet weak var labelThatShowsIfThereAreNoComments: UILabel!
+    
     let emailUserComments = UserDefaults.standard.string(forKey: "email")
     let idUserComments = UserDefaults.standard.string(forKey: "token")
     
@@ -36,6 +40,9 @@ class LoadCommentsViewController: UIViewController {
         
         navigationItem.leftBarButtonItem?.image = UIImage(named:"navigateBack")
         
+        imageThatShowsIfThereAreNoComments.image = UIImage(named: "placeholderEmpty")
+        
+        
     }
     
     @objc func goBackToEpDetails() {
@@ -51,6 +58,8 @@ class LoadCommentsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getEpisodeComments()
+        
+        
         addRefreshControl()
         
         NotificationCenter.default.addObserver(self, selector: #selector(LoadCommentsViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -109,6 +118,10 @@ class LoadCommentsViewController: UIViewController {
                     self?.refreshControl?.endRefreshing()
                     self?.tableViewComments.reloadData()
                     
+                    if self?.commentsList.count == 0 {
+                        self?.tableViewComments.isHidden = true
+                    }
+                    
                 case .failure(let error):
                     print("Failed: \(error)")
                 }
@@ -133,19 +146,20 @@ class LoadCommentsViewController: UIViewController {
                 headers: (headers as! HTTPHeaders)
             )
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<PostComment>) in
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<PostComment>) in
                 SVProgressHUD.dismiss()
                 
                 switch response.result {
                 case .success(let success):
                     print("Success \(success)")
+                    self?.tableViewComments.isHidden = false
+                    self?.getEpisodeComments()
                     
                 case .failure(let error):
                     print("Failed: \(error)")
                 }
         }
     }
-    
     
     @IBAction func didTapPostComment() {
         postEpisodeCommentWith(text: inputCommentTextField.text!, episodeID: episodeID)

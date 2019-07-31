@@ -49,7 +49,7 @@ class DetailsViewController: UIViewController {
     
     func loadDetails() {
         loadDetailsShowAlamofireCodable(showId: idDetails)
-        loadDescriptionDetailsShowAlamofireCodable(showId: idDetails)
+        
         
         nameSeriesDetails.text = showTitle
         episodesNumberDetails.text = String(numberOfEpisodes)
@@ -150,8 +150,8 @@ private extension DetailsViewController {
             )
             .validate()
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<[ShowDetails]>) in
-                SVProgressHUD.dismiss()
-                self?.refreshControl?.endRefreshing()
+                
+                
 
                 switch response.result {
                 case .success(let showsDetails):
@@ -161,6 +161,7 @@ private extension DetailsViewController {
                         self?.characteristics.append(show)
                     }
                     self?.episodesNumberDetails.text = "Number of episodes:\(showsDetails.count)"
+                    self?.loadDescriptionDetailsShowAlamofireCodable(showId: self!.idDetails)
                     self?.tableViewDetails.reloadData()
                     
                 case .failure(let error):
