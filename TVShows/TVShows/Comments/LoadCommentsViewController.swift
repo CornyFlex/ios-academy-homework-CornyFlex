@@ -24,7 +24,7 @@ class LoadCommentsViewController: UIViewController {
     
     var commentsList = [Comment]()
     
-    public var refreshControl: UIRefreshControl?
+    var refreshControl: UIRefreshControl?
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,18 +74,15 @@ class LoadCommentsViewController: UIViewController {
             }
         }
 
-    func addRefreshControl() {
+   func addRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl?.tintColor = UIColor.red
         refreshControl?.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
-        tableViewComments.addSubview(refreshControl!)
+        tableViewComments.refreshControl = refreshControl
     }
     
     @objc func refreshTable() {
         getEpisodeComments()
-        refreshControl?.endRefreshing()
-        tableViewComments.reloadData()
-        
     }
     
     func getEpisodeComments() {
@@ -109,6 +106,7 @@ class LoadCommentsViewController: UIViewController {
                     print("Success: \(comments)")
                     
                     self?.commentsList = comments
+                    self?.refreshControl?.endRefreshing()
                     self?.tableViewComments.reloadData()
                     
                 case .failure(let error):
@@ -135,7 +133,7 @@ class LoadCommentsViewController: UIViewController {
                 headers: (headers as! HTTPHeaders)
             )
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<PostComment>) in
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<PostComment>) in
                 SVProgressHUD.dismiss()
                 
                 switch response.result {

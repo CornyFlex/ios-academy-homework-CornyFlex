@@ -25,7 +25,6 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
     @IBOutlet weak var episodeDescriptionTextField: UITextField!
     @IBOutlet weak var episodeAddPhotoButton: UIButton!
     
-    var media: Media?
     var showId: String = ""
     var tokenEpisode: String = ""
     weak var delegate: NewEpisodeDelegate?
@@ -57,7 +56,7 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
     }
     
     @objc func didSelectAddShow() {
-        addShowEpisode(ShowId: showId)
+        uploadImageOnAPI(token: tokenEpisode)
     }
 
     
@@ -126,7 +125,7 @@ private extension NewEpisodeViewController {
     
     func processUploadRequest(_ uploadRequest: UploadRequest) {
         uploadRequest
-            .responseDecodableObject(keyPath: "data") { (response:
+            .responseDecodableObject(keyPath: "data") { [weak self] (response:
                 DataResponse<Media>) in
                 
                 SVProgressHUD.dismiss()
@@ -134,7 +133,7 @@ private extension NewEpisodeViewController {
                     case .success(let media):
                         print("DECODED: \(media)")
                         print("Proceed to add episode call...")
-                        self.media = media
+                        self?.addShowEpisode(ShowId: self!.showId, mediaId: media.id)
                     case .failure(let error):
                         print("FAILURE: \(error)")
     
@@ -146,22 +145,19 @@ private extension NewEpisodeViewController {
     
 
 private extension NewEpisodeViewController {
-    func addShowEpisode(ShowId: String){
+    func addShowEpisode(ShowId: String, mediaId: String){
         
         SVProgressHUD.show()
         
-        var parameters: [String: String] = [
+        let parameters: [String: String] = [
             "showId": ShowId,
             "title" : episodeTitleTextField.text!,
             "description": episodeDescriptionTextField.text!,
             "episodeNumber": episodeNumberTextField.text!,
             "season": seasonNumberTextField.text!,
+            "mediaId": mediaId
         ]
-        
-        if let mediaId = media?.id {
-            parameters["mediaId"] = mediaId
-        }
-        
+
         let headers = ["Authorization": tokenEpisode]
         
         Alamofire
@@ -200,7 +196,8 @@ extension NewEpisodeViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         imageGallery = pickedImage
-        uploadImageOnAPI(token: tokenEpisode)
+        episodeAddPhotoButton.setBackgroundImage(pickedImage, for: UIControl.State.normal)
+        
         navigationController?.dismiss(animated: true, completion: nil)
     }
     

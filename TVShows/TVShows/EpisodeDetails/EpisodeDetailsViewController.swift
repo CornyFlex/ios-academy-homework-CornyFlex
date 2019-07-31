@@ -37,7 +37,7 @@ class EpisodeDetailsViewController: UIViewController {
         episodeDetailsSeasonAndEpisodeNumber.text = "S\(epSeasonNumber) Ep\(epNumber)"
         
         let url = URL(string: "https://api.infinum.academy\(epImageUrl)")
-        let placeHolder = UIImage(named: "placeholderEpisodeDetails")
+        let placeHolder = UIImage(named: "placeholderAlpha")
         
         episodeDetailsImage.kf.setImage(with: url, placeholder: placeHolder)
     }

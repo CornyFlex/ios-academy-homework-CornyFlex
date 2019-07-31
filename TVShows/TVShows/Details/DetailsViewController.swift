@@ -14,6 +14,8 @@ import SVProgressHUD
 class DetailsViewController: UIViewController {
     
     @IBOutlet weak var descriptionDetailsShow: UITextView!
+    
+    @IBOutlet weak var descriptionDetailsShowLabel: UILabel!
     @IBOutlet weak var nameSeriesDetails: UILabel!
     @IBOutlet weak var episodesNumberDetails: UILabel!
     @IBOutlet weak var thumbnailDetails: UIImageView!
@@ -32,9 +34,17 @@ class DetailsViewController: UIViewController {
     
     var characteristics = [ShowDetails]()
     
+    var refreshControl: UIRefreshControl?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadDetails()
+        addRefreshControl()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableViewDetails.fixTableHeaderViewHeight()
     }
     
     func loadDetails() {
@@ -51,6 +61,18 @@ class DetailsViewController: UIViewController {
         thumbnailDetails.kf.setImage(with: url, placeholder: placeHolder)
        
     }
+    
+    func addRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.tintColor = UIColor.red
+        refreshControl?.addTarget(self, action: #selector(refreshDetailsTable), for: .valueChanged)
+        tableViewDetails.refreshControl = refreshControl
+    }
+    
+    @objc func refreshDetailsTable() {
+        loadDetails()
+    }
+    
     @IBAction func clickToAddNewEp() {
         let newEpStoryboard = UIStoryboard(name:"AddEpisode", bundle:nil)
         let newEpViewController = newEpStoryboard.instantiateViewController(withIdentifier: "NewEpisodeViewController") as! NewEpisodeViewController
@@ -129,6 +151,7 @@ private extension DetailsViewController {
             .validate()
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<[ShowDetails]>) in
                 SVProgressHUD.dismiss()
+                self?.refreshControl?.endRefreshing()
 
                 switch response.result {
                 case .success(let showsDetails):
@@ -139,7 +162,7 @@ private extension DetailsViewController {
                     }
                     self?.episodesNumberDetails.text = "Number of episodes:\(showsDetails.count)"
                     self?.tableViewDetails.reloadData()
-                  
+                    
                 case .failure(let error):
                     print("Failed: \(error)")
                 }
@@ -163,11 +186,13 @@ private extension DetailsViewController {
             .validate()
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<ShowDetails>) in
                 SVProgressHUD.dismiss()
+                self?.refreshControl?.endRefreshing()
                 
                 switch response.result {
                 case .success(let showsDetails):
                     print("Success: \(showsDetails)")
-                    self?.descriptionDetailsShow.text = showsDetails.description
+                    self?.descriptionDetailsShowLabel.text = showsDetails.description
+            
                     self?.tableViewDetails.reloadData()
                     
                 case .failure(let error):
@@ -191,5 +216,34 @@ extension DetailsViewController: NewEpisodeDelegate {
         loadDetails()
     }
     func episodeError() {
+    }
+}
+
+extension UITableView {
+    func fixTableHeaderViewHeight(for size: CGSize = CGSize(width: UIScreen.main.bounds.width, height: CGFloat.greatestFiniteMagnitude)) {
+        guard let headerView = tableHeaderView else { return }
+        let headerSize: CGSize
+        if #available(iOS 10.0, *) {
+            headerSize = headerView.systemLayoutSizeFitting(size)
+        } else {
+            headerSize = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        }
+        if headerView.bounds.height == headerSize.height { return }
+        headerView.bounds.size.height = headerSize.height
+        headerView.layoutIfNeeded()
+        tableHeaderView = headerView
+    }
+    func fixTableFooterViewHeight(for size: CGSize = CGSize(width: UIScreen.main.bounds.width, height: CGFloat.greatestFiniteMagnitude)) {
+        guard let footerView = tableFooterView else { return }
+        let footerSize: CGSize
+        if #available(iOS 10.0, *) {
+            footerSize = footerView.systemLayoutSizeFitting(size)
+        } else {
+            footerSize = footerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        }
+        if footerView.bounds.height == footerSize.height { return }
+        footerView.bounds.size.height = footerSize.height
+        footerView.layoutIfNeeded()
+        tableFooterView = footerView
     }
 }

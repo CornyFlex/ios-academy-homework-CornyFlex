@@ -25,35 +25,52 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="6bu-gK-D8G">
-                                                <rect key="frame" x="15" y="0.0" width="384" height="738.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                                 <subviews>
                                                     <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderEpisodeDetails" translatesAutoresizingMaskIntoConstraints="NO" id="VzK-0K-aYA">
-                                                        <rect key="frame" x="0.0" y="0.0" width="384" height="350"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="350"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="350" id="he5-Kg-Uh9"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ske-oN-KMi">
-                                                        <rect key="frame" x="0.0" y="355" width="384" height="44.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mT8-Yl-p1V">
+                                                        <rect key="frame" x="0.0" y="355" width="414" height="541"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="c43-fj-yh1">
+                                                                <rect key="frame" x="15" y="0.0" width="384" height="541"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ske-oN-KMi">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="384" height="44.5"/>
+                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="6CN-qg-S5v">
+                                                                        <rect key="frame" x="0.0" y="49.5" width="384" height="18"/>
+                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                        <color key="textColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sot-yS-dRb">
+                                                                        <rect key="frame" x="0.0" y="72.5" width="384" height="468.5"/>
+                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                    </textView>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="37"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="6CN-qg-S5v">
-                                                        <rect key="frame" x="0.0" y="404.5" width="384" height="18"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                        <color key="textColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sot-yS-dRb">
-                                                        <rect key="frame" x="0.0" y="427.5" width="384" height="311"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                    </textView>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="c43-fj-yh1" secondAttribute="bottom" id="6o5-Wn-IPE"/>
+                                                            <constraint firstItem="c43-fj-yh1" firstAttribute="leading" secondItem="mT8-Yl-p1V" secondAttribute="leading" constant="15" id="83L-fr-XSE"/>
+                                                            <constraint firstItem="c43-fj-yh1" firstAttribute="top" secondItem="mT8-Yl-p1V" secondAttribute="top" id="Bf9-tl-90w"/>
+                                                            <constraint firstAttribute="trailing" secondItem="c43-fj-yh1" secondAttribute="trailing" constant="15" id="pIq-Sx-rPH"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="VzK-0K-aYA" firstAttribute="width" secondItem="6bu-gK-D8G" secondAttribute="width" id="PTF-ky-Vjs"/>
@@ -63,9 +80,9 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="6bu-gK-D8G" firstAttribute="top" secondItem="pOj-C9-rBl" secondAttribute="top" id="DRt-MJ-3fX"/>
-                                            <constraint firstAttribute="trailing" secondItem="6bu-gK-D8G" secondAttribute="trailing" constant="15" id="agj-1V-lko"/>
-                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6bu-gK-D8G" secondAttribute="bottom" id="tQZ-bd-KkP"/>
-                                            <constraint firstItem="6bu-gK-D8G" firstAttribute="leading" secondItem="pOj-C9-rBl" secondAttribute="leading" constant="15" id="umu-rT-WMt"/>
+                                            <constraint firstAttribute="trailing" secondItem="6bu-gK-D8G" secondAttribute="trailing" id="agj-1V-lko"/>
+                                            <constraint firstAttribute="bottom" secondItem="6bu-gK-D8G" secondAttribute="bottom" id="tQZ-bd-KkP"/>
+                                            <constraint firstItem="6bu-gK-D8G" firstAttribute="leading" secondItem="pOj-C9-rBl" secondAttribute="leading" id="umu-rT-WMt"/>
                                         </constraints>
                                     </view>
                                 </subviews>
