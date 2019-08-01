@@ -238,15 +238,6 @@ extension LoadCommentsViewController: UITableViewDelegate {
         
         return [deleteAction]
     }
-//    func tableView(tableView: UITableView!, commitEditingStyle editingStyle:   UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: IndexPath) {
-//        if (editingStyle == UITableViewCell.EditingStyle.delete) {
-//            tableViewComments.beginUpdates()
-////            Names.removeAtIndex(indexPath!.row)
-//            tableViewComments.deleteRows(at: [indexPath], with: UITableView.RowAnimation.none)
-//            tableViewComments.endUpdates()
-//
-//        }
-//    }
 }
     
 extension LoadCommentsViewController: UITableViewDataSource {

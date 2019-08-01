@@ -48,7 +48,7 @@ class DetailsViewController: UIViewController {
     }
     
     func loadDetails() {
-        loadDetailsShowAlamofireCodable(showId: idDetails)
+        loadShowDetailsWith(showId: idDetails)
         
         
         nameSeriesDetails.text = showTitle
@@ -136,7 +136,7 @@ extension DetailsViewController: UITableViewDataSource {
 
 
 private extension DetailsViewController {
-    func loadDetailsShowAlamofireCodable(showId: String) {
+    func loadShowDetailsWith(showId: String) {
         SVProgressHUD.show()
         
         let headers = ["Authorization": tokenDetails]
@@ -161,7 +161,7 @@ private extension DetailsViewController {
                         self?.characteristics.append(show)
                     }
                     self?.episodesNumberDetails.text = "Number of episodes:\(showsDetails.count)"
-                    self?.loadDescriptionDetailsShowAlamofireCodable(showId: self!.idDetails)
+                    self?.loadDescriptionDetailsWith(showId: self!.idDetails)
                     self?.tableViewDetails.reloadData()
                     
                 case .failure(let error):
@@ -172,7 +172,7 @@ private extension DetailsViewController {
 }
 
 private extension DetailsViewController {
-    func loadDescriptionDetailsShowAlamofireCodable(showId: String) {
+    func loadDescriptionDetailsWith(showId: String) {
         SVProgressHUD.show()
         
         let headers = ["Authorization": tokenDetails]
