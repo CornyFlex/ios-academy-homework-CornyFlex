@@ -10,23 +10,24 @@ import UIKit
 
 class CommentTableViewCell: UITableViewCell {
 
+    // MARK: - outlets
+    
     @IBOutlet weak var commentUserImage: UIImageView!
     @IBOutlet weak var commentUserNameLabel: UILabel!
     @IBOutlet weak var commentUserMessageLabel: UILabel!
     
+    // MARK: - lifecycle functions
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 }
+
+// MARK: - extensions
 
 extension CommentTableViewCell {
     func configureComment(with item: Comment) {

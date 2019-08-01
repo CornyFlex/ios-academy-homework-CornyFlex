@@ -12,6 +12,8 @@ import CodableAlamofire
 import SVProgressHUD
 import Photos
 
+// MARK: - protocol
+
 protocol NewEpisodeDelegate: class {
     func episodeAdded()
     func episodeError()
@@ -19,11 +21,15 @@ protocol NewEpisodeDelegate: class {
 
 class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate {
 
+    // MARK: - outlet
+    
     @IBOutlet weak var episodeTitleTextField: UITextField!
     @IBOutlet weak var seasonNumberTextField: UITextField!
     @IBOutlet weak var episodeNumberTextField: UITextField!
     @IBOutlet weak var episodeDescriptionTextField: UITextField!
     @IBOutlet weak var episodeAddPhotoButton: UIButton!
+    
+    // MARK: - properties
     
     var showId: String = ""
     var tokenEpisode: String = ""
@@ -31,6 +37,8 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
     let imagePicker = UIImagePickerController()
     
     var imageGallery: UIImage!
+    
+    // MARK: - lifecycle functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +67,7 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
         uploadImageOnAPI(token: tokenEpisode)
     }
 
+    // MARK: - actions
     
     @IBAction func didTapAddPhotoButton() {
         
@@ -69,31 +78,35 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
         navigationController?.present(imagePicker, animated: true, completion: nil)
         
     }
-}
 
-func checkPermission() {
-    let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
-    switch photoAuthorizationStatus {
-    case .authorized:
-        print("Access is granted by user")
-    case .notDetermined:
-        PHPhotoLibrary.requestAuthorization({
-            (newStatus) in
-            print("status is \(newStatus)")
-            if newStatus ==  PHAuthorizationStatus.authorized {
-                /* do stuff here */
-                print("success")
-            }
-        })
-        print("It is not determined until now")
-    case .restricted:
-        print("User do not have access to photo album.")
-    case .denied:
-        print("User has denied the permission.")
-    @unknown default:
-        fatalError()
+    // MARK: - check permission
+    
+    func checkPermission() {
+        let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
+        switch photoAuthorizationStatus {
+        case .authorized:
+            print("Access is granted by user")
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization({
+                (newStatus) in
+                print("status is \(newStatus)")
+                if newStatus ==  PHAuthorizationStatus.authorized {
+                    print("success")
+                }
+            })
+            print("It is not determined until now")
+        case .restricted:
+            print("User do not have access to photo album.")
+        case .denied:
+            print("User has denied the permission.")
+        @unknown default:
+            fatalError()
+        }
     }
 }
+    
+    
+// MARK: - private extensions
 
 private extension NewEpisodeViewController {
     func uploadImageOnAPI(token: String) {
@@ -142,8 +155,6 @@ private extension NewEpisodeViewController {
     }
 }
 
-    
-
 private extension NewEpisodeViewController {
     func addShowEpisode(ShowId: String, mediaId: String){
         
@@ -190,6 +201,8 @@ private extension NewEpisodeViewController {
         }
     }
 }
+
+// MARK: - extension delegate
 
 extension NewEpisodeViewController: UIImagePickerControllerDelegate {
     

@@ -13,13 +13,15 @@ import CodableAlamofire
 
 class LoadCommentsViewController: UIViewController {
     
+    // MARK: - outlet
+    
     @IBOutlet weak var tableViewComments: UITableView!
     @IBOutlet weak var inputCommentTextField: UITextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    
-    
     @IBOutlet weak var imageThatShowsIfThereAreNoComments: UIImageView!
     @IBOutlet weak var labelThatShowsIfThereAreNoComments: UILabel!
+    
+    // MARK: - properties
     
     let emailUserComments = UserDefaults.standard.string(forKey: "email")
     let idUserComments = UserDefaults.standard.string(forKey: "token")
@@ -30,6 +32,7 @@ class LoadCommentsViewController: UIViewController {
     
     var refreshControl: UIRefreshControl?
     
+    // MARK: - lifecycle functions
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -54,12 +57,9 @@ class LoadCommentsViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         getEpisodeComments()
-        
-        
         addRefreshControl()
         
         NotificationCenter.default.addObserver(self, selector: #selector(LoadCommentsViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -118,6 +118,7 @@ class LoadCommentsViewController: UIViewController {
                     self?.refreshControl?.endRefreshing()
                     self?.tableViewComments.reloadData()
                     
+                    
                     if self?.commentsList.count == 0 {
                         self?.tableViewComments.isHidden = true
                     }
@@ -155,11 +156,43 @@ class LoadCommentsViewController: UIViewController {
                     self?.tableViewComments.isHidden = false
                     self?.getEpisodeComments()
                     
+                    
                 case .failure(let error):
                     print("Failed: \(error)")
                 }
         }
     }
+    
+    func deleteComment(with commentId: String, commentsListIndex: IndexPath) {
+        SVProgressHUD.show()
+        let headers = ["Authorization": idUserComments]
+        
+        Alamofire
+            .request(
+                "https://api.infinum.academy/api/comments/\(commentId)",
+                method: .delete,
+                encoding: JSONEncoding.default,
+                headers: (headers as! HTTPHeaders)
+            )
+            .validate()
+            .responseData { [weak self] response in
+                
+                SVProgressHUD.dismiss()
+                
+                switch response.result {
+                case .success(let success):
+                    print("Success \(success)")
+                    self?.tableViewComments.beginUpdates()
+                    self?.commentsList.remove(at: commentsListIndex.row)
+                    self?.tableViewComments.deleteRows(at: [commentsListIndex], with: UITableView.RowAnimation.none)
+                    self?.tableViewComments.endUpdates()
+                    
+                case .failure(let error):
+                    print("Error \(error)")
+                }
+            }
+    }
+    // MARK: - actions
     
     @IBAction func didTapPostComment() {
         postEpisodeCommentWith(text: inputCommentTextField.text!, episodeID: episodeID)
@@ -167,11 +200,14 @@ class LoadCommentsViewController: UIViewController {
     }
     
 }
+
+// MARK: - extensions
+
 extension LoadCommentsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.fade)
         let commentDetails = commentsList[indexPath.row]
+        
         print("\(commentDetails)")
     }
     
@@ -182,6 +218,35 @@ extension LoadCommentsViewController: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        var deleteAction = UITableViewRowAction(style: .default, title: "Delete") { [weak self] _,_ in
+            let commentID = self?.commentsList[indexPath.row].userId
+            
+            self?.deleteComment(with: commentID!, commentsListIndex: indexPath)
+            //handle delete
+        }
+        
+        return [deleteAction]
+    }
+//    func tableView(tableView: UITableView!, commitEditingStyle editingStyle:   UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: IndexPath) {
+//        if (editingStyle == UITableViewCell.EditingStyle.delete) {
+//            tableViewComments.beginUpdates()
+////            Names.removeAtIndex(indexPath!.row)
+//            tableViewComments.deleteRows(at: [indexPath], with: UITableView.RowAnimation.none)
+//            tableViewComments.endUpdates()
+//
+//        }
+//    }
 }
     
 extension LoadCommentsViewController: UITableViewDataSource {
@@ -196,6 +261,5 @@ extension LoadCommentsViewController: UITableViewDataSource {
         
         return cell
     }
-
 }
 

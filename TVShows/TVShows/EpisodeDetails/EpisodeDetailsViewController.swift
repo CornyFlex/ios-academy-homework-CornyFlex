@@ -11,10 +11,14 @@ import Kingfisher
 
 class EpisodeDetailsViewController: UIViewController {
 
+    // MARK: - outlets
+    
     @IBOutlet weak var episodeDetailsImage: UIImageView!
     @IBOutlet weak var episodeDetailsTitle: UILabel!
     @IBOutlet weak var episodeDetailsSeasonAndEpisodeNumber: UILabel!
     @IBOutlet weak var episodeDetailsDescription: UITextView!
+    
+    // MARK: - properties
     
     var epId = ""
     var token = ""
@@ -27,10 +31,13 @@ class EpisodeDetailsViewController: UIViewController {
     
     let barButtonImage = UIImage(named: "navigateBack")
     
+    // MARK: - lifecycle functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadEpisodeDetails()
     }
+    
     func loadEpisodeDetails() {
         episodeDetailsDescription.text = epDescription
         episodeDetailsTitle.text = epTitleDetails
@@ -42,6 +49,7 @@ class EpisodeDetailsViewController: UIViewController {
         episodeDetailsImage.kf.setImage(with: url, placeholder: placeHolder)
     }
     
+    // MARK: - actions
     
     @IBAction func goBack() {
         self.dismiss(animated: true, completion: nil)
@@ -49,13 +57,12 @@ class EpisodeDetailsViewController: UIViewController {
     
     @IBAction func didClickOnCommentsButton() {
         let commentsSB = UIStoryboard(name: "Comments", bundle: nil)
+        
         guard
             let commentsVC = commentsSB.instantiateViewController(withIdentifier: "LoadCommentsViewController") as? LoadCommentsViewController
             else { return }
         
         commentsVC.episodeID = epId
-        
-        
         navigationController?.pushViewController(commentsVC, animated: true)
         
     }
