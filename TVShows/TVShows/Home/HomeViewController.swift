@@ -37,21 +37,32 @@ class HomeViewController: UIViewController {
         setupTableView()
         loadShows()
         navigationController?.navigationBar.tintColor = UIColor.black
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "Image-7"),
             style: .plain,
             target: self,
             action: #selector(logoutActionHandler))
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(named: "goToGridView"),
+            style: .plain,
+            target: self,
+            action: #selector(switchToGridView))
     }
     
     @objc private func logoutActionHandler() {
-        print("hello")
+        print("Log OUT")
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
         UserDefaults.standard.removeObject(forKey: "token")
         UserDefaults.standard.synchronize()
         
         goToLogin()
+    }
+    
+    @objc private func switchToGridView() {
+        
     }
 }
 
@@ -129,6 +140,7 @@ private extension HomeViewController {
                     self?.tableViewShows.reloadData()
                 case .failure(let error):
                     print("Eror: \(error)")
+                    
                 }
         }
     }

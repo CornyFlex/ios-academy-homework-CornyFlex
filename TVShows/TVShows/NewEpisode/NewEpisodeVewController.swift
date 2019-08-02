@@ -132,6 +132,10 @@ private extension NewEpisodeViewController {
                     self?.processUploadRequest(uploadRequest)
                 case .failure(let encodingError):
                     print(encodingError)
+                    
+                    let alert = UIAlertController(title: "Couldn't upload image to API", message: "The image you are trying to upload to the API could not be uploaded, reason: \(encodingError)", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self?.present(alert, animated: true)
                 }
         }
     }
@@ -145,11 +149,14 @@ private extension NewEpisodeViewController {
                 switch response.result {
                     case .success(let media):
                         print("DECODED: \(media)")
-                        print("Proceed to add episode call...")
+            
                         self?.addShowEpisode(ShowId: self!.showId, mediaId: media.id)
                     case .failure(let error):
                         print("FAILURE: \(error)")
-    
+                    
+                        let alert = UIAlertController(title: "Could not finish call", message: "Upload was suddenly interrupted, reason: \(error)", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                        self?.present(alert, animated: true)
                 }
         }
     }
