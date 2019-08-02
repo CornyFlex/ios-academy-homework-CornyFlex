@@ -12,16 +12,23 @@ import Alamofire
 import CodableAlamofire
 import Kingfisher
 
+enum LayoutMode {
+    case grid
+    case list
+}
+
 class HomeViewController: UIViewController {
     
     // MARK: - outlets
     
-    @IBOutlet weak var tableViewShows: UITableView!
+    @IBOutlet weak var collectionViewHome: UICollectionView!
     
     // MARK: - properties
     
     var items = [Show]()
     var token: String!
+    
+    var collectionViewLayoutMode: LayoutMode = .list
     
     // MARK: - life cycle functions
     override func viewWillAppear(_ animated: Bool) {
@@ -32,9 +39,8 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViewShows.delegate = self
-        tableViewShows.dataSource = self
-        setupTableView()
+        collectionViewHome.delegate = self
+        collectionViewHome.dataSource = self
         loadShows()
         navigationController?.navigationBar.tintColor = UIColor.black
         
@@ -62,16 +68,35 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func switchToGridView() {
+        guard let layoutButton = navigationItem.rightBarButtonItem else {
+            return
+        }
+        
+        collectionViewLayoutMode = collectionViewLayoutMode == .grid ? .list : .grid
+        
+        let barButtonImage: UIImage?
+        
+        switch collectionViewLayoutMode {
+        case .grid:
+            barButtonImage = UIImage(named: "goToListView")
+        case .list:
+            barButtonImage = UIImage(named: "goToGridView")
+        }
+        
+        layoutButton.image = barButtonImage
+        
+        collectionViewHome.reloadData()
         
     }
 }
 
 // MARK: - extensions
 
-extension HomeViewController: UITableViewDelegate {
+extension HomeViewController: UICollectionViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
         let item = items[indexPath.row]
         print("Selected Item: \(item)")
         
@@ -88,28 +113,49 @@ extension HomeViewController: UITableViewDelegate {
         navigationController?.pushViewController(detailsViewController, animated: true)
         
     }
+}
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0;
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let cellWidth: CGFloat
+        
+        switch collectionViewLayoutMode {
+        case .grid:
+            cellWidth = view.frame.width / 2
+        case .list:
+            cellWidth = view.frame.width
+        }
+        
+        return CGSize(width: cellWidth, height: 200)
     }
-
+    
 }
 
-extension HomeViewController: UITableViewDataSource {
+
+
+extension HomeViewController: UICollectionViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         print("CURRENT INDEX PATH BEING CONFIGURED: \(indexPath)")
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ShowsTableViewCell.self), for: indexPath) as! ShowsTableViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ShowsCollectionViewCell.self), for: indexPath) as! ShowsCollectionViewCell
         
-            cell.configure(with: items[indexPath.row])
         
+        if collectionViewLayoutMode == .grid {
+            cell.configure(with: items[indexPath.row], layout: true)
+        } else {
+            cell.configure(with: items[indexPath.row], layout: false)
+        }
           return cell
     }
+    
 }
 
 //Mark: -private
@@ -137,7 +183,7 @@ private extension HomeViewController {
                     shows.forEach { show in
                         self?.items.append(show)
                     }
-                    self?.tableViewShows.reloadData()
+                    self?.collectionViewHome.reloadData()
                 case .failure(let error):
                     print("Eror: \(error)")
                     
@@ -157,12 +203,5 @@ private extension HomeViewController {
         navigationController?.setViewControllers([viewControllerForGoingBackToLogin], animated: true)
     }
 }
-private extension HomeViewController {
-    
-    func setupTableView() {
-        tableViewShows.estimatedRowHeight = 110
-        tableViewShows.tableFooterView = UIView()
-        tableViewShows.separatorStyle = .none
-    }
-}
+
 
