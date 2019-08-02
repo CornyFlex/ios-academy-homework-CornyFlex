@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Add Episode-->
+        <scene sceneID="8DF-ec-47b">
+            <objects>
+                <viewController storyboardIdentifier="NewEpisodeViewController" title="Add Episode" id="eHM-bR-gDo" customClass="NewEpisodeViewController" customModule="TVShows" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xio-Hq-6S7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xQD-iW-bLN">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="5k2-Hj-ioS">
+                                        <rect key="frame" x="15" y="0.0" width="384" height="500"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5MB-Lx-lMz">
+                                                <rect key="frame" x="0.0" y="0.0" width="384" height="200"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MO3-ZP-GHE">
+                                                        <rect key="frame" x="117" y="50" width="150" height="100"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FKw-oF-EBT">
+                                                                <rect key="frame" x="50" y="25" width="50" height="50"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="50" id="fvi-u2-0JJ"/>
+                                                                    <constraint firstAttribute="height" constant="50" id="ksy-LJ-stQ"/>
+                                                                </constraints>
+                                                                <state key="normal" backgroundImage="Image-6"/>
+                                                            </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOU-2r-zoS">
+                                                                <rect key="frame" x="35" y="85" width="80" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <color key="textColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="JOU-2r-zoS" firstAttribute="top" secondItem="FKw-oF-EBT" secondAttribute="bottom" constant="10" id="BNd-ge-I8S"/>
+                                                            <constraint firstItem="FKw-oF-EBT" firstAttribute="centerX" secondItem="MO3-ZP-GHE" secondAttribute="centerX" id="NSw-Ub-tbi"/>
+                                                            <constraint firstItem="JOU-2r-zoS" firstAttribute="centerX" secondItem="MO3-ZP-GHE" secondAttribute="centerX" id="Of4-8h-ow3"/>
+                                                            <constraint firstAttribute="height" constant="100" id="iQw-kS-Pnl"/>
+                                                            <constraint firstAttribute="width" constant="150" id="pCy-kQ-cjG"/>
+                                                            <constraint firstItem="FKw-oF-EBT" firstAttribute="centerY" secondItem="MO3-ZP-GHE" secondAttribute="centerY" id="uVM-c8-JP0"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="200" id="1HN-Sf-MYY"/>
+                                                    <constraint firstItem="MO3-ZP-GHE" firstAttribute="centerY" secondItem="5MB-Lx-lMz" secondAttribute="centerY" id="592-r2-wJ4"/>
+                                                    <constraint firstItem="MO3-ZP-GHE" firstAttribute="centerX" secondItem="5MB-Lx-lMz" secondAttribute="centerX" id="IST-hV-N5L"/>
+                                                </constraints>
+                                            </view>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Episode title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H7R-lD-CcN">
+                                                <rect key="frame" x="0.0" y="225" width="384" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="H2H-iX-jUv"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Season n." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dlV-Kq-sn8">
+                                                <rect key="frame" x="0.0" y="300" width="384" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="oBD-c5-L0H"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Episode n." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Qr-Mj-Ne4">
+                                                <rect key="frame" x="0.0" y="375" width="384" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="H4C-a5-kdZ"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Episode description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="81D-UL-zlV">
+                                                <rect key="frame" x="0.0" y="450" width="384" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="CRV-F2-nJj"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="500" id="nz9-1r-sa7"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="5k2-Hj-ioS" firstAttribute="leading" secondItem="xQD-iW-bLN" secondAttribute="leading" constant="15" id="gAe-SD-R9e"/>
+                                    <constraint firstItem="5k2-Hj-ioS" firstAttribute="centerX" secondItem="xQD-iW-bLN" secondAttribute="centerX" id="if8-ss-RMY"/>
+                                    <constraint firstAttribute="trailing" secondItem="5k2-Hj-ioS" secondAttribute="trailing" constant="15" id="lCH-1Y-esI"/>
+                                    <constraint firstItem="5k2-Hj-ioS" firstAttribute="top" secondItem="xQD-iW-bLN" secondAttribute="top" id="sde-d3-p39"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="o97-fj-7NX" firstAttribute="trailing" secondItem="xQD-iW-bLN" secondAttribute="trailing" id="6ME-oG-BBd"/>
+                            <constraint firstItem="xQD-iW-bLN" firstAttribute="top" secondItem="o97-fj-7NX" secondAttribute="top" id="FDc-gR-lec"/>
+                            <constraint firstItem="o97-fj-7NX" firstAttribute="bottom" secondItem="xQD-iW-bLN" secondAttribute="bottom" id="N4w-z3-6h5"/>
+                            <constraint firstItem="xQD-iW-bLN" firstAttribute="leading" secondItem="o97-fj-7NX" secondAttribute="leading" id="z9w-NN-YIm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="o97-fj-7NX"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="xBu-eJ-qwW"/>
+                    <connections>
+                        <outlet property="episodeDescriptionTextField" destination="81D-UL-zlV" id="E94-FU-R4x"/>
+                        <outlet property="episodeNumberTextField" destination="3Qr-Mj-Ne4" id="kUA-hf-gR7"/>
+                        <outlet property="episodeTitleTextField" destination="H7R-lD-CcN" id="yPf-yJ-9az"/>
+                        <outlet property="seasonNumberTextField" destination="dlV-Kq-sn8" id="pUN-pr-yXd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zgL-ZR-2Sp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="957.97101449275374" y="3.3482142857142856"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Image-6" width="24" height="24"/>
+    </resources>
+</document>

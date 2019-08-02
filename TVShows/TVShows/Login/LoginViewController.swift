@@ -13,8 +13,8 @@ import CodableAlamofire
 import SVProgressHUD
 
 class LoginViewController: UIViewController {
-    
-    // MARK - outlets:
+
+    // MARK: - outlets
     
     @IBOutlet private weak var usernameTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
@@ -24,13 +24,14 @@ class LoginViewController: UIViewController {
     
     // MARK: - life cycle functions
     
-    private func goToHomeScreen() {
-        let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+    private func goToHomeScreen(token: String) {
         
+        let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         guard
         let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
             else { return }
-        navigationController?.pushViewController(viewController, animated: true)
+        viewController.token = token
+        navigationController?.setViewControllers([viewController], animated: true)
     }
     
     private func loginButtonEdit() {
@@ -39,10 +40,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        SVProgressHUD.setDefaultMaskType(.black)
         checkmarkClicked()
         loginButtonEdit()
-        
-        rememberMeCheckmark.isSelected = false
     }
     
     // MARK: - actions
@@ -67,8 +67,7 @@ class LoginViewController: UIViewController {
         loginUserWith(email: email, pass: password)
     }
     
-    @IBAction func clickToCreateAccount() {
-        
+    @IBAction func clickToCreateAccount() {        
         guard
             let email = usernameTextField.text,
             let password = passwordTextField.text,
@@ -154,6 +153,9 @@ class LoginViewController: UIViewController {
                         
                     case .failure(let error):
                         print("API failure: \(error)")
+                        let alert = UIAlertController(title:"Login failed", message: "Error: Incorrect email or password, please try again.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title:"OK", style: .cancel, handler:nil))
+                        self?.present(alert, animated: true)
                 }
             }
         }
