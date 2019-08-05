@@ -11,4 +11,6 @@ target 'TVShows' do
   pod 'CodableAlamofire'
   pod 'SVProgressHUD'
   pod 'Kingfisher'
+  pod 'RxSwift'
+  pod 'RxCocoa'
 end
