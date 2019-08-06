@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 import CodableAlamofire
 import SVProgressHUD
+import RxSwift
+import RxCocoa
 
 class DetailsViewController: UIViewController {
     
@@ -33,13 +35,15 @@ class DetailsViewController: UIViewController {
     var imageUrlDetails: String!
     
     var characteristics = [ShowDetails]()
-    
     var refreshControl: UIRefreshControl?
+    
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadDetails()
         addRefreshControl()
+        loadEvents()
     }
     
     override func viewDidLayoutSubviews() {
@@ -69,17 +73,27 @@ class DetailsViewController: UIViewController {
         loadDetails()
     }
     
-    @IBAction func clickToAddNewEp() {
+    func addNewEpisode() {
         let newEpStoryboard = UIStoryboard(name:"AddEpisode", bundle:nil)
         let newEpViewController = newEpStoryboard.instantiateViewController(withIdentifier: "NewEpisodeViewController") as! NewEpisodeViewController
         
         newEpViewController.showId = idDetails
         newEpViewController.tokenEpisode = tokenDetails
-        
         newEpViewController.delegate = self
         
         let navigationController = UINavigationController(rootViewController: newEpViewController)
         present(navigationController, animated: true)
+    }
+    
+    func loadEvents() {
+        
+        addNewShow.rx.tap
+        .asObservable()
+        .subscribe(onNext: { [unowned self] _ in
+            self.addNewEpisode()
+        })
+        .disposed(by: disposeBag)
+        
     }
 }
 
@@ -92,9 +106,14 @@ extension DetailsViewController: UITableViewDelegate {
         let itemDetails = characteristics[indexPath.row]
         print("\(itemDetails)")
         
+        goToEpisodeDetails(with: itemDetails)
+    }
+    
+    func goToEpisodeDetails(with itemDetails: ShowDetails) {
+        
         let episodeDetailsSB = UIStoryboard(name: "EpisodeDetails", bundle: nil)
         guard
-        let episodeDetailsVC = episodeDetailsSB.instantiateViewController(withIdentifier: "EpisodeDetailsViewController") as? EpisodeDetailsViewController
+            let episodeDetailsVC = episodeDetailsSB.instantiateViewController(withIdentifier: "EpisodeDetailsViewController") as? EpisodeDetailsViewController
             else { return }
         
         episodeDetailsVC.epDescription = itemDetails.description!
@@ -106,13 +125,13 @@ extension DetailsViewController: UITableViewDelegate {
         episodeDetailsVC.token = tokenDetails
         episodeDetailsVC.epId = itemDetails.idShow
         
-        
         let navigationController = UINavigationController(rootViewController: episodeDetailsVC)
         navigationController.setNavigationBarHidden(true, animated: true)
         present(navigationController, animated: true)
-
     }
 }
+
+
 
 extension DetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -146,8 +165,6 @@ private extension DetailsViewController {
             )
             .validate()
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<[ShowDetails]>) in
-                
-                
 
                 switch response.result {
                 case .success(let showsDetails):
@@ -194,11 +211,11 @@ private extension DetailsViewController {
                     
                 case .failure(let error):
                     print("Failed: \(error)")
-                }
+            }
         }
     }
-    
 }
+
 private extension DetailsViewController {
     func setupDetailsTable() {
         tableViewDetails.estimatedRowHeight = 70
@@ -216,6 +233,7 @@ extension DetailsViewController: NewEpisodeDelegate {
     }
 }
 
+// table view header height
 extension UITableView {
     func fixTableHeaderViewHeight(for size: CGSize = CGSize(width: UIScreen.main.bounds.width, height: CGFloat.greatestFiniteMagnitude)) {
         guard let headerView = tableHeaderView else { return }

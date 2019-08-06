@@ -37,9 +37,6 @@
                                                                     <constraint firstAttribute="height" constant="125" id="8iv-Dy-rMP"/>
                                                                 </constraints>
                                                                 <state key="normal" backgroundImage="Image-6"/>
-                                                                <connections>
-                                                                    <action selector="didTapAddPhotoButton" destination="eHM-bR-gDo" eventType="touchUpInside" id="5Uz-mT-r5u"/>
-                                                                </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOU-2r-zoS">
                                                                 <rect key="frame" x="35" y="122.5" width="80" height="20.5"/>

@@ -165,6 +165,7 @@ extension HomeViewController: UICollectionViewDataSource {
 //Mark: -private
     //Mark: -shows loading and parsing
 private extension HomeViewController {
+    
     func loadShows() {
         SVProgressHUD.show()
         
@@ -191,7 +192,7 @@ private extension HomeViewController {
                 case .failure(let error):
                     print("Eror: \(error)")
                     
-                }
+            }
         }
     }
 }

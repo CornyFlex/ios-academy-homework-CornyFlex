@@ -165,9 +165,6 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmn-od-Jjx">
                                 <rect key="frame" x="316" y="788" width="68" height="74"/>
                                 <state key="normal" backgroundImage="Image-3"/>
-                                <connections>
-                                    <action selector="clickToAddNewEp" destination="K8n-lv-ePv" eventType="touchUpInside" id="YvT-GT-a3S"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
