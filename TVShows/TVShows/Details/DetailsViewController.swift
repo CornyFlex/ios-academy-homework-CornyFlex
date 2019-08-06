@@ -49,13 +49,9 @@ class DetailsViewController: UIViewController {
     
     func loadDetails() {
         loadShowDetailsWith(showId: idDetails)
-        
-        
         nameSeriesDetails.text = showTitle
         episodesNumberDetails.text = String(numberOfEpisodes)
-        
-        self.tableViewDetails.bringSubviewToFront(addNewShow)
-        
+
         let url = URL(string: "https://api.infinum.academy" + imageUrlDetails)
         let placeHolder = UIImage(named: "Image-5")
         thumbnailDetails.kf.setImage(with: url, placeholder: placeHolder)

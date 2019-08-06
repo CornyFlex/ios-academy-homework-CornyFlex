@@ -125,17 +125,13 @@ private extension NewEpisodeViewController {
             method: .post,
             headers: headers)
             { [weak self] result in
-                
                 switch result {
                 case .success(let uploadRequest, _, _):
                     print(uploadRequest)
                     self?.processUploadRequest(uploadRequest)
                 case .failure(let encodingError):
                     print(encodingError)
-                    
-                    let alert = UIAlertController(title: "Couldn't upload image to API", message: "The image you are trying to upload to the API could not be uploaded, reason: \(encodingError)", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self?.present(alert, animated: true)
+                    self?.getErrorMessage(with: encodingError)
                 }
         }
     }
@@ -149,18 +145,15 @@ private extension NewEpisodeViewController {
                 switch response.result {
                     case .success(let media):
                         print("DECODED: \(media)")
-            
                         self?.addShowEpisode(ShowId: self!.showId, mediaId: media.id)
                     case .failure(let error):
                         print("FAILURE: \(error)")
-                    
-                        let alert = UIAlertController(title: "Could not finish call", message: "Upload was suddenly interrupted, reason: \(error)", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                        self?.present(alert, animated: true)
+                        self?.getErrorMessage(with: error)
                 }
         }
     }
 }
+
 
 private extension NewEpisodeViewController {
     func addShowEpisode(ShowId: String, mediaId: String){
@@ -198,14 +191,18 @@ private extension NewEpisodeViewController {
                 
             case .failure(let error):
                 print("API failure: \(error)")
-                
-                let alert = UIAlertController(title:"Failed to add episode", message: "Failed to add new episode, please try again. (Error: \(error)", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title:"OK", style: .cancel, handler:nil))
-                self?.present(alert, animated: true)
-                
+                self?.getErrorMessage(with: error)
                 self?.delegate?.episodeError()
             }
         }
+    }
+}
+private extension NewEpisodeViewController {
+    
+    func getErrorMessage(with error: Error) {
+        let alert = UIAlertController(title: "Could not finish call", message: "Upload was suddenly interrupted, reason: \(error)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
     }
 }
 

@@ -100,9 +100,14 @@ extension HomeViewController: UICollectionViewDelegate {
         let item = items[indexPath.row]
         print("Selected Item: \(item)")
         
+        goToDetails(with: item)
+    }
+    
+    func goToDetails(with item: Show) {
+        
         let detailsStoryboard = UIStoryboard(name: "Details", bundle: nil)
         guard
-        let detailsViewController = detailsStoryboard.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController
+            let detailsViewController = detailsStoryboard.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController
             else { return }
         
         detailsViewController.idDetails = item.idShow
@@ -111,10 +116,9 @@ extension HomeViewController: UICollectionViewDelegate {
         detailsViewController.imageUrlDetails = item.imageUrl
         
         navigationController?.pushViewController(detailsViewController, animated: true)
-        
     }
 }
-    
+
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -147,13 +151,13 @@ extension HomeViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ShowsCollectionViewCell.self), for: indexPath) as! ShowsCollectionViewCell
         
-        
         if collectionViewLayoutMode == .grid {
             cell.configure(with: items[indexPath.row], layout: true)
         } else {
             cell.configure(with: items[indexPath.row], layout: false)
         }
-          return cell
+        
+        return cell
     }
     
 }

@@ -13,14 +13,7 @@ class ShowsCollectionViewCell: UICollectionViewCell {
 
     // MARK: - private UI elements
     @IBOutlet weak var thumbnailTVShow: UIImageView!
-    
     @IBOutlet weak var titleTVShow: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-    }
-
 }
 
 extension ShowsCollectionViewCell {

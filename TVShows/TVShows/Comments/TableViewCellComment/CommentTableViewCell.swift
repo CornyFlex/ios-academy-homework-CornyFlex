@@ -16,15 +16,6 @@ class CommentTableViewCell: UITableViewCell {
     @IBOutlet weak var commentUserNameLabel: UILabel!
     @IBOutlet weak var commentUserMessageLabel: UILabel!
     
-    // MARK: - lifecycle functions
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
 }
 
 // MARK: - extensions

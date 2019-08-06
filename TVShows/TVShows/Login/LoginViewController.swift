@@ -58,14 +58,7 @@ class LoginViewController: UIViewController {
         loginAndRegisterEvents()
         checkIfUserExists()
     }
-    
-//    func checkCredentials(email: String, password: String) -> Bool{
-//        if (email != "" && password != "") {
-//            return true
-//        } else {
-//            return false
-//        }
-//    }
+
     
     func confirmButtonValid(username: Observable<String>, password: Observable<String>) -> Observable<Bool> {
         return Observable.combineLatest(username, password)
@@ -129,34 +122,8 @@ class LoginViewController: UIViewController {
             loginUserWith(email: defaults.string(forKey:"email")!, pass: defaults.string(forKey: "password")!)
         }
     }
-    
-    // MARK: - actions
-    
-//    @IBAction private func checkmarkClicked() {
-//        rememberMeCheckmark.isSelected.toggle()
-//    }
-    
-//    @IBAction func loginClicked() {
-//
-//        if checkCredentials(email: usernameField.text ?? "", password: passwordField.text ?? "") {
-//
-//            loginUserWith(email: usernameField.text!, pass: passwordField.text!)
-//
-//        }
-//    }
-    
-    
-    
-    
-//    @IBAction func createAccountClicked() {
-//
-//        if checkCredentials(email: usernameField.text ?? "", password: passwordField.text ?? "") {
-//
-//            registerUserWith(email: usernameField.text!, pass: passwordField.text!)
-//
-//        }
-//    }
 }
+
 // MARK: - private
     // MARK: - register and json parsing (going to login)
     
