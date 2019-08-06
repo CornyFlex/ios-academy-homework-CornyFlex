@@ -18,13 +18,15 @@ class LoginViewController: UIViewController {
 
     let defaults = UserDefaults.standard
     
+    let disposeBag = DisposeBag()
+    
     // MARK: - outlets
     
     @IBOutlet private weak var usernameField: UITextField!
     @IBOutlet private weak var passwordField: UITextField!
-    @IBOutlet private weak var clickToRememberCheckmark: UIButton!
-    @IBOutlet private weak var clickToLogin: UIButton!
-    @IBOutlet private weak var clickToCreateAccount: UIButton!
+    @IBOutlet private weak var rememberMeCheckmark: UIButton!
+    @IBOutlet private weak var loginButton: UIButton!
+    @IBOutlet private weak var createAccountButton: UIButton!
     
     // MARK: - life cycle functions
     
@@ -38,7 +40,7 @@ class LoginViewController: UIViewController {
     }
     
     private func loginButtonEdit() {
-        clickToLogin.layer.cornerRadius = 10
+        loginButton.layer.cornerRadius = 10
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -52,10 +54,77 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        editLoginUI()
+        loginAndRegisterEvents()
+        checkIfUserExists()
+    }
+    
+//    func checkCredentials(email: String, password: String) -> Bool{
+//        if (email != "" && password != "") {
+//            return true
+//        } else {
+//            return false
+//        }
+//    }
+    
+    func confirmButtonValid(username: Observable<String>, password: Observable<String>) -> Observable<Bool> {
+        return Observable.combineLatest(username, password)
+        { (username, password) in
+            return username.count > 0
+                && password.count > 0
+        }
+    }
+    
+    func editLoginUI() {
         SVProgressHUD.setDefaultMaskType(.black)
-        clickToRememberCheckmark.isSelected = false
+        rememberMeCheckmark.isSelected = false
         loginButtonEdit()
+    }
+    
+    
+    func loginAndRegisterEvents() {
         
+        let buttonColorEnabled = UIColor(red: 255.0/255.0, green: 117.0/255.0, blue: 140.0/255.0, alpha: 1)
+        let username = usernameField.rx.text.orEmpty.asObservable()
+        let password = passwordField.rx.text.orEmpty.asObservable()
+        
+        confirmButtonValid(username: username, password: password)
+            .bind(to: loginButton.rx.isEnabled, createAccountButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        confirmButtonValid(username: username, password: password)
+            .map { $0 ? buttonColorEnabled : UIColor.gray }
+            .map { $0.withAlphaComponent(0.9) }
+            .do(onNext: {[weak createAccountButton] in createAccountButton?.setTitleColor($0, for: [.normal, .disabled])})
+            .bind(to: loginButton.rx.backgroundColor)
+            .disposed(by: disposeBag)
+        
+        let userNameAndPass = Observable.combineLatest(username, password)
+    
+        loginButton.rx.tap
+            .asObservable()
+            .withLatestFrom(userNameAndPass)
+            .subscribe(onNext: { [unowned self] (email, password) in
+                self.loginUserWith(email: email, pass: password)
+            })
+            .disposed(by: disposeBag)
+        
+        
+        createAccountButton.rx.tap
+            .asObservable()
+            .withLatestFrom(userNameAndPass)
+            .subscribe(onNext: { [unowned self] (email, password) in
+                self.registerUserWith(email: email, pass: password)
+            })
+            .disposed(by: disposeBag)
+        
+        rememberMeCheckmark.rx.tap
+            .map { [unowned self] in !self.rememberMeCheckmark.isSelected }
+            .bind(to: rememberMeCheckmark.rx.isSelected)
+            .disposed(by: disposeBag)
+    }
+    
+    func checkIfUserExists() {
         if userAlreadyExist(userNameKey: "email", passwordKey: "password") == true {
             loginUserWith(email: defaults.string(forKey:"email")!, pass: defaults.string(forKey: "password")!)
         }
@@ -63,45 +132,30 @@ class LoginViewController: UIViewController {
     
     // MARK: - actions
     
-    @IBAction private func checkmarkClicked() {
-        clickToRememberCheckmark.isSelected.toggle()
-    }
+//    @IBAction private func checkmarkClicked() {
+//        rememberMeCheckmark.isSelected.toggle()
+//    }
     
-    @IBAction func loginClicked() {
-        guard let email = usernameField.text else {
-            print("Error username")
-            return
-        }
-        
-        guard let password = passwordField.text else {
-            print("Error password")
-            return
-        }
-        
-        if (email == "" || password == "") {
-            return
-        }
-        
-        loginUserWith(email: email, pass: password)
-    }
+//    @IBAction func loginClicked() {
+//
+//        if checkCredentials(email: usernameField.text ?? "", password: passwordField.text ?? "") {
+//
+//            loginUserWith(email: usernameField.text!, pass: passwordField.text!)
+//
+//        }
+//    }
     
-    @IBAction func createAccountClicked() {
-        
-        guard let email = usernameField.text else {
-            print("Error username")
-            return
-        }
-        guard let password = passwordField.text else {
-            print("Error password")
-            return
-        }
-        
-        if (email == "" || password == "") {
-            return
-        }
-        
-        registerUserWith(email: email, pass: password)
-    }
+    
+    
+    
+//    @IBAction func createAccountClicked() {
+//
+//        if checkCredentials(email: usernameField.text ?? "", password: passwordField.text ?? "") {
+//
+//            registerUserWith(email: usernameField.text!, pass: passwordField.text!)
+//
+//        }
+//    }
 }
 // MARK: - private
     // MARK: - register and json parsing (going to login)
@@ -166,7 +220,7 @@ class LoginViewController: UIViewController {
                         
                     case .success(let user):
                         print("Succes: \(user)")
-                        if self?.clickToRememberCheckmark.isSelected == true {
+                        if self?.rememberMeCheckmark.isSelected == true {
         
                             self?.defaults.set(pass, forKey: "password")
                             self?.defaults.synchronize()

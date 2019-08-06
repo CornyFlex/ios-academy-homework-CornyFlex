@@ -74,9 +74,6 @@
                                                 <color key="tintColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" backgroundImage="ic-checkbox-empty"/>
                                                 <state key="selected" image="ic-checkbox-filled" backgroundImage="ic-checkbox-empty"/>
-                                                <connections>
-                                                    <action selector="checkmarkClicked" destination="LVn-LZ-bkB" eventType="touchUpInside" id="w1X-pI-ATs"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -96,9 +93,6 @@
                                         <state key="normal" title="LOG IN">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <connections>
-                                            <action selector="loginClicked" destination="LVn-LZ-bkB" eventType="touchUpInside" id="tq5-2D-lAt"/>
-                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7Z-07-xWP">
                                         <rect key="frame" x="0.0" y="307" width="340" height="20.5"/>
@@ -114,9 +108,6 @@
                                         <state key="normal" title="Create an account">
                                             <color key="titleColor" red="1" green="0.45882352941176469" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
-                                        <connections>
-                                            <action selector="createAccountClicked" destination="LVn-LZ-bkB" eventType="touchUpInside" id="1bo-MG-eRA"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -145,10 +136,10 @@
                     <navigationItem key="navigationItem" id="e5A-NQ-Lbf"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
-                        <outlet property="clickToCreateAccount" destination="c4w-K4-jS8" id="HD8-5M-EYR"/>
-                        <outlet property="clickToLogin" destination="MBR-b2-PAv" id="bKn-EQ-svO"/>
-                        <outlet property="clickToRememberCheckmark" destination="wec-GI-den" id="k2u-Y0-8gp"/>
+                        <outlet property="createAccountButton" destination="c4w-K4-jS8" id="HD8-5M-EYR"/>
+                        <outlet property="loginButton" destination="MBR-b2-PAv" id="bKn-EQ-svO"/>
                         <outlet property="passwordField" destination="mzP-YD-YKR" id="M8n-K2-dTM"/>
+                        <outlet property="rememberMeCheckmark" destination="wec-GI-den" id="k2u-Y0-8gp"/>
                         <outlet property="usernameField" destination="S12-55-qrp" id="FH4-6U-D5m"/>
                     </connections>
                 </viewController>
