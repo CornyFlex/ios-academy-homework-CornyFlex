@@ -17,6 +17,8 @@ import RxCocoa
 
 // MARK: - protocol
 
+// MARK: - protocol
+
 protocol NewEpisodeDelegate: class {
     func episodeAdded()
     func episodeError()
@@ -31,6 +33,8 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
     @IBOutlet weak var episodeNumberTextField: UITextField!
     @IBOutlet weak var episodeDescriptionTextField: UITextField!
     @IBOutlet weak var episodeAddPhotoButton: UIButton!
+    
+    // MARK: - properties
     
     // MARK: - properties
     
@@ -56,6 +60,8 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
     )
     
     // MARK: - lifecycle functions
+    
+    // MARK: - life cycle functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -231,7 +237,6 @@ private extension NewEpisodeViewController {
     func addShowEpisode(ShowId: String, mediaId: String?){
         
         SVProgressHUD.show()
-        
         let parameters: [String: String] = [
             "showId": ShowId,
             "title" : episodeTitleTextField.text!,
@@ -244,24 +249,26 @@ private extension NewEpisodeViewController {
         let headers = ["Authorization": tokenEpisode]
         
         Alamofire
-        .request("https://api.infinum.academy/api/episodes",
-        method: .post,
-        parameters: parameters,
-        encoding: JSONEncoding.default,
-        headers: headers)
+            .request("https://api.infinum.academy/api/episodes",
+                     method: .post,
+                     parameters: parameters,
+                     encoding: JSONEncoding.default,
+                     headers: headers)
         
         .validate()
         .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<Episodes>) in
             
             SVProgressHUD.dismiss()
-            
             switch response.result {
+        
             case .success(let episodeAdded):
+                
                 print("Succes: \(episodeAdded)")
                 self?.dismiss(animated: true)
                 self?.delegate?.episodeAdded()
                 
             case .failure(let error):
+                
                 print("API failure: \(error)")
                 self?.getErrorMessage(with: error)
                 self?.delegate?.episodeError()

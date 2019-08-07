@@ -21,10 +21,10 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var nameSeriesDetails: UILabel!
     @IBOutlet weak var episodesNumberDetails: UILabel!
     @IBOutlet weak var thumbnailDetails: UIImageView!
-    
     @IBOutlet weak var addNewShow: UIButton!
-    
     @IBOutlet weak var tableViewDetails: UITableView!
+    
+    // MARK: - properties
     
     var tokenDetails: String!
     var idDetails: String!
@@ -38,6 +38,8 @@ class DetailsViewController: UIViewController {
     var refreshControl: UIRefreshControl?
     
     let disposeBag = DisposeBag()
+    
+    // MARK: - lifecycle functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,10 +77,14 @@ class DetailsViewController: UIViewController {
     
     func addNewEpisode() {
         let newEpStoryboard = UIStoryboard(name:"AddEpisode", bundle:nil)
-        let newEpViewController = newEpStoryboard.instantiateViewController(withIdentifier: "NewEpisodeViewController") as! NewEpisodeViewController
+        
+        guard
+        let newEpViewController = newEpStoryboard.instantiateViewController(withIdentifier: "NewEpisodeViewController") as? NewEpisodeViewController
+        else { return }
         
         newEpViewController.showId = idDetails
         newEpViewController.tokenEpisode = tokenDetails
+        
         newEpViewController.delegate = self
         
         let navigationController = UINavigationController(rootViewController: newEpViewController)
@@ -136,6 +142,7 @@ extension DetailsViewController: UITableViewDelegate {
 extension DetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("CURRENT INDEX PATH BEING CONFIGURED: \(indexPath)")
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailsTableViewCell", for: indexPath) as! DetailsTableViewCell
         cell.configureDetailsCell(with: characteristics[indexPath.row])
         
@@ -148,7 +155,6 @@ extension DetailsViewController: UITableViewDataSource {
 }
 
 // MARK: - private extension
-
 
 private extension DetailsViewController {
     func loadShowDetailsWith(showId: String) {
@@ -167,6 +173,7 @@ private extension DetailsViewController {
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<[ShowDetails]>) in
 
                 switch response.result {
+                    
                 case .success(let showsDetails):
                     print("Success: \(showsDetails)")
                     
@@ -187,7 +194,6 @@ private extension DetailsViewController {
 private extension DetailsViewController {
     func loadDescriptionDetailsWith(showId: String) {
         SVProgressHUD.show()
-        
         let headers = ["Authorization": tokenDetails]
         
         Alamofire
@@ -226,6 +232,7 @@ private extension DetailsViewController {
 // MARK: - extension delegate
 
 extension DetailsViewController: NewEpisodeDelegate {
+    
     func episodeAdded() {
         loadDetails()
     }

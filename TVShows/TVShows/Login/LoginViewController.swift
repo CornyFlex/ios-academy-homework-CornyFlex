@@ -33,10 +33,11 @@ class LoginViewController: UIViewController {
     private func goToHomeScreen(token: String) {
         
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
-        let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        guard
+        let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
+            else { return }
         viewController.token = token
         navigationController?.setViewControllers([viewController], animated: true)
-        
     }
     
     private func loginButtonEdit() {
@@ -135,6 +136,7 @@ class LoginViewController: UIViewController {
 }
 
 // MARK: - private
+
     // MARK: - register and json parsing (going to login)
     
     private extension LoginViewController {
@@ -161,6 +163,7 @@ class LoginViewController: UIViewController {
                     
                     switch response.result {
                     case .success(let user):
+                        
                         print("Succes: \(user)")
                         self?.loginUserWith(email: email, pass: pass)
                     case .failure(let error):
@@ -172,7 +175,7 @@ class LoginViewController: UIViewController {
                     }
                 }
             }
-        }
+    }
 
 // MARK: Login and json parsing (going to home screen)
 
