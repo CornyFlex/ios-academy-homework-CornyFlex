@@ -11,6 +11,7 @@ PODS:
     - RxSwift (~> 5)
   - RxSwift (5.0.0)
   - SVProgressHUD (2.2.5)
+  - TransitionButton (0.5.2)
 
 DEPENDENCIES:
   - Alamofire
@@ -20,6 +21,7 @@ DEPENDENCIES:
   - RxCocoa
   - RxSwift
   - SVProgressHUD
+  - TransitionButton
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -31,6 +33,7 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - SVProgressHUD
+    - TransitionButton
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
@@ -41,7 +44,8 @@ SPEC CHECKSUMS:
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  TransitionButton: fb271583d9c9e4bb116b97103047e5157653f233
 
-PODFILE CHECKSUM: 9dec0910821687e970ad31f882db8bb49551da4b
+PODFILE CHECKSUM: b7b8356bc58462747f32cb3d7a206d5303a38b2e
 
 COCOAPODS: 1.7.3

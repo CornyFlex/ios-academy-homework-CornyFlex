@@ -13,6 +13,7 @@ import CodableAlamofire
 import SVProgressHUD
 import RxCocoa
 import RxSwift
+import TransitionButton
 
 class LoginViewController: UIViewController {
 
@@ -24,7 +25,7 @@ class LoginViewController: UIViewController {
     @IBOutlet private weak var usernameField: UITextField!
     @IBOutlet private weak var passwordField: UITextField!
     @IBOutlet private weak var rememberMeCheckmark: UIButton!
-    @IBOutlet private weak var loginButton: UIButton!
+    @IBOutlet private weak var loginButton: TransitionButton!
     @IBOutlet private weak var createAccountButton: UIButton!
     
     // MARK: - life cycle functions
@@ -95,15 +96,25 @@ class LoginViewController: UIViewController {
     
         loginButton.rx.tap
             .asObservable()
+            .do(onNext: {
+                self.loginButton.startAnimation()
+            })
             .withLatestFrom(userNameAndPass)
             .subscribe(onNext: { [unowned self] (email, password) in
+                let qualityOfServiceClass = DispatchQoS.QoSClass.background
+                let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+                backgroundQueue.async(execute: {
                 self.loginUserWith(email: email, pass: password)
-            })
+                }
+            )})
             .disposed(by: disposeBag)
         
         
         createAccountButton.rx.tap
             .asObservable()
+            .do(onNext: {
+                self.loginButton.startAnimation()
+            })
             .withLatestFrom(userNameAndPass)
             .subscribe(onNext: { [unowned self] (email, password) in
                 self.registerUserWith(email: email, pass: password)
@@ -157,9 +168,7 @@ class LoginViewController: UIViewController {
                         self?.passwordField.shake()
                         self?.usernameField.shake()
                         
-                        let alert = UIAlertController(title:"Failed to Create Account", message: "Error: Incorrect email or password, please try again.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title:"OK", style: .cancel, handler:nil))
-                        self?.present(alert, animated: true)
+                         self?.loginButton.stopAnimation(animationStyle: .shake, completion: nil)
                     }
                 }
             }
@@ -170,8 +179,6 @@ class LoginViewController: UIViewController {
     private extension LoginViewController {
     
         func loginUserWith(email: String, pass: String) {
-            
-            SVProgressHUD.show()
             
             let parameters: [String: String] = [
                 "email": email,
@@ -186,8 +193,6 @@ class LoginViewController: UIViewController {
                 .validate()
                 .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<LoginData>) in
                     
-                    SVProgressHUD.dismiss()
-                    
                     switch response.result {
                         
                     case .success(let user):
@@ -201,18 +206,18 @@ class LoginViewController: UIViewController {
                         self?.defaults.set(user.token, forKey: "token")
                         self?.defaults.synchronize()
                         
-                        self?.goToHomeScreen(token: user.token)
+                        DispatchQueue.main.async(execute: { () -> Void in
+                            self?.loginButton.stopAnimation(animationStyle: .expand, completion: {
+                                    self?.goToHomeScreen(token: user.token)
+                            })
+                        })
                         
                     case .failure(let error):
                         print("API failure: \(error)")
-                        
+                        self?.loginButton.stopAnimation(animationStyle: .shake, completion: nil)
                         self?.passwordField.shake()
                         self?.usernameField.shake()
-                        
-                        let alert = UIAlertController(title:"Login failed", message: "Error: Incorrect email or password, please try again.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title:"OK", style: .cancel, handler:nil))
-                        self?.present(alert, animated: true)
-                    }
+                }
         }
     }
 }

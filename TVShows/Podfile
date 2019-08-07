@@ -13,4 +13,5 @@ target 'TVShows' do
   pod 'Kingfisher'
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'TransitionButton'
 end
