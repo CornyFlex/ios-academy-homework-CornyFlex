@@ -155,6 +155,12 @@ class LoginViewController: UIViewController {
                         self?.loginUserWith(email: email, pass: pass)
                     case .failure(let error):
                         print("API failure: \(error)")
+                        self?.passwordField.shake()
+                        self?.usernameField.shake()
+                        
+                        let alert = UIAlertController(title:"Failed to Create Account", message: "Error: Incorrect email or password, please try again.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title:"OK", style: .cancel, handler:nil))
+                        self?.present(alert, animated: true)
                     }
                 }
             }
