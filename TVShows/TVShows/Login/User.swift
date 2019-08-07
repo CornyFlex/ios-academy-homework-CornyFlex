@@ -73,3 +73,39 @@ struct Episodes: Codable {
         case season
     }
 }
+
+struct Media: Codable {
+    let path: String
+    let type: String
+    let id: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case path
+        case type
+    }
+}
+
+struct Comment: Codable {
+    let text: String
+    let episodeId: String
+    let userEmail: String
+    let userId: String
+    
+    enum CodingKeys: String, CodingKey {
+        case text
+        case episodeId
+        case userEmail
+        case userId = "_id"
+    }
+}
+
+struct PostComment: Codable {
+    let text: String
+    let episodeId: String
+    
+    enum CodingKeys: String, CodingKey {
+        case text
+        case episodeId
+    }
+}

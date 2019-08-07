@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="LdY-4L-E6q">
             <objects>
-                <viewController id="LVn-LZ-bkB" customClass="LoginViewController" customModule="TVShows" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginVC" id="LVn-LZ-bkB" customClass="LoginViewController" customModule="TVShows" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MD1-Eu-R0p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,7 +24,7 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-logo" translatesAutoresizingMaskIntoConstraints="NO" id="QuQ-r6-Xql">
                                         <rect key="frame" x="0.0" y="0.0" width="340" height="80"/>
                                     </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S12-55-qrp" userLabel="Username_textfield">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="S12-55-qrp" userLabel="Username_textfield">
                                         <rect key="frame" x="0.0" y="85" width="340" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="500" constant="40" id="2oe-qq-9v2"/>
@@ -41,7 +41,7 @@
                                             <constraint firstAttribute="height" constant="1" id="oNC-OQ-itT"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mzP-YD-YKR">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mzP-YD-YKR">
                                         <rect key="frame" x="0.0" y="136" width="340" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="340" id="5Rg-Tw-jaf"/>
@@ -49,7 +49,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bpn-7c-PUC">
                                         <rect key="frame" x="0.0" y="181" width="340" height="1"/>
@@ -72,11 +72,8 @@
                                                 <rect key="frame" x="-1" y="12" width="24" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                <state key="normal" image="ic-checkbox-empty"/>
-                                                <state key="selected" image="ic-checkbox-filled"/>
-                                                <connections>
-                                                    <action selector="checkmarkClicked" destination="LVn-LZ-bkB" eventType="touchUpInside" id="w1X-pI-ATs"/>
-                                                </connections>
+                                                <state key="normal" backgroundImage="ic-checkbox-empty"/>
+                                                <state key="selected" image="ic-checkbox-filled" backgroundImage="ic-checkbox-empty"/>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -85,7 +82,7 @@
                                             <constraint firstAttribute="height" constant="40" id="ub4-Xi-lkn"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MBR-b2-PAv">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MBR-b2-PAv" customClass="TransitionButton" customModule="TransitionButton">
                                         <rect key="frame" x="0.0" y="232" width="340" height="70"/>
                                         <color key="backgroundColor" red="1" green="0.45882352941176469" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -96,9 +93,6 @@
                                         <state key="normal" title="LOG IN">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <connections>
-                                            <action selector="loginClicked" destination="LVn-LZ-bkB" eventType="touchUpInside" id="tq5-2D-lAt"/>
-                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7Z-07-xWP">
                                         <rect key="frame" x="0.0" y="307" width="340" height="20.5"/>
@@ -114,9 +108,6 @@
                                         <state key="normal" title="Create an account">
                                             <color key="titleColor" red="1" green="0.45882352941176469" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
-                                        <connections>
-                                            <action selector="clickToCreateAccount" destination="LVn-LZ-bkB" eventType="touchUpInside" id="1bo-MG-eRA"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -147,9 +138,9 @@
                     <connections>
                         <outlet property="createAccountButton" destination="c4w-K4-jS8" id="HD8-5M-EYR"/>
                         <outlet property="loginButton" destination="MBR-b2-PAv" id="bKn-EQ-svO"/>
-                        <outlet property="passwordTextField" destination="mzP-YD-YKR" id="M8n-K2-dTM"/>
+                        <outlet property="passwordField" destination="mzP-YD-YKR" id="M8n-K2-dTM"/>
                         <outlet property="rememberMeCheckmark" destination="wec-GI-den" id="k2u-Y0-8gp"/>
-                        <outlet property="usernameTextField" destination="S12-55-qrp" id="FH4-6U-D5m"/>
+                        <outlet property="usernameField" destination="S12-55-qrp" id="FH4-6U-D5m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="204-8W-36j" userLabel="First Responder" sceneMemberID="firstResponder"/>

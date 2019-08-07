@@ -10,12 +10,14 @@ import UIKit
 import Alamofire
 import CodableAlamofire
 import SVProgressHUD
+import RxSwift
+import RxCocoa
 
 class DetailsViewController: UIViewController {
     
-    // MARK: - outlets
+    @IBOutlet weak var descriptionDetailsShow: UITextView!
     
-    @IBOutlet weak var descriptionDetailsShow: UILabel!
+    @IBOutlet weak var descriptionDetailsShowLabel: UILabel!
     @IBOutlet weak var nameSeriesDetails: UILabel!
     @IBOutlet weak var episodesNumberDetails: UILabel!
     @IBOutlet weak var thumbnailDetails: UIImageView!
@@ -30,29 +32,50 @@ class DetailsViewController: UIViewController {
     var showTitle: String!
     var showDescription: String?
     var numberOfEpisodes = 0
+    var imageUrlDetails: String!
     
     var characteristics = [ShowDetails]()
+    var refreshControl: UIRefreshControl?
+    
+    let disposeBag = DisposeBag()
     
     // MARK: - lifecycle functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadDetails()
+        addRefreshControl()
+        loadEvents()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableViewDetails.fixTableHeaderViewHeight()
     }
     
     func loadDetails() {
-        
-        loadDetailsShowAlamofireCodable(showId: idDetails)
-        loadDescriptionDetailsShowAlamofireCodable(showId: idDetails)
-        
+        loadShowDetailsWith(showId: idDetails)
         nameSeriesDetails.text = showTitle
         episodesNumberDetails.text = String(numberOfEpisodes)
-        
-        self.tableViewDetails.bringSubviewToFront(addNewShow)
+
+        let url = URL(string: "https://api.infinum.academy" + imageUrlDetails)
+        let placeHolder = UIImage(named: "Image-5")
+        thumbnailDetails.kf.setImage(with: url, placeholder: placeHolder)
+       
     }
     
-    @IBAction func clickToAddNewEp() {
-        
+    func addRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.tintColor = UIColor.red
+        refreshControl?.addTarget(self, action: #selector(refreshDetailsTable), for: .valueChanged)
+        tableViewDetails.refreshControl = refreshControl
+    }
+    
+    @objc func refreshDetailsTable() {
+        loadDetails()
+    }
+    
+    func addNewEpisode() {
         let newEpStoryboard = UIStoryboard(name:"AddEpisode", bundle:nil)
         
         guard
@@ -67,19 +90,54 @@ class DetailsViewController: UIViewController {
         let navigationController = UINavigationController(rootViewController: newEpViewController)
         present(navigationController, animated: true)
     }
-}
-
-// MARK: - extensions
-extension DetailsViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) {
+    func loadEvents() {
         
-        tableView.deselectRow(at: indexPath, animated: false)
-        let itemDetails = characteristics[indexPath.row]
-        print("\(itemDetails)")
+        addNewShow.rx.tap
+        .asObservable()
+        .subscribe(onNext: { [unowned self] _ in
+            self.addNewEpisode()
+        })
+        .disposed(by: disposeBag)
         
     }
 }
+
+// MARK: - extensions
+
+extension DetailsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let itemDetails = characteristics[indexPath.row]
+        print("\(itemDetails)")
+        
+        goToEpisodeDetails(with: itemDetails)
+    }
+    
+    func goToEpisodeDetails(with itemDetails: ShowDetails) {
+        
+        let episodeDetailsSB = UIStoryboard(name: "EpisodeDetails", bundle: nil)
+        guard
+            let episodeDetailsVC = episodeDetailsSB.instantiateViewController(withIdentifier: "EpisodeDetailsViewController") as? EpisodeDetailsViewController
+            else { return }
+        
+        episodeDetailsVC.epDescription = itemDetails.description!
+        episodeDetailsVC.epSeasonNumber = itemDetails.season!
+        episodeDetailsVC.epNumber = itemDetails.episodeNumber!
+        episodeDetailsVC.epTitleDetails = itemDetails.title
+        episodeDetailsVC.epImageUrl = itemDetails.imageUrl
+        
+        episodeDetailsVC.token = tokenDetails
+        episodeDetailsVC.epId = itemDetails.idShow
+        
+        let navigationController = UINavigationController(rootViewController: episodeDetailsVC)
+        navigationController.setNavigationBarHidden(true, animated: true)
+        present(navigationController, animated: true)
+    }
+}
+
+
 
 extension DetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,7 +157,7 @@ extension DetailsViewController: UITableViewDataSource {
 // MARK: - private extension
 
 private extension DetailsViewController {
-    func loadDetailsShowAlamofireCodable(showId: String) {
+    func loadShowDetailsWith(showId: String) {
         SVProgressHUD.show()
         
         let headers = ["Authorization": tokenDetails]
@@ -113,7 +171,6 @@ private extension DetailsViewController {
             )
             .validate()
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<[ShowDetails]>) in
-                SVProgressHUD.dismiss()
 
                 switch response.result {
                     
@@ -124,8 +181,9 @@ private extension DetailsViewController {
                         self?.characteristics.append(show)
                     }
                     self?.episodesNumberDetails.text = "Number of episodes:\(showsDetails.count)"
+                    self?.loadDescriptionDetailsWith(showId: self!.idDetails)
                     self?.tableViewDetails.reloadData()
-                  
+                    
                 case .failure(let error):
                     print("Failed: \(error)")
                 }
@@ -134,8 +192,7 @@ private extension DetailsViewController {
 }
 
 private extension DetailsViewController {
-    
-    func loadDescriptionDetailsShowAlamofireCodable(showId: String) {
+    func loadDescriptionDetailsWith(showId: String) {
         SVProgressHUD.show()
         let headers = ["Authorization": tokenDetails]
         
@@ -147,18 +204,20 @@ private extension DetailsViewController {
                 headers: (headers as! HTTPHeaders)
             )
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<ShowDetails>) in
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<ShowDetails>) in
                 SVProgressHUD.dismiss()
+                self?.refreshControl?.endRefreshing()
                 
                 switch response.result {
                 case .success(let showsDetails):
                     print("Success: \(showsDetails)")
-                    self.descriptionDetailsShow.text = showsDetails.description
-                    self.tableViewDetails.reloadData()
+                    self?.descriptionDetailsShowLabel.text = showsDetails.description
+            
+                    self?.tableViewDetails.reloadData()
                     
                 case .failure(let error):
                     print("Failed: \(error)")
-                }
+            }
         }
     }
 }
@@ -170,7 +229,7 @@ private extension DetailsViewController {
     }
 }
 
-// MARK: - Delegate
+// MARK: - extension delegate
 
 extension DetailsViewController: NewEpisodeDelegate {
     
@@ -181,3 +240,32 @@ extension DetailsViewController: NewEpisodeDelegate {
     }
 }
 
+// table view header height
+extension UITableView {
+    func fixTableHeaderViewHeight(for size: CGSize = CGSize(width: UIScreen.main.bounds.width, height: CGFloat.greatestFiniteMagnitude)) {
+        guard let headerView = tableHeaderView else { return }
+        let headerSize: CGSize
+        if #available(iOS 10.0, *) {
+            headerSize = headerView.systemLayoutSizeFitting(size)
+        } else {
+            headerSize = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        }
+        if headerView.bounds.height == headerSize.height { return }
+        headerView.bounds.size.height = headerSize.height
+        headerView.layoutIfNeeded()
+        tableHeaderView = headerView
+    }
+    func fixTableFooterViewHeight(for size: CGSize = CGSize(width: UIScreen.main.bounds.width, height: CGFloat.greatestFiniteMagnitude)) {
+        guard let footerView = tableFooterView else { return }
+        let footerSize: CGSize
+        if #available(iOS 10.0, *) {
+            footerSize = footerView.systemLayoutSizeFitting(size)
+        } else {
+            footerSize = footerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        }
+        if footerView.bounds.height == footerSize.height { return }
+        footerView.bounds.size.height = footerSize.height
+        footerView.layoutIfNeeded()
+        tableFooterView = footerView
+    }
+}

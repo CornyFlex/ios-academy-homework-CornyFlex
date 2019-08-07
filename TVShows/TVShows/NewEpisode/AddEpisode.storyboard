@@ -31,15 +31,15 @@
                                                         <rect key="frame" x="117" y="50" width="150" height="100"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FKw-oF-EBT">
-                                                                <rect key="frame" x="50" y="25" width="50" height="50"/>
+                                                                <rect key="frame" x="12.5" y="-12.5" width="125" height="125"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="50" id="fvi-u2-0JJ"/>
-                                                                    <constraint firstAttribute="height" constant="50" id="ksy-LJ-stQ"/>
+                                                                    <constraint firstAttribute="width" constant="125" id="2gp-YJ-o0Q"/>
+                                                                    <constraint firstAttribute="height" constant="125" id="8iv-Dy-rMP"/>
                                                                 </constraints>
                                                                 <state key="normal" backgroundImage="Image-6"/>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOU-2r-zoS">
-                                                                <rect key="frame" x="35" y="85" width="80" height="20.5"/>
+                                                                <rect key="frame" x="35" y="122.5" width="80" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -125,6 +125,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="xBu-eJ-qwW"/>
                     <connections>
+                        <outlet property="episodeAddPhotoButton" destination="FKw-oF-EBT" id="mZf-9U-DDH"/>
                         <outlet property="episodeDescriptionTextField" destination="81D-UL-zlV" id="E94-FU-R4x"/>
                         <outlet property="episodeNumberTextField" destination="3Qr-Mj-Ne4" id="kUA-hf-gR7"/>
                         <outlet property="episodeTitleTextField" destination="H7R-lD-CcN" id="yPf-yJ-9az"/>
