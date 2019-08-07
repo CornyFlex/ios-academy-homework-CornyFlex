@@ -27,9 +27,7 @@ class LoadCommentsViewController: UIViewController {
     let idUserComments = UserDefaults.standard.string(forKey: "token")
     
     var episodeID = ""
-    
     var commentsList = [Comment]()
-    
     var refreshControl: UIRefreshControl?
     
     // MARK: - lifecycle functions
@@ -229,11 +227,10 @@ extension LoadCommentsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        var deleteAction = UITableViewRowAction(style: .default, title: "Delete") { [weak self] _,_ in
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { [weak self] _,_ in
             let commentID = self?.commentsList[indexPath.row].userId
             
             self?.deleteComment(with: commentID!, commentsListIndex: indexPath)
-            //handle delete
         }
         
         return [deleteAction]

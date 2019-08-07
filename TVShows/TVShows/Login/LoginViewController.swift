@@ -17,7 +17,6 @@ import RxSwift
 class LoginViewController: UIViewController {
 
     let defaults = UserDefaults.standard
-    
     let disposeBag = DisposeBag()
     
     // MARK: - outlets
