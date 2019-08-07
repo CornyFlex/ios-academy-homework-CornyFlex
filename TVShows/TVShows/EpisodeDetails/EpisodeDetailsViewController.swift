@@ -8,11 +8,15 @@
 
 import UIKit
 import Kingfisher
+import RxCocoa
+import RxSwift
 
 class EpisodeDetailsViewController: UIViewController {
 
     // MARK: - outlets
     
+    @IBOutlet weak var goToCommentsButton: UIButton!
+    @IBOutlet weak var goBackButton: UIButton!
     @IBOutlet weak var episodeDetailsImage: UIImageView!
     @IBOutlet weak var episodeDetailsTitle: UILabel!
     @IBOutlet weak var episodeDetailsSeasonAndEpisodeNumber: UILabel!
@@ -30,12 +34,14 @@ class EpisodeDetailsViewController: UIViewController {
     var epDescription = ""
     
     let barButtonImage = UIImage(named: "navigateBack")
+    let disposeBag = DisposeBag()
     
     // MARK: - lifecycle functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadEpisodeDetails()
+        loadEpisodeDetailsEvents()
     }
     
     func loadEpisodeDetails() {
@@ -49,13 +55,7 @@ class EpisodeDetailsViewController: UIViewController {
         episodeDetailsImage.kf.setImage(with: url, placeholder: placeHolder)
     }
     
-    // MARK: - actions
-    
-    @IBAction func goBack() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func didClickOnCommentsButton() {
+    func goToAddComments() {
         let commentsSB = UIStoryboard(name: "Comments", bundle: nil)
         
         guard
@@ -64,6 +64,24 @@ class EpisodeDetailsViewController: UIViewController {
         
         commentsVC.episodeID = epId
         navigationController?.pushViewController(commentsVC, animated: true)
+    }
+    
+    func loadEpisodeDetailsEvents() {
+        
+        goBackButton.rx.tap
+        .asObservable()
+        .subscribe(onNext: { [unowned self] _ in
+            self.dismiss(animated: true, completion:nil)
+        })
+        .disposed(by: disposeBag)
+        
+        goToCommentsButton.rx.tap
+        .asObservable()
+        .subscribe(onNext: { [unowned self] _ in
+            self.goToAddComments()
+        })
+        .disposed(by: disposeBag)
         
     }
 }
+

@@ -103,9 +103,6 @@
                                 <state key="normal" title="  Comments" image="comments">
                                     <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <connections>
-                                    <action selector="didClickOnCommentsButton" destination="eqc-Ux-qVn" eventType="touchUpInside" id="Hta-3v-yyD"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hA5-ha-sEB">
                                 <rect key="frame" x="25" y="59" width="40" height="40"/>
@@ -114,9 +111,6 @@
                                     <constraint firstAttribute="width" constant="40" id="phY-C1-6iT"/>
                                 </constraints>
                                 <state key="normal" image="navigateBack"/>
-                                <connections>
-                                    <action selector="goBack" destination="eqc-Ux-qVn" eventType="touchUpInside" id="TVA-EE-hcX"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -139,6 +133,8 @@
                         <outlet property="episodeDetailsImage" destination="VzK-0K-aYA" id="8y3-Ki-1si"/>
                         <outlet property="episodeDetailsSeasonAndEpisodeNumber" destination="6CN-qg-S5v" id="fUe-mo-9V9"/>
                         <outlet property="episodeDetailsTitle" destination="ske-oN-KMi" id="FKY-sX-A5Q"/>
+                        <outlet property="goBackButton" destination="hA5-ha-sEB" id="09J-mr-9wu"/>
+                        <outlet property="goToCommentsButton" destination="NA3-KU-WEK" id="nK1-es-9yw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KYg-MQ-8m5" userLabel="First Responder" sceneMemberID="firstResponder"/>
