@@ -172,12 +172,6 @@ class LoginViewController: UIViewController {
             })
         }
     }
-    
-    func handleCreateAccountData(_ userData: User?) {
-        if let userData = userData {
-            loginUserWith(email: userData.email, pass: "")
-        }
-    }
 }
 
 // MARK: - private
