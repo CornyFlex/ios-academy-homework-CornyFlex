@@ -34,10 +34,11 @@ class LoginViewController: UIViewController {
     private func goToHomeScreen(token: String) {
         
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
-        let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        guard
+        let viewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
+            else { return }
         viewController.token = token
         navigationController?.setViewControllers([viewController], animated: true)
-        
     }
     
     private func loginButtonEdit() {
@@ -180,54 +181,53 @@ class LoginViewController: UIViewController {
 }
 
 // MARK: - private
+
     // MARK: - register and json parsing (going to login)
     
 private extension LoginViewController {
     
     func registerUserWith(email: String, pass: String) -> Observable<User?> {
         return Observable<User?>.create { sub in
-        
-        let parameters: [String: String] = [
-            "email": email,
-            "password": pass
-        ]
-        
-        Alamofire
-            .request("https://api.infinum.academy/api/users",
-                     method: .post,
-                     parameters: parameters,
-                     encoding: JSONEncoding.default)
             
-            .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<User>) in
+            let parameters: [String: String] = [
+                "email": email,
+                "password": pass
+            ]
+            
+            Alamofire
+                .request("https://api.infinum.academy/api/users",
+                         method: .post,
+                         parameters: parameters,
+                         encoding: JSONEncoding.default)
                 
-                SVProgressHUD.dismiss()
-                
-                switch response.result {
-                case .success(let user):
-                    print("Succes: \(user)")
+                .validate()
+                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<User>) in
                     
-                    sub.onNext(response.result.value)
-                    sub.onCompleted()
-                case .failure(let error):
-                    print("API failure: \(error)")
+                    SVProgressHUD.dismiss()
                     
-                    sub.onError(error)
-                }
+                    switch response.result {
+                    case .success(let user):
+                        print("Succes: \(user)")
+                        
+                        sub.onNext(response.result.value)
+                        sub.onCompleted()
+                    case .failure(let error):
+                        print("API failure: \(error)")
+                        
+                        sub.onError(error)
+                    }
+            }
+            return Disposables.create()
         }
-        return Disposables.create()
     }
 }
-}
-
 
 // MARK: Login and json parsing (going to home screen)
-
 private extension LoginViewController {
     
     func loginUserWith(email: String, pass: String) -> Observable<LoginData?> {
         return Observable<LoginData?>.create { sub in
-        
+            
             let parameters: [String: String] = [
                 "email": email,
                 "password": pass
@@ -252,11 +252,13 @@ private extension LoginViewController {
                     case .failure(let error):
                         print("API failure: \(error)")
                         sub.onError(error)
-                }
+                    }
+            }
+            return Disposables.create()
         }
-        return Disposables.create()
     }
-}}
+}
+
 
 private extension LoginViewController {
     
